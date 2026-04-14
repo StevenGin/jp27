@@ -225,25 +225,6 @@ function toggleDay(h){var b=h.nextElementSibling,ch=h.querySelector('.day-chev')
 function toggleBlk(hdr){var b=hdr.nextElementSibling,ch=hdr.querySelector('.bchev'),o=b.classList.toggle('open');if(ch){ch.style.transform=o?'rotate(90deg)':'';ch.style.color=o?'var(--cherry)':'var(--border)';}}
 function switchTab(id,btn){document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');document.getElementById('tab-'+id).scrollTop=0;}
 
-/* ─── MAP ───────────────────────────────────────────────────────────── */
-function buildMap(){
-  var el=document.getElementById('route-map');
-  if(!el)return;
-  var W=360,H=300,minLat=32,maxLat=38.8,minLng=125.5,maxLng=142;
-  function px(lng){return Math.round((lng-minLng)/(maxLng-minLng)*W);}
-  function py(lat){return Math.round((1-(lat-minLat)/(maxLat-minLat))*H);}
-  var pts=MAP_STOPS.map(function(s){return px(s.lng)+','+py(s.lat);}).join(' ');
-  var circles=MAP_STOPS.map(function(s,i){
-    var x=px(s.lng),y=py(s.lat),col=regionColor(s.region);
-    return'<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+col+'" stroke="#fff" stroke-width="2.5"/>'
-      +'<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="sans-serif">'+(i+1)+'</text>'
-      +'<text x="'+x+'" y="'+(y+23)+'" text-anchor="middle" font-size="8.5" fill="'+col+'" font-weight="600" font-family="sans-serif">'+s.name+'</text>';
-  }).join('');
-  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:300px;display:block">'
-    +'<rect width="'+W+'" height="'+H+'" fill="#eef2f7" rx="8"/>'
-    +'<polyline points="'+pts+'" fill="none" stroke="#9090a8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.65"/>'
-    +circles+'</svg>';
-}
 
 /* ─── INIT ─────────────────────────────────────────────────────── */
 buildProfileGrid();
@@ -253,7 +234,6 @@ try {
 } catch(e) {}
 curIdx = getTodayIdx();
 buildTimeline();
-buildMap();
 if (!currentProfile) {
   buildToday(curIdx);
   buildPacking();
