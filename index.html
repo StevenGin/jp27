@@ -9,7 +9,6 @@
 <meta name="theme-color" content="#0f0f1a">
 <title>Japan · Korea 2027</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,18 +47,7 @@
 
   <!-- ALL DAYS TIMELINE -->
   <div class="tab-pane" id="tab-timeline">
-    <div class="tl-hdr">
-      <div class="tl-country">Japan</div>
-      <div class="tl-title">April 3 – 17</div>
-      <div class="tl-dates">Tokyo · Magome · Shirakawa-go · Kanazawa · Kyoto · Hiroshima</div>
-    </div>
-    <div id="tl-jp"></div>
-    <div class="tl-hdr" style="background:#f0faf7">
-      <div class="tl-country" style="color:var(--teal)">Korea</div>
-      <div class="tl-title">April 17 – 21</div>
-      <div class="tl-dates">Seoul</div>
-    </div>
-    <div id="tl-kr"></div>
+    <div id="tl-all"></div>
   </div>
 
   <!-- ROUTE MAP -->
@@ -174,7 +162,6 @@
   <button class="nav-btn" onclick="switchTab('crew', this)"><span class="ni">ℹ️</span><span class="nl">INFO</span></button>
 </nav>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
