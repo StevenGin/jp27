@@ -6,6 +6,13 @@
 var currentProfile = null;
 var curIdx = 0;
 
+
+/* ─── REGION HELPERS ────────────────────────────────────────────────── */
+function regionColor(r)  { return REGIONS[r] ? REGIONS[r].color : 'var(--cherry)'; }
+function regionLight(r)  { return REGIONS[r] ? REGIONS[r].light : 'var(--cherry-l)'; }
+function regionEmoji(r)  { return REGIONS[r] ? REGIONS[r].emoji : ''; }
+function regionName(r)   { return REGIONS[r] ? REGIONS[r].name  : ''; }
+
 /* ─── PROFILE ──────────────────────────────────────────────────── */
 function buildProfileGrid(){
   var g=document.getElementById('profile-grid');
@@ -144,7 +151,7 @@ function getTodayIdx(){var start=new Date('2027-04-03'),now=new Date(),d=Math.fl
 
 function buildToday(idx){
   var d=DAYS[idx],p=currentProfile,isKr=d.c==='kr',prev=idx>0,next=idx<DAYS.length-1;
-  var h='<div class="today-hero"><img src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.opacity=0"><div class="today-hero-ov"></div><div class="today-hero-content"><div class="tday-badge'+(isKr?' kr':'')+'"><span>Day '+d.n+'</span></div><h2>'+d.title+'</h2><div class="tdate">'+d.date+' · '+d.label+'</div></div></div>';
+  var h='<div class="today-hero"><img src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.opacity=0"><div class="today-hero-ov"></div><div class="today-hero-content"><div class="tday-badge '+(d.region||'')+'"><span>Day '+d.n+'</span></div><h2>'+d.title+'</h2><div class="tdate">'+d.date+' · '+d.label+'</div></div></div>';
   h+='<div class="today-nav"><button class="tnav-btn" onclick="goDay('+(idx-1)+')" style="opacity:'+(prev?1:0.3)+'" '+(prev?'':'disabled')+'>‹ Prev</button><div class="tnav-center">Day '+d.n+' of '+DAYS.length+'<small>'+d.date+'</small></div><button class="tnav-btn" onclick="goDay('+(idx+1)+')" style="opacity:'+(next?1:0.3)+'" '+(next?'':'disabled')+'>Next ›</button></div>';
   h+='<div class="today-body">';
   var wt=d.wt||{t:isKr?'12–18°C':'13–18°C',cond:'Spring weather · light jacket recommended',icon:'🌸'};
@@ -199,6 +206,28 @@ function toggleDay(h){var b=h.nextElementSibling,ch=h.querySelector('.day-chev')
 function toggleBlk(hdr){var b=hdr.nextElementSibling,ch=hdr.querySelector('.bchev'),o=b.classList.toggle('open');if(ch){ch.style.transform=o?'rotate(90deg)':'';ch.style.color=o?'var(--cherry)':'var(--border)';}}
 function switchTab(id,btn){document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');document.getElementById('tab-'+id).scrollTop=0;}
 
+/* ─── MAP ───────────────────────────────────────────────────────────── */
+function buildMap(){
+  if(typeof L==='undefined')return;
+  var map=L.map('route-map',{zoomControl:true,scrollWheelZoom:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'© <a href="https://openstreetmap.org">OpenStreetMap</a>',maxZoom:13
+  }).addTo(map);
+  var latlngs=MAP_STOPS.map(function(s){return[s.lat,s.lng];});
+  L.polyline(latlngs,{color:'#9090a8',weight:2,dashArray:'5,6',opacity:0.7}).addTo(map);
+  MAP_STOPS.forEach(function(s,i){
+    var col=regionColor(s.region);
+    var icon=L.divIcon({
+      className:'',
+      html:'<div style="width:32px;height:32px;background:'+col+';border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;font-family:sans-serif">'+(i+1)+'</div>',
+      iconSize:[32,32],iconAnchor:[16,16]
+    });
+    L.marker([s.lat,s.lng],{icon:icon}).addTo(map)
+      .bindPopup('<strong>'+s.name+'</strong><br>'+s.days,'<br>'+regionEmoji(s.region));
+  });
+  map.fitBounds(L.latLngBounds(latlngs),{padding:[20,20]});
+}
+
 /* ─── INIT ─────────────────────────────────────────────────────── */
 buildProfileGrid();
 try {
@@ -207,6 +236,7 @@ try {
 } catch(e) {}
 curIdx = getTodayIdx();
 buildTimeline();
+buildMap();
 if (!currentProfile) {
   buildToday(curIdx);
   buildPacking();
