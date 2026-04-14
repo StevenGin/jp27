@@ -20,7 +20,7 @@ var IMG={
   shibuya:  'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75', // Shibuya crossing
   magome:   'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=800&q=75', // Post town path
   shirakawa:'https://images.pexels.com/photos/31362648/pexels-photo-31362648.jpeg?auto=compress&cs=tinysrgb&w=800', // Gassho farmhouses Shirakawa-go
-  kanazawa: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=75', // Kenrokuen garden
+  kanazawa: 'https://images.pexels.com/photos/29393691/pexels-photo-29393691.jpeg?auto=compress&cs=tinysrgb&w=800', // Kenrokuen garden Kanazawa
   kyoto:    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75', // Kyoto alley
   fushimi:  'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&q=75', // Fushimi Inari gates
   hiroshima:'https://images.pexels.com/photos/14331552/pexels-photo-14331552.jpeg?auto=compress&cs=tinysrgb&w=800', // Hiroshima Peace Memorial
