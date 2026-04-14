@@ -8,26 +8,51 @@ var PROFILES=[
   {id:'steven',name:'Steven Gin',init:'SG',col:'#c0395b',role:'SF · Trip lead',tags:[{c:'lead',t:'Trip lead'},{c:'sf',t:'San Francisco'}],group:'sfo',isKnee:false,isGloria:false,isGolf:false},
   {id:'esther',name:'Esther Nam',init:'EN',col:'#e87095',role:'SF · Travelling with Steven',tags:[{c:'sf',t:'San Francisco'}],group:'sfo',isKnee:false,isGloria:false,isGolf:false},
   {id:'rick',name:'Rick Tucker',init:'RT',col:'#0f7a65',role:'Winnipeg · Bad knees · Golfer',tags:[{c:'ywg',t:'Winnipeg'},{c:'knee',t:'Bad knees'},{c:'golf',t:'Golfer'}],group:'ywg',isKnee:true,isGloria:false,isGolf:true},
-  {id:'rose',name:'Rose Rucker',init:'RR',col:'#5c6bc0',role:'Winnipeg · Golfer',tags:[{c:'ywg',t:'Winnipeg'},{c:'golf',t:'Golfer'}],group:'ywg',isKnee:false,isGloria:false,isGolf:true},
+  {id:'rose',name:'Rose Tucker',init:'RR',col:'#5c6bc0',role:'Winnipeg · Golfer',tags:[{c:'ywg',t:'Winnipeg'},{c:'golf',t:'Golfer'}],group:'ywg',isKnee:false,isGloria:false,isGolf:true},
   {id:'sally',name:'Sally Gin',init:'SG',col:'#b8860b',role:'Winnipeg',tags:[{c:'ywg',t:'Winnipeg'}],group:'ywg',isKnee:false,isGloria:false,isGolf:false},
   {id:'gloria',name:'Gloria Nam',init:'GN',col:'#0f7a65',role:'Seoul · Korea local',tags:[{c:'seoul',t:'Seoul local'},{c:'conf',t:'Confirmed ✓'}],group:'gloria',isKnee:false,isGloria:true,isGolf:false}
 ];
 
 /* ─── IMAGES ──────────────────────────────────────────────────── */
 var IMG={
-  tokyo:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75',
-  kamakura:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=75',
-  magome:'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=800&q=75',
-  shirakawa:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=75',
-  kanazawa:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=75',
-  kyoto:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75',
-  uji:'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=75',
-  hiroshima:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=800&q=75',
-  miyajima:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=75',
-  seoul:'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=75',
-  gwangjang:'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75',
-  dmz:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=75'
+  tokyo:    'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=800&q=75', // Tokyo Tower at night
+  cherry:   'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=75', // Sakura canal
+  shibuya:  'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75', // Shibuya crossing
+  magome:   'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=800&q=75', // Post town path
+  shirakawa:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=75', // Gassho farmhouses
+  kanazawa: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=75', // Kenrokuen garden
+  kyoto:    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75', // Kyoto alley
+  fushimi:  'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&q=75', // Fushimi Inari gates
+  hiroshima:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=800&q=75', // Peace Memorial
+  miyajima: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=75', // Floating torii gate
+  seoul:    'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=75', // Seoul cityscape
+  gwangjang:'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75', // Gwangjang market
+  dmz:      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=75'  // DMZ border
 };
+
+/* ─── REGIONS ──────────────────────────────────────────────────── */
+/* Defines color identity per leg of the trip.                        */
+var REGIONS = {
+  tokyo:     { name:'Tokyo',        color:'#3d52a0', light:'#eef0fb', emoji:'🗼' },
+  mountains: { name:'Mountains',    color:'#2d6a4f', light:'#d8f3dc', emoji:'🏔️' },
+  kanazawa:  { name:'Kanazawa',     color:'#b8860b', light:'#fdf5d8', emoji:'🏯' },
+  kyoto:     { name:'Kyoto',        color:'#c0395b', light:'#fde8ee', emoji:'⛩️' },
+  hiroshima: { name:'Hiroshima',    color:'#4a5568', light:'#edf2f7', emoji:'☮️' },
+  seoul:     { name:'Seoul',        color:'#0f7a65', light:'#d4f0e8', emoji:'🇰🇷' }
+};
+
+/* ─── MAP STOPS ─────────────────────────────────────────────────── */
+/* Shown on the interactive Leaflet route map.                        */
+var MAP_STOPS = [
+  { name:'Tokyo',        lat:35.6762, lng:139.6503, days:'Apr 3–6',   region:'tokyo'     },
+  { name:'Magome',       lat:35.5228, lng:137.5896, days:'Apr 7–8',   region:'mountains' },
+  { name:'Shirakawa-go', lat:36.2558, lng:136.9063, days:'Apr 9',     region:'mountains' },
+  { name:'Kanazawa',     lat:36.5613, lng:136.6562, days:'Apr 10–11', region:'kanazawa'  },
+  { name:'Kyoto',        lat:35.0116, lng:135.7681, days:'Apr 12–15', region:'kyoto'     },
+  { name:'Hiroshima',    lat:34.3853, lng:132.4553, days:'Apr 16',    region:'hiroshima' },
+  { name:'Miyajima',     lat:34.2959, lng:132.3197, days:'Apr 17',    region:'hiroshima' },
+  { name:'Seoul',        lat:37.5665, lng:126.9780, days:'Apr 18–22', region:'seoul'     }
+];
 
 /* ─── DAYS ────────────────────────────────────────────────────── */
 /* Each day: { n, date, label, c (jp/kr), title, sub, tags, img,
@@ -36,7 +61,7 @@ var IMG={
    ---------------------------------------------------------------- */
 var DAYS=[
   // ─ DAY 1 ─────────────────────────────────
-  {n:1,date:'Fri Apr 3',label:'Tokyo',c:'jp',title:'Tokyo — Arrive',sub:'Shinjuku hotel · Izakaya welcome dinner',tags:['travel','night'],img:IMG.tokyo,
+  {n:1,region:'tokyo',date:'Fri Apr 3',label:'Tokyo',c:'jp',title:'Tokyo — Arrive',sub:'Shinjuku hotel · Izakaya welcome dinner',tags:['travel','night'],img:IMG.cherry,
    wt:{t:'14°C',cond:'Partly cloudy, cool evening',icon:'🌤️'},
    activities:[
     {time:'Afternoon',timeKo:'오후',
@@ -51,7 +76,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 2 ─────────────────────────────────
-  {n:2,date:'Sat Apr 4',label:'Tokyo',c:'jp',title:'Tokyo — Asakusa + Ueno + Shibuya Night',sub:'Old Tokyo · Cherry blossoms · Iconic crossing',tags:['night'],img:IMG.tokyo,
+  {n:2,region:'tokyo',date:'Sat Apr 4',label:'Tokyo',c:'jp',title:'Tokyo — Asakusa + Ueno + Shibuya Night',sub:'Old Tokyo · Cherry blossoms · Iconic crossing',tags:['night'],img:IMG.cherry,
    activities:[
     {time:'Early Morning',timeKo:'이른 아침',
      desc:'Head to <a href="https://maps.google.com/?q=Asakusa,Tokyo" target="_blank"><strong>Asakusa</strong></a> early — before 8am on a Saturday it\'s magical, by 9:30am it\'s mobbed. Direct JR Chuo-Sobu Line from Shinjuku.',
@@ -74,7 +99,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 3 ─────────────────────────────────
-  {n:3,date:'Sun Apr 5',label:'Tokyo',c:'jp',title:'Tokyo — Shinjuku Gyoen + Nakameguro + Shimokitazawa',sub:'Garden · Canal · Vintage neighbourhoods',tags:['night'],img:IMG.tokyo,
+  {n:3,region:'tokyo',date:'Sun Apr 5',label:'Tokyo',c:'jp',title:'Tokyo — Shinjuku Gyoen + Nakameguro + Shimokitazawa',sub:'Garden · Canal · Vintage neighbourhoods',tags:['night'],img:IMG.tokyo,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Shinjuku+Gyoen+Tokyo" target="_blank"><strong>Shinjuku Gyoen</strong></a> — 10-min walk from the hotel. Japan\'s most refined cherry blossom garden: Japanese, French, and English landscape sections in one park. No alcohol, so it\'s calm rather than party-like. ¥500 entry. Allow 1–1.5h. <strong>Closes 4:30pm</strong> — only need the morning here.',
@@ -94,7 +119,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 4 ─────────────────────────────────
-  {n:4,date:'Mon Apr 6',label:'Tokyo',c:'jp',title:'Tokyo — Tsukiji + Akihabara + TeamLab',sub:'Market breakfast · Arcades · Digital art',tags:['night'],img:IMG.tokyo,
+  {n:4,region:'tokyo',date:'Mon Apr 6',label:'Tokyo',c:'jp',title:'Tokyo — Tsukiji + Akihabara + TeamLab',sub:'Market breakfast · Arcades · Digital art',tags:['night'],img:IMG.tokyo,
    activities:[
     {time:'Early Morning',timeKo:'이른 아침',
      desc:'<a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank"><strong>Tsukiji Outer Market</strong></a> — arrive by 8–9am, stalls wind down by 10–11am. One of the great food experiences in Japan: fresh uni on rice, tamagoyaki (sweet omelette) on sticks, the best sushi breakfast of the trip from tiny stalls. No reservation, just arrive and eat.',
@@ -111,7 +136,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 5 ─────────────────────────────────
-  {n:5,date:'Tue Apr 7',label:'Magome',c:'jp',title:'Travel → Magome Ryokan',sub:'Tokyo → Nagoya → Nakatsugawa → Magome',tags:['travel','night'],img:IMG.magome,
+  {n:5,region:'mountains',date:'Tue Apr 7',label:'Magome',c:'jp',title:'Travel → Magome Ryokan',sub:'Tokyo → Nagoya → Nakatsugawa → Magome',tags:['travel','night'],img:IMG.magome,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Hikari shinkansen Tokyo Station→Nagoya (~1h 55min, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a> covered — take Hikari not Nozomi). Limited express Nagoya→Nakatsugawa (~45 min). Bus to Magome (~25–30 min, ¥800pp, runs hourly) or taxi from Nakatsugawa (~¥2,500 whole group).',
@@ -126,7 +151,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 6 ─────────────────────────────────
-  {n:6,date:'Wed Apr 8',label:'Magome',c:'jp',title:'Magome — Nakasendo Hike Day',sub:'Magome → Tsumago trail · Ryokan Night 2',tags:['split','knee'],img:IMG.magome,
+  {n:6,region:'mountains',date:'Wed Apr 8',label:'Magome',c:'jp',title:'Magome — Nakasendo Hike Day',sub:'Magome → Tsumago trail · Ryokan Night 2',tags:['split','knee'],img:IMG.magome,
    split:[
     {who:'Walkers (8km, ~3h)',whoKo:'도보 참가자 (8km, 약 3시간)',whoFor:['steven','esther','rose','sally','gloria'],
      text:'The <a href="https://maps.google.com/?q=Nakasendo+Trail+Magome+Tsumago" target="_blank">Nakasendo trail</a> from Magome to Tsumago — gentle descent through cedar forest, past waterfalls and Edo-era milestones. Leave by 9am. One of the best easy hikes in Japan.',
@@ -149,7 +174,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 7 ─────────────────────────────────
-  {n:7,date:'Thu Apr 9',label:'Shirakawa-go',c:'jp',title:'Travel → Shirakawa-go Farmhouse',sub:'via Nagoya + Toyama · Check in by 5pm',tags:['travel','night'],img:IMG.shirakawa,
+  {n:7,region:'mountains',date:'Thu Apr 9',label:'Shirakawa-go',c:'jp',title:'Travel → Shirakawa-go Farmhouse',sub:'via Nagoya + Toyama · Check in by 5pm',tags:['travel','night'],img:IMG.shirakawa,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. Forward large bags to Kanazawa via <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank"><strong>Yamato Transport</strong></a> (ask ryokan staff — ~¥2,000–2,500/bag, arrives next day). Carry overnight bag only. Train→Nagoya→Toyama.',
@@ -163,7 +188,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 8 ─────────────────────────────────
-  {n:8,date:'Fri Apr 10',label:'Kanazawa',c:'jp',title:'Shirakawa-go → Kanazawa',sub:'Geisha district afternoon · Katamachi dinner',tags:['night'],img:IMG.kanazawa,
+  {n:8,region:'kanazawa',date:'Fri Apr 10',label:'Kanazawa',c:'jp',title:'Shirakawa-go → Kanazawa',sub:'Geisha district afternoon · Katamachi dinner',tags:['night'],img:IMG.kanazawa,
    activities:[
     {time:'Late Morning',timeKo:'오전 늦게',
      desc:'Bus to <a href="https://maps.google.com/?q=Kanazawa+Japan" target="_blank"><strong>Kanazawa</strong></a> (~1h 15min). Hotel check-in. Large bags from Magome should be waiting.',
@@ -177,7 +202,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 9 ─────────────────────────────────
-  {n:9,date:'Sat Apr 11',label:'Kanazawa',c:'jp',title:'Kanazawa — Gardens + Market + Samurai District',sub:'Kenrokuen · Omicho Market · Nagamachi',tags:['night'],img:IMG.kanazawa,
+  {n:9,region:'kanazawa',date:'Sat Apr 11',label:'Kanazawa',c:'jp',title:'Kanazawa — Gardens + Market + Samurai District',sub:'Kenrokuen · Omicho Market · Nagamachi',tags:['night'],img:IMG.kanazawa,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Kenrokuen+Garden+Kanazawa" target="_blank"><strong>Kenrokuen Garden</strong></a> — one of Japan\'s top 3 gardens. Allow 1.5–2h. Adjacent: <a href="https://maps.google.com/?q=Kanazawa+Castle+Park" target="_blank"><strong>Kanazawa Castle Park</strong></a> (free grounds). Both flat and accessible.',
@@ -194,7 +219,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 10 ─────────────────────────────────
-  {n:10,date:'Sun Apr 12',label:'Kyoto',c:'jp',title:'Travel → Kyoto',sub:'Kanazawa → Tsuruga → Kyoto · Settle in',tags:['travel','night'],img:IMG.kyoto,
+  {n:10,region:'kyoto',date:'Sun Apr 12',label:'Kyoto',c:'jp',title:'Travel → Kyoto',sub:'Kanazawa → Tsuruga → Kyoto · Settle in',tags:['travel','night'],img:IMG.kyoto,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Hokuriku Shinkansen Kanazawa→Tsuruga (~45 min). Transfer to Thunderbird limited express→Kyoto (~55 min). Total ~1h 45min, one transfer. Have reserved seat tickets ready. Taxi to hotel.',
@@ -208,7 +233,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 11 ─────────────────────────────────
-  {n:11,date:'Mon Apr 13',label:'Kyoto',c:'jp',title:"Kyoto — Philosopher's Path + Higashiyama + Gion",sub:'Full day in the historic east · Geisha district evening',tags:['night'],img:IMG.kyoto,
+  {n:11,region:'kyoto',date:'Mon Apr 13',label:'Kyoto',c:'jp',title:"Kyoto — Philosopher's Path + Higashiyama + Gion",sub:'Full day in the historic east · Geisha district evening',tags:['night'],img:IMG.kyoto,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:"<a href='https://maps.google.com/?q=Philosophers+Path+Kyoto' target='_blank'><strong>Philosopher's Path</strong></a> — start at <a href='https://maps.google.com/?q=Ginkakuji+Kyoto' target='_blank'>Ginkaku-ji (Silver Pavilion)</a> and walk south. 2km, completely flat, canal lined with cherry trees. Detour: <a href='https://maps.google.com/?q=Honen-in+Kyoto' target='_blank'>Honen-in temple</a> (walled gate, moss-covered sand mounds, almost no crowds). South end: <a href='https://maps.google.com/?q=Nanzenji+Kyoto' target='_blank'><strong>Nanzen-ji complex</strong></a> (enormous Sanmon gate + unexpected aqueduct through the grounds).",
@@ -227,7 +252,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 12 ─────────────────────────────────
-  {n:12,date:'Tue Apr 14',label:'Kyoto',c:'jp',title:'Nishiki Market + Kinkaku-ji · Rick & Rose: Golf',sub:'Split day · Golden Pavilion · Michelin dinner',tags:['split','golf','splurge'],img:IMG.kyoto,
+  {n:12,region:'kyoto',date:'Tue Apr 14',label:'Kyoto',c:'jp',title:'Nishiki Market + Kinkaku-ji · Rick & Rose: Golf',sub:'Split day · Golden Pavilion · Michelin dinner',tags:['split','golf','splurge'],img:IMG.kyoto,
    split:[
     {who:'Rick + Rose 🏌️',whoKo:'Rick + Rose 🏌️',whoFor:['rick','rose'],cls:'golf',
      text:'<a href="https://maps.google.com/?q=Seta+Golf+Course+Otsu+Shiga" target="_blank"><strong>Seta Golf Course North</strong></a> (Shiga, ~30 min from Kyoto). Caddied. Hosted USLPGA Tour 14 times. Green fee ~¥20,000–30,000pp. Book via hotel concierge — Japanese courses rarely take English bookings directly.',
@@ -246,7 +271,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 13 ─────────────────────────────────
-  {n:13,date:'Wed Apr 15',label:'Kyoto',c:'jp',title:'Arashiyama + ⭐ Michelin Dinner Evening',sub:'Bamboo grove · Bridge · Stroll garden · Big dinner',tags:['splurge','night'],img:IMG.kyoto,
+  {n:13,region:'kyoto',date:'Wed Apr 15',label:'Kyoto',c:'jp',title:'Arashiyama + ⭐ Michelin Dinner Evening',sub:'Bamboo grove · Bridge · Stroll garden · Big dinner',tags:['splurge','night'],img:IMG.fushimi,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Bus or taxi to <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank"><strong>Arashiyama</strong></a> (~30 min from central Kyoto). Go early — it fills up by 10am. Three things right next to each other: <strong>bamboo grove</strong> (flat, dramatic 10-min walk through towering green columns — one of the most photographed spots in Japan), <a href="https://maps.google.com/?q=Togetsukyo+Bridge+Arashiyama" target="_blank"><strong>Togetsukyo bridge</strong></a> over the Oi River (wide, scenic, beautiful in spring light), and <a href="https://maps.google.com/?q=Tenryuji+Temple+Arashiyama" target="_blank"><strong>Tenryu-ji stroll garden</strong></a> (¥500, walk through rather than sit-down, cherry blossoms and central pond). Allow 2–3h total. Craft shops and food along the main street.',
@@ -261,7 +286,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 14 ─────────────────────────────────
-  {n:14,date:'Thu Apr 16',label:'Hiroshima',c:'jp',title:'Travel → Hiroshima',sub:'Peace Park + Museum · Okonomiyaki night',tags:['travel','night'],img:IMG.hiroshima,
+  {n:14,region:'hiroshima',date:'Thu Apr 16',label:'Hiroshima',c:'jp',title:'Travel → Hiroshima',sub:'Peace Park + Museum · Okonomiyaki night',tags:['travel','night'],img:IMG.hiroshima,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Hikari shinkansen Kyoto→Hiroshima (~1h 44min, JR Pass — <strong>do not take Nozomi</strong>). Hotel check-in.',
@@ -275,7 +300,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 15 ─────────────────────────────────
-  {n:15,date:'Fri Apr 17',label:'Miyajima',c:'jp',title:'Miyajima Island Day Trip',sub:'Floating torii · Oysters · Ropeway optional',tags:['split','night'],img:IMG.miyajima,
+  {n:15,region:'hiroshima',date:'Fri Apr 17',label:'Miyajima',c:'jp',title:'Miyajima Island Day Trip',sub:'Floating torii · Oysters · Ropeway optional',tags:['split','night'],img:IMG.miyajima,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'JR to <a href="https://maps.google.com/?q=Miyajimaguchi+Station" target="_blank">Miyajimaguchi</a> (~30 min, JR Pass) + JR ferry (~10 min, JR Pass included). Arrive before 9am — busy by 10am. Check tide table before going: <a href="https://www.miyajima.or.jp/english/information/info_tide.html" target="_blank">high tide</a> = floating torii, low tide = walk to its base. Both worth seeing.',
@@ -294,7 +319,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 16 ─────────────────────────────────
-  {n:16,date:'Sat Apr 18',label:'Seoul',c:'jp',title:'Hiroshima → Seoul',sub:'Japan ends · Korea begins · Gloria at ICN',tags:['travel'],img:IMG.seoul,
+  {n:16,region:'seoul',date:'Sat Apr 18',label:'Seoul',c:'jp',title:'Hiroshima → Seoul',sub:'Japan ends · Korea begins · Gloria at ICN',tags:['travel'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. Ship heavy bags home via post office if needed. Travel light to Korea.',
@@ -309,7 +334,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 17 ─────────────────────────────────
-  {n:17,date:'Sun Apr 19',label:'Seoul',c:'kr',title:'Seoul — Palaces + Korean BBQ',sub:'Gyeongbokgung · Insadong · N Seoul Tower · BBQ dinner',tags:['night','korea'],img:IMG.seoul,
+  {n:17,region:'seoul',date:'Sun Apr 19',label:'Seoul',c:'kr',title:'Seoul — Palaces + Korean BBQ',sub:'Gyeongbokgung · Insadong · N Seoul Tower · BBQ dinner',tags:['night','korea'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Gyeongbokgung+Palace+Seoul" target="_blank"><strong>Gyeongbokgung Palace</strong></a> — grandest of Seoul\'s five royal palaces (1395). Changing of the guard at 10am + 2pm. Free entry with rented hanbok (~₩20,000/2h at east gate). All flat, paved, spacious.',
@@ -328,7 +353,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 18 ─────────────────────────────────
-  {n:18,date:'Mon Apr 20',label:'Seoul',c:'kr',title:'Seoul — Markets + Han River',sub:"Gwangjang Market · Gloria's day to lead",tags:['night','korea'],img:IMG.gwangjang,
+  {n:18,region:'seoul',date:'Mon Apr 20',label:'Seoul',c:'kr',title:'Seoul — Markets + Han River',sub:"Gwangjang Market · Gloria's day to lead",tags:['night','korea'],img:IMG.gwangjang,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Gwangjang+Market+Seoul" target="_blank"><strong>Gwangjang Market</strong></a> — Seoul\'s oldest traditional market (1905). Must try: <em>bindaetteok</em> (crispy mung bean pancakes), <em>mayak gimbap</em> (tiny addictive rice rolls), <em>yukhoe</em> (raw beef tartare with pear and egg yolk).',
@@ -343,7 +368,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 19 ─────────────────────────────────
-  {n:19,date:'Tue Apr 21',label:'Seoul',c:'kr',title:'Seoul — DMZ or Busan or Free Day',sub:'Final full day · Farewell dinner · Gloria picks',tags:['split','korea'],img:IMG.dmz,
+  {n:19,region:'seoul',date:'Tue Apr 21',label:'Seoul',c:'kr',title:'Seoul — DMZ or Busan or Free Day',sub:'Final full day · Farewell dinner · Gloria picks',tags:['split','korea'],img:IMG.dmz,
    split:[
     {who:'Option A: DMZ',whoKo:'선택 A: DMZ',whoFor:['all'],
      text:'<a href="https://maps.google.com/?q=DMZ+South+Korea" target="_blank"><strong>DMZ day tour</strong></a> — North Korean border, ~1h from Seoul. Guided tour (<a href="https://www.klook.com/" target="_blank">Klook</a>, ~$60–80pp). 3rd Tunnel, Dora Observatory, Dorasan Station. Deeply moving after Hiroshima.',
@@ -364,7 +389,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 20 ─────────────────────────────────
-  {n:20,date:'Wed Apr 22',label:'Depart',c:'kr',title:'Depart Seoul — Everyone Flies Home',sub:'AREX to Incheon · Allow 3h for international flights',tags:['travel'],img:IMG.seoul,
+  {n:20,region:'seoul',date:'Wed Apr 22',label:'Depart',c:'kr',title:'Depart Seoul — Everyone Flies Home',sub:'AREX to Incheon · Allow 3h for international flights',tags:['travel'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. <a href="https://www.arex.or.kr/en/" target="_blank"><strong>AREX Express</strong></a> to Incheon Airport (43 min from Seoul Station, ~₩9,500). Allow 3h before international departure.',

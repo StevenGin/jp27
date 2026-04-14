@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#0f0f1a">
 <title>Japan · Korea 2027</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -61,6 +62,19 @@
     <div id="tl-kr"></div>
   </div>
 
+  <!-- ROUTE MAP -->
+  <div class="tab-pane" id="tab-map">
+    <div id="route-map"></div>
+    <div class="map-legend">
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#3d52a0"></div>Tokyo</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#2d6a4f"></div>Mountains</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#b8860b"></div>Kanazawa</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#c0395b"></div>Kyoto</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#4a5568"></div>Hiroshima</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#0f7a65"></div>Seoul</div>
+    </div>
+  </div>
+
   <!-- PACKING -->
   <div class="tab-pane" id="tab-packing">
     <div class="pack-progress">
@@ -75,81 +89,92 @@
     <div id="pack-categories"></div>
   </div>
 
-  <!-- CREW -->
+  <!-- INFO (formerly Crew) -->
   <div class="tab-pane" id="tab-crew">
-    <div class="crew-card" id="crew-list"></div>
 
-    <div class="info-blk" id="knee-section">
-      <div class="info-blk-hdr" onclick="toggleBlk(this)">
-        <span style="font-size:20px">🦵</span>
-        <h3>Rick's Knee Guide</h3>
-        <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
-      </div>
-      <div class="info-blk-body">
-        <div class="irow"><div class="il ok">Fine</div><div class="ir">Philosopher's Path (flat), Kenrokuen (flat), Gyeongbokgung Seoul (flat), Fushimi Inari lower section, Miyajima waterfront, N Seoul Tower cable car.</div></div>
-        <div class="irow"><div class="il warn">Careful</div><div class="ir">Magome-juku stone slope — short, manageable, uneven. Kamakura temple steps — avoidable.</div></div>
-        <div class="irow"><div class="il no">Skip</div><div class="ir">Magome→Tsumago 8km hike (take bus). Shirakawa-go viewpoint (15-min uphill). Miyajima ropeway hike. Full Fushimi Inari trail.</div></div>
-        <div class="irow"><div class="il ok">Bonus</div><div class="ir">Seoul jjimjilbang (bathhouse) — heated floor rooms are excellent for bad knees. Highly recommended on the free Seoul day.</div></div>
-      </div>
+    <!-- Traveller cards (built by buildCrew()) -->
+    <div style="padding:12px 12px 0">
+      <div class="crew-card" id="crew-list"></div>
     </div>
 
-    <div class="info-blk">
-      <div class="info-blk-hdr" onclick="toggleBlk(this)">
-        <span style="font-size:20px">🌸</span>
-        <h3>Cherry Blossom Timing</h3>
-        <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
-      </div>
-      <div class="info-blk-body">
-        <div class="irow"><div class="il">Tokyo</div><div class="ir">Apr 3–8: likely at peak. Nakameguro canal and Ueno Park are the highlights on this route.</div></div>
-        <div class="irow"><div class="il">Kyoto</div><div class="ir">Apr 11–14: late blossoms possible. Philosopher's Path is the classic spot.</div></div>
-        <div class="irow"><div class="il">Magome</div><div class="ir">Mountain elevation may push blossoms slightly later — possible bonus Apr 6–7.</div></div>
-      </div>
-    </div>
+    <!-- Trip quick-reference blocks -->
+    <div style="padding:0 12px 12px">
 
-    <div class="info-blk" id="gloria-section">
-      <div class="info-blk-hdr" onclick="toggleBlk(this)">
-        <span style="font-size:20px">🇰🇷</span>
-        <h3>Gloria's Korea Guide <span class="ko">글로리아 안내</span></h3>
-        <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+      <div class="info-blk" id="knee-section">
+        <div class="info-blk-hdr" onclick="toggleBlk(this)">
+          <span style="font-size:20px">🦵</span>
+          <h3>Rick's Knee Guide</h3>
+          <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+        </div>
+        <div class="info-blk-body">
+          <div class="irow"><div class="il ok">Fine</div><div class="ir">Philosopher's Path (flat), Kenrokuen (flat), Gyeongbokgung Seoul (flat), Fushimi Inari lower section, Miyajima waterfront, N Seoul Tower cable car.</div></div>
+          <div class="irow"><div class="il warn">Careful</div><div class="ir">Magome-juku stone slope — short, manageable, uneven. Kamakura temple steps — avoidable.</div></div>
+          <div class="irow"><div class="il no">Skip</div><div class="ir">Magome→Tsumago 8km hike (take bus). Shirakawa-go viewpoint (15-min uphill). Miyajima ropeway hike. Full Fushimi Inari trail.</div></div>
+          <div class="irow"><div class="il ok">Bonus</div><div class="ir">Seoul jjimjilbang (bathhouse) — heated floor rooms are excellent for bad knees. Highly recommended on the free Seoul day.</div></div>
+        </div>
       </div>
-      <div class="info-blk-body">
-        <div class="irow"><div class="il" style="color:var(--teal)">합류</div><div class="ir">Apr 3 — ICN → HND (~2h). Meet the group at Tokyo hotel evening. <span class="ko">4월 3일 합류, 도쿄 호텔에서 만나요.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">Day 17</div><div class="ir">Apr 19 — Your day to lead. Take everyone somewhere special in Seoul. Gwangjang Market in the morning. <span class="ko">4월 19일은 글로리아가 이끄는 날입니다.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">저녁식사</div><div class="ir">Apr 20 — Farewell dinner is your pick. Hanjeonsik or Gangnam rooftop. <span class="ko">4월 20일 작별 저녁식사는 글로리아가 선택합니다.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">귀가</div><div class="ir">Apr 21 — Everyone else flies home. You're already there! <span class="ko">4월 21일 — 글로리아는 이미 집에 있네요! 🎉</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">팁</div><div class="ir">Group doesn't know Seoul well — be ready to help navigate T-money, recommend restaurants, translate menus. <span class="ko">그룹이 서울을 잘 모르니 도움을 부탁드려요.</span></div></div>
-      </div>
-    </div>
 
-    <div class="info-blk">
-      <div class="info-blk-hdr" onclick="toggleBlk(this)">
-        <span style="font-size:20px">🆘</span>
-        <h3>Emergency Contacts</h3>
-        <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+      <div class="info-blk">
+        <div class="info-blk-hdr" onclick="toggleBlk(this)">
+          <span style="font-size:20px">🌸</span>
+          <h3>Cherry Blossom Timing</h3>
+          <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+        </div>
+        <div class="info-blk-body">
+          <div class="irow"><div class="il">Tokyo</div><div class="ir">Apr 3–8: likely at peak. Nakameguro canal and Ueno Park are the highlights on this route.</div></div>
+          <div class="irow"><div class="il">Kyoto</div><div class="ir">Apr 11–14: late blossoms possible. Philosopher's Path is the classic spot.</div></div>
+          <div class="irow"><div class="il">Magome</div><div class="ir">Mountain elevation may push blossoms slightly later — possible bonus Apr 6–7.</div></div>
+        </div>
       </div>
-      <div class="info-blk-body">
-        <div class="irow"><div class="il">Japan</div><div class="ir">Police: 110 · Ambulance: 119 · Canadian Embassy Tokyo: +81-3-5412-6200</div></div>
-        <div class="irow"><div class="il">Korea</div><div class="ir">Police: 112 · Ambulance: 119 · Canadian Embassy Seoul: +82-2-3783-6000 · English helpline: 1330</div></div>
-        <div class="irow"><div class="il">ATMs</div><div class="ir">Japan: 7-Eleven + Japan Post accept foreign cards 24/7. Korea: convenience store ATMs. Always carry cash for rural Japan.</div></div>
-      </div>
-    </div>
 
-    <div class="inst">
-      <span style="font-size:22px">📲</span>
-      <p><strong>Add to home screen for offline use</strong>iOS: Share → Add to Home Screen. Android: Chrome → Add to Home Screen. Works without internet.</p>
+      <div class="info-blk" id="gloria-section">
+        <div class="info-blk-hdr" onclick="toggleBlk(this)">
+          <span style="font-size:20px">🇰🇷</span>
+          <h3>Gloria's Korea Guide <span class="ko">글로리아 안내</span></h3>
+          <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+        </div>
+        <div class="info-blk-body">
+          <div class="irow"><div class="il" style="color:var(--teal)">합류</div><div class="ir">Apr 3 — ICN → HND (~2h). Meet the group at Tokyo hotel evening. <span class="ko">4월 3일 합류, 도쿄 호텔에서 만나요.</span></div></div>
+          <div class="irow"><div class="il" style="color:var(--teal)">Day 17</div><div class="ir">Apr 19 — Your day to lead. Take everyone somewhere special in Seoul. Gwangjang Market in the morning. <span class="ko">4월 19일은 글로리아가 이끄는 날입니다.</span></div></div>
+          <div class="irow"><div class="il" style="color:var(--teal)">저녁식사</div><div class="ir">Apr 20 — Farewell dinner is your pick. Hanjeonsik or Gangnam rooftop. <span class="ko">4월 20일 작별 저녁식사는 글로리아가 선택합니다.</span></div></div>
+          <div class="irow"><div class="il" style="color:var(--teal)">귀가</div><div class="ir">Apr 21 — Everyone else flies home. You're already there! <span class="ko">4월 21일 — 글로리아는 이미 집에 있네요! 🎉</span></div></div>
+          <div class="irow"><div class="il" style="color:var(--teal)">팁</div><div class="ir">Group doesn't know Seoul well — be ready to help navigate T-money, recommend restaurants, translate menus. <span class="ko">그룹이 서울을 잘 모르니 도움을 부탁드려요.</span></div></div>
+        </div>
+      </div>
+
+      <div class="info-blk">
+        <div class="info-blk-hdr" onclick="toggleBlk(this)">
+          <span style="font-size:20px">🆘</span>
+          <h3>Emergency Contacts</h3>
+          <span class="bchev" style="font-size:18px;color:var(--border);transition:transform 0.2s">›</span>
+        </div>
+        <div class="info-blk-body">
+          <div class="irow"><div class="il">Japan</div><div class="ir">Police: 110 · Ambulance: 119 · Canadian Embassy Tokyo: +81-3-5412-6200</div></div>
+          <div class="irow"><div class="il">Korea</div><div class="ir">Police: 112 · Ambulance: 119 · Canadian Embassy Seoul: +82-2-3783-6000 · English helpline: 1330</div></div>
+          <div class="irow"><div class="il">ATMs</div><div class="ir">Japan: 7-Eleven + Japan Post accept foreign cards 24/7. Korea: convenience store ATMs. Always carry cash for rural Japan.</div></div>
+        </div>
+      </div>
+
+      <div class="inst">
+        <span style="font-size:22px">📲</span>
+        <p><strong>Add to home screen for offline use</strong>iOS: Share → Add to Home Screen. Android: Chrome → Add to Home Screen. Works without internet.</p>
+      </div>
+
     </div>
   </div>
 
 </div><!-- end app-body -->
 
-<!-- BOTTOM NAV — 4 tabs -->
+<!-- BOTTOM NAV — 5 tabs -->
 <nav class="bottom-nav">
   <button class="nav-btn active" onclick="switchTab('today', this)"><span class="ni">📍</span><span class="nl">TODAY</span></button>
   <button class="nav-btn" onclick="switchTab('timeline', this)"><span class="ni">📅</span><span class="nl">ALL DAYS</span></button>
+  <button class="nav-btn" onclick="switchTab('map', this)"><span class="ni">🗺️</span><span class="nl">MAP</span></button>
   <button class="nav-btn" onclick="switchTab('packing', this)"><span class="ni">🧳</span><span class="nl">PACKING</span></button>
-  <button class="nav-btn" onclick="switchTab('crew', this)"><span class="ni">👥</span><span class="nl">CREW</span></button>
+  <button class="nav-btn" onclick="switchTab('crew', this)"><span class="ni">ℹ️</span><span class="nl">INFO</span></button>
 </nav>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
