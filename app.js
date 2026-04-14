@@ -188,15 +188,34 @@ function goDay(i){if(i<0||i>=DAYS.length)return;curIdx=i;buildToday(i);document.
 /* ─── TIMELINE ─────────────────────────────────────────────────── */
 /* ─── TIMELINE ─────────────────────────────────────── */
 function buildTimeline(){
-  var jp=document.getElementById('tl-jp'),kr=document.getElementById('tl-kr');
+  var container=document.getElementById('tl-all');
   var tagMap={night:'Night',travel:'Transit',golf:'Golf',split:'Split',knee:'Rick flag',splurge:'Splurge',korea:'Korea'};
+  var lastRegion=null;
   DAYS.forEach(function(d){
-    var el=d.c==='kr'?kr:jp,isKr=d.c==='kr';
+    var rkey=d.region||'tokyo';
+    if(rkey!==lastRegion){
+      lastRegion=rkey;
+      var r=REGIONS[rkey];
+      var rDays=DAYS.filter(function(x){return x.region===rkey;});
+      var dates=rDays[0].date.split(' ').slice(1).join(' ')+' – '+rDays[rDays.length-1].date.split(' ').slice(1).join(' ');
+      container.innerHTML+='<div class="tl-region-hdr" style="background:'+r.color+'">'
+        +'<span class="rh-emoji">'+r.emoji+'</span>'
+        +'<span class="rh-name">'+r.name+'</span>'
+        +'<span class="rh-dates">'+dates+'</span></div>';
+    }
+    var isKr=d.c==='kr';
     var tags=d.tags.map(function(t){return'<span class="dtag '+t+'">'+(tagMap[t]||t)+'</span>';}).join('');
     var body='';
     if(d.split)d.split.forEach(function(s){body+='<div class="db-act"><div class="db-time'+(isKr?' kr':'')+'" style="'+(s.cls==='golf'?'color:#2e7d32':'')+'">'+(s.cls==='golf'?'🏌️ Golf':s.who)+'</div><div class="db-desc">'+s.text+(s.knee?'<div class="knee-note">🦵 '+s.knee+'</div>':'')+'</div></div>';});
     d.activities.forEach(function(a){body+='<div class="db-act"><div class="db-time'+(isKr?' kr':'')+'">'+a.time+'</div><div class="db-desc">'+a.desc+(a.knee?'<div class="knee-note">🦵 '+a.knee+'</div>':'')+'</div></div>';});
-    el.innerHTML+='<div class="day-card"><div class="day-card-hdr" onclick="toggleDay(this)"><img class="day-card-img" src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.display=\'none\'"><div class="day-card-nfo"><div class="day-num-lbl">Day '+d.n+' · '+d.date+'</div><div class="day-title-t">'+d.title+'</div><div class="day-sub-t">'+d.sub+'</div><div class="day-tags-t">'+tags+'</div></div><div class="day-chev">›</div></div><div class="day-body">'+body+'</div></div>';
+    container.innerHTML+='<div class="day-card" data-region="'+rkey+'">'
+      +'<div class="day-card-hdr" onclick="toggleDay(this)">'
+      +'<img class="day-card-img" src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.display=\'none\'">'
+      +'<div class="day-card-nfo"><div class="day-num-lbl">Day '+d.n+' · '+d.date+'</div>'
+      +'<div class="day-title-t">'+d.title+'</div><div class="day-sub-t">'+d.sub+'</div>'
+      +'<div class="day-tags-t">'+tags+'</div></div>'
+      +'<div class="day-chev">›</div></div>'
+      +'<div class="day-body">'+body+'</div></div>';
   });
 }
 function toggleDay(h){var b=h.nextElementSibling,ch=h.querySelector('.day-chev'),o=b.classList.toggle('open');ch.classList.toggle('open',o);}
@@ -208,24 +227,22 @@ function switchTab(id,btn){document.querySelectorAll('.tab-pane').forEach(functi
 
 /* ─── MAP ───────────────────────────────────────────────────────────── */
 function buildMap(){
-  if(typeof L==='undefined')return;
-  var map=L.map('route-map',{zoomControl:true,scrollWheelZoom:false});
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'© <a href="https://openstreetmap.org">OpenStreetMap</a>',maxZoom:13
-  }).addTo(map);
-  var latlngs=MAP_STOPS.map(function(s){return[s.lat,s.lng];});
-  L.polyline(latlngs,{color:'#9090a8',weight:2,dashArray:'5,6',opacity:0.7}).addTo(map);
-  MAP_STOPS.forEach(function(s,i){
-    var col=regionColor(s.region);
-    var icon=L.divIcon({
-      className:'',
-      html:'<div style="width:32px;height:32px;background:'+col+';border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;font-family:sans-serif">'+(i+1)+'</div>',
-      iconSize:[32,32],iconAnchor:[16,16]
-    });
-    L.marker([s.lat,s.lng],{icon:icon}).addTo(map)
-      .bindPopup('<strong>'+s.name+'</strong><br>'+s.days,'<br>'+regionEmoji(s.region));
-  });
-  map.fitBounds(L.latLngBounds(latlngs),{padding:[20,20]});
+  var el=document.getElementById('route-map');
+  if(!el)return;
+  var W=360,H=300,minLat=32,maxLat=38.8,minLng=125.5,maxLng=142;
+  function px(lng){return Math.round((lng-minLng)/(maxLng-minLng)*W);}
+  function py(lat){return Math.round((1-(lat-minLat)/(maxLat-minLat))*H);}
+  var pts=MAP_STOPS.map(function(s){return px(s.lng)+','+py(s.lat);}).join(' ');
+  var circles=MAP_STOPS.map(function(s,i){
+    var x=px(s.lng),y=py(s.lat),col=regionColor(s.region);
+    return'<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+col+'" stroke="#fff" stroke-width="2.5"/>'
+      +'<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="sans-serif">'+(i+1)+'</text>'
+      +'<text x="'+x+'" y="'+(y+23)+'" text-anchor="middle" font-size="8.5" fill="'+col+'" font-weight="600" font-family="sans-serif">'+s.name+'</text>';
+  }).join('');
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:300px;display:block">'
+    +'<rect width="'+W+'" height="'+H+'" fill="#eef2f7" rx="8"/>'
+    +'<polyline points="'+pts+'" fill="none" stroke="#9090a8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.65"/>'
+    +circles+'</svg>';
 }
 
 /* ─── INIT ─────────────────────────────────────────────────────── */
