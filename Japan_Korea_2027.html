@@ -119,6 +119,7 @@ body{display:flex;flex-direction:column;height:100dvh}
 .dtag.split{background:#e3f2fd;color:#1565c0}
 .dtag.knee{background:#fff3e0;color:#c45000}
 .dtag.splurge{background:var(--gold-l);color:var(--gold)}
+.dtag.festival{background:#fff0d4;color:#b05000}
 .dtag.korea{background:var(--teal-l);color:var(--teal)}
 .day-chev{padding:0 12px;display:flex;align-items:center;color:var(--border);font-size:20px;transition:transform 0.2s}
 .day-chev.open{transform:rotate(90deg);color:var(--cherry)}
@@ -258,7 +259,7 @@ body{display:flex;flex-direction:column;height:100dvh}
       <span id="pp-name"></span>
     </div>
   </div>
-  <div class="header-sub">Apr 3 – Apr 22 · 20 Nights · 6 Travellers</div>
+  <div class="header-sub">Apr 3 – Apr 24 · 21 Nights · 6 Travellers</div>
   <div class="header-chips">
     <span class="chip on" id="hchip-lead">Steven on point</span>
     <span class="chip" id="hchip-knee">Rick: knee flags</span>
@@ -268,9 +269,9 @@ body{display:flex;flex-direction:column;height:100dvh}
 <div class="app-body">
   <div class="tab-pane active" id="tab-today"><div id="today-content"></div></div>
   <div class="tab-pane" id="tab-timeline">
-    <div class="tl-hdr"><div class="tl-country">Japan</div><div class="tl-title">April 3 – 17</div><div class="tl-dates">Tokyo · Magome · Shirakawa-go · Kanazawa · Kyoto · Hiroshima</div></div>
+    <div class="tl-hdr"><div class="tl-country">Japan</div><div class="tl-title">April 3 – 22</div><div class="tl-dates">Tokyo · Magome · Shirakawa-go · Kanazawa · Takayama · Kyoto · Himeji · Hiroshima</div></div>
     <div id="tl-jp"></div>
-    <div class="tl-hdr" style="background:#f0faf7"><div class="tl-country" style="color:var(--teal)">Korea</div><div class="tl-title">April 17 – 21</div><div class="tl-dates">Seoul</div></div>
+    <div class="tl-hdr" style="background:#f0faf7"><div class="tl-country" style="color:var(--teal)">Korea</div><div class="tl-title">April 21 – 24</div><div class="tl-dates">Seoul</div></div>
     <div id="tl-kr"></div>
   </div>
   <div class="tab-pane" id="tab-checklist">
@@ -298,8 +299,8 @@ body{display:flex;flex-direction:column;height:100dvh}
     <div class="info-blk" id="knee-section">
       <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🦵</span><h3>Rick's Knee Guide</h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
       <div class="info-blk-body">
-        <div class="irow"><div class="il ok">Fine</div><div class="ir">Philosopher's Path (flat), Kenrokuen (flat), Gyeongbokgung Seoul (flat), Fushimi Inari lower section, Miyajima waterfront, N Seoul Tower cable car.</div></div>
-        <div class="irow"><div class="il warn">Careful</div><div class="ir">Magome-juku stone slope — short, manageable, uneven. Kamakura temple steps — avoidable.</div></div>
+        <div class="irow"><div class="il ok">Fine</div><div class="ir">TeamLab Planets (flat throughout), Arashiyama bamboo grove + bridge (flat), Nagamachi samurai district (flat), Himeji Castle grounds (mostly flat — skip upper floors), Takayama old town / Sanmachi Suji (flat), Philosopher's Path (flat), Kenrokuen (flat), Gyeongbokgung Seoul (flat), Fushimi Inari lower section, Miyajima waterfront, N Seoul Tower cable car.</div></div>
+        <div class="irow"><div class="il warn">Careful</div><div class="ir">Magome-juku stone slope — short, manageable, uneven. Take it slow, use the wooden posts.</div></div>
         <div class="irow"><div class="il no">Skip</div><div class="ir">Magome→Tsumago 8km hike (take bus). Shirakawa-go viewpoint (15-min uphill). Miyajima ropeway hike. Full Fushimi Inari trail.</div></div>
         <div class="irow"><div class="il ok">Bonus</div><div class="ir">Seoul jjimjilbang (bathhouse) — heated floor rooms are excellent for bad knees. Highly recommended on the free Seoul day.</div></div>
       </div>
@@ -307,18 +308,20 @@ body{display:flex;flex-direction:column;height:100dvh}
     <div class="info-blk">
       <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🌸</span><h3>Cherry Blossom Timing</h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
       <div class="info-blk-body">
-        <div class="irow"><div class="il">Tokyo</div><div class="ir">Apr 3–8: likely at peak. Nakameguro canal and Ueno Park are the highlights on this route.</div></div>
-        <div class="irow"><div class="il">Kyoto</div><div class="ir">Apr 11–14: late blossoms possible. Philosopher's Path is the classic spot.</div></div>
-        <div class="irow"><div class="il">Magome</div><div class="ir">Mountain elevation may push blossoms slightly later — possible bonus Apr 6–7.</div></div>
+        <div class="irow"><div class="il">Tokyo</div><div class="ir">Apr 3–7: likely at or near peak. Nakameguro canal and Ueno Park are the highlights on this route.</div></div>
+        <div class="irow"><div class="il">Kyoto</div><div class="ir">Apr 15–18: late blossoms possible. Philosopher's Path is the classic spot.</div></div>
+        <div class="irow"><div class="il">Magome/Takayama</div><div class="ir">Mountain elevation may push blossoms slightly later — possible bonus Apr 8–14.</div></div>
+        <div class="irow"><div class="il">Note</div><div class="ir">Cherry blossoms are a bonus, not the agenda — group preference is to enjoy them naturally rather than over-optimise.</div></div>
       </div>
     </div>
     <div class="info-blk" id="gloria-section">
       <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🇰🇷</span><h3>Gloria's Korea Guide <span class="ko">글로리아 안내</span></h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
       <div class="info-blk-body">
         <div class="irow"><div class="il" style="color:var(--teal)">합류</div><div class="ir">Apr 3 — ICN → HND (Korean Air or Asiana, ~2h). Meet the group at Tokyo hotel evening. <span class="ko">4월 3일 합류, 도쿄 호텔에서 만나요.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">Day 17</div><div class="ir">Apr 19 — Your day to lead. Take everyone somewhere special in Seoul. Gwangjang Market in the morning. <span class="ko">4월 19일은 글로리아가 이끄는 날입니다.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">저녁식사</div><div class="ir">Apr 20 — Farewell dinner is your pick. Hanjeonsik or Gangnam rooftop. <span class="ko">4월 20일 작별 저녁식사는 글로리아가 선택합니다.</span></div></div>
-        <div class="irow"><div class="il" style="color:var(--teal)">귀가</div><div class="ir">Apr 21 — Everyone else flies home. You're already there! <span class="ko">4월 21일 — 글로리아는 이미 집에 있네요! 🎉</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">Day 19</div><div class="ir">Apr 21 — Meet group at ICN (HIJ→ICN Jeju Air flight). Guide everyone on AREX to Seoul hotel. <span class="ko">4월 21일 인천공항에서 그룹 픽업, AREX 안내 부탁드려요.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">Day 21</div><div class="ir">Apr 23 — Your day to lead. Gwangjang Market in the morning, then take everyone somewhere you love in Seoul. <span class="ko">4월 23일은 글로리아가 이끄는 날입니다.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">저녁식사</div><div class="ir">Apr 23 — Farewell dinner is your pick. Hanjeonsik or Gangnam rooftop or your favourite. <span class="ko">4월 23일 작별 저녁식사는 글로리아가 선택합니다.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">귀가</div><div class="ir">Apr 24 — Everyone else flies home. You're already there! <span class="ko">4월 24일 — 글로리아는 이미 집에 있네요! 🎉</span></div></div>
         <div class="irow"><div class="il" style="color:var(--teal)">팁</div><div class="ir">Group doesn't know Seoul well — be ready to help navigate T-money, recommend restaurants, translate menus. <span class="ko">그룹이 서울을 잘 모르니 도움을 부탁드려요.</span></div></div>
       </div>
     </div>
@@ -407,37 +410,36 @@ function applyProfile(){
 /* ─── DAYS DATA ─────────────────────────────────────── */
 var IMG={
   tokyo:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75',
-  kamakura:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=75',
   magome:'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=800&q=75',
   shirakawa:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=75',
   kanazawa:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=75',
+  takayama:'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&q=75',
   kyoto:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75',
-  uji:'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=75',
+  himeji:'https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=800&q=75',
   hiroshima:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=800&q=75',
   miyajima:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=75',
   seoul:'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=75',
-  gwangjang:'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75',
-  dmz:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=75'
+  gwangjang:'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75'
 };
 
 var DAYS=[
   // ─ DAY 1 ─────────────────────────────────
-  {n:1,date:'Fri Apr 3',label:'Tokyo',c:'jp',title:'Tokyo — Arrive',sub:'Shinjuku hotel · Izakaya welcome dinner',tags:['travel','night'],img:IMG.tokyo,
+  {n:1,date:'Sat Apr 3',label:'Tokyo',c:'jp',title:'Tokyo — Arrive',sub:'Shinjuku hotel · Izakaya welcome dinner',tags:['travel','night'],img:IMG.tokyo,
    wt:{t:'14°C',cond:'Partly cloudy, cool evening',icon:'🌤️'},
    activities:[
     {time:'Afternoon',timeKo:'오후',
      desc:'Arrive <strong>HND (Haneda Airport)</strong> (preferred — 30 min to centre via monorail) or NRT (Narita, 60 min via N\'EX). Pick up <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank"><strong>Suica IC cards</strong></a> at the airport — works on every train, bus, and convenience store in Japan.',
      ko:'<strong>하네다 공항(HND)</strong>(선호 — 모노레일로 시내 30분) 또는 나리타 공항(NRT, N\'EX 60분) 도착. 공항에서 <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank"><strong>스이카 IC 카드</strong></a>를 받으세요.'},
     {time:'Evening',timeKo:'저녁',
-     desc:'Check in to <strong>Shinjuku hotel</strong> (central or south Shinjuku, near JR station). Welcome dinner at an <strong>izakaya</strong> nearby — order everything, share everything. Short neon wander after if anyone has energy. Early night.',
-     ko:'신주쿠 호텔 체크인. 근처 <strong>이자카야</strong>에서 환영 저녁 식사. 에너지가 있으면 짧은 네온 거리 산책. 일찍 주무세요.'},
+     desc:'Check in to <strong>Shinjuku hotel</strong> (central or south Shinjuku, near JR station). Recommended: <a href="https://maps.google.com/?q=Dormy+Inn+Premium+Shinjuku" target="_blank">Dormy Inn Premium Shinjuku</a>, Hyatt Regency Tokyo, Keio Plaza, or Park Hyatt. Welcome dinner at an <strong>izakaya</strong> nearby — order everything, share everything. Early night.',
+     ko:'신주쿠 호텔 체크인 — 신주쿠역 근처 중심 또는 남쪽. 추천: 도르미 인 프리미엄 신주쿠, 하얏트 리젠시, 케이오 플라자, 파크 하얏트. 근처 <strong>이자카야</strong>에서 환영 저녁 식사. 일찍 주무세요.'},
     {time:'Tonight',timeKo:'오늘 밤',
      desc:'Put a ¥5,000 note in your wallet — you\'ll need cash tomorrow.',
      ko:'지갑에 5,000엔 지폐를 넣어두세요 — 내일 필요합니다.'}
   ]},
 
   // ─ DAY 2 ─────────────────────────────────
-  {n:2,date:'Sat Apr 4',label:'Tokyo',c:'jp',title:'Tokyo — Asakusa + Ueno + Shibuya Night',sub:'Old Tokyo · Cherry blossoms · Iconic crossing',tags:['night'],img:IMG.tokyo,
+  {n:2,date:'Sun Apr 4',label:'Tokyo',c:'jp',title:'Tokyo — Asakusa + Ueno + Shibuya Night',sub:'Old Tokyo · Cherry blossoms · Iconic crossing',tags:['night'],img:IMG.tokyo,
    activities:[
     {time:'Early Morning',timeKo:'이른 아침',
      desc:'Head to <a href="https://maps.google.com/?q=Asakusa,Tokyo" target="_blank"><strong>Asakusa</strong></a> early — before 8am on a Saturday it\'s magical, by 9:30am it\'s mobbed. Direct JR Chuo-Sobu Line from Shinjuku.',
@@ -460,7 +462,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 3 ─────────────────────────────────
-  {n:3,date:'Sun Apr 5',label:'Tokyo',c:'jp',title:'Tokyo — Shinjuku Gyoen + Nakameguro + Shimokitazawa',sub:'Garden · Canal · Vintage neighbourhoods',tags:['night'],img:IMG.tokyo,
+  {n:3,date:'Mon Apr 5',label:'Tokyo',c:'jp',title:'Tokyo — Shinjuku Gyoen + Nakameguro + Shimokitazawa',sub:'Garden · Canal · Vintage neighbourhoods',tags:['night'],img:IMG.tokyo,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Shinjuku+Gyoen+Tokyo" target="_blank"><strong>Shinjuku Gyoen</strong></a> — 10-min walk from the hotel. Japan\'s most refined cherry blossom garden: Japanese, French, and English landscape sections in one park. No alcohol, so it\'s calm rather than party-like. ¥500 entry. Allow 1–1.5h. <strong>Closes 4:30pm</strong> — only need the morning here.',
@@ -480,7 +482,7 @@ var DAYS=[
   ]},
 
   // ─ DAY 4 ─────────────────────────────────
-  {n:4,date:'Mon Apr 6',label:'Tokyo',c:'jp',title:'Tokyo — Tsukiji + Akihabara + TeamLab',sub:'Market breakfast · Arcades · Digital art',tags:['night'],img:IMG.tokyo,
+  {n:4,date:'Tue Apr 6',label:'Tokyo',c:'jp',title:'Tokyo — Tsukiji + Akihabara + TeamLab',sub:'Market breakfast · Arcades · Digital art',tags:['night'],img:IMG.tokyo,
    activities:[
     {time:'Early Morning',timeKo:'이른 아침',
      desc:'<a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank"><strong>Tsukiji Outer Market</strong></a> — arrive by 8–9am, stalls wind down by 10–11am. One of the great food experiences in Japan: fresh uni on rice, tamagoyaki (sweet omelette) on sticks, the best sushi breakfast of the trip from tiny stalls. No reservation, just arrive and eat.',
@@ -497,11 +499,22 @@ var DAYS=[
   ]},
 
   // ─ DAY 5 ─────────────────────────────────
-  {n:5,date:'Tue Apr 7',label:'Magome',c:'jp',title:'Travel → Magome Ryokan',sub:'Tokyo → Nagoya → Nakatsugawa → Magome',tags:['travel','night'],img:IMG.magome,
+  {n:5,date:'Wed Apr 7',label:'Tokyo',c:'jp',title:'Tokyo — Free Day · Wander or Add-Ons',sub:'Harajuku · Yanaka · Sumo practice · Or just wander',tags:['night'],img:IMG.tokyo,
+   activities:[
+    {time:'Options',timeKo:'선택지',
+     desc:'This day is intentionally loose. Group picks from: <strong><a href="https://maps.google.com/?q=Harajuku+Tokyo" target="_blank">Harajuku + Meiji Shrine + Omotesando</a></strong> — Takeshita St for street fashion, forested Meiji Shrine grounds, Omotesando for luxury architecture. OR <strong><a href="https://maps.google.com/?q=Yanaka+Tokyo" target="_blank">Yanaka</a></strong> — old Tokyo that survived WWII, cemetery walk, Yanaka Ginza shopping street, cats, almost no tourists. OR <strong>Sumo morning practice</strong> — Ryogoku district, 6–9am, watch wrestlers train (book through tour operator). OR <strong><a href="https://maps.google.com/?q=Ginza+Tokyo" target="_blank">Ginza</a></strong> — depachika basement food halls, Itoya stationery store. OR <strong><a href="https://maps.google.com/?q=Mori+Art+Museum+Roppongi" target="_blank">Roppongi / Mori Art Museum</a></strong> — observation deck, contemporary art. OR just wander Shinjuku — knife shopping, more izakaya, prep for the rural section ahead.',
+     ko:'이날은 여유롭게 자유 행동. 선택지: <strong><a href="https://maps.google.com/?q=하라주쿠+도쿄" target="_blank">하라주쿠 + 메이지 신궁 + 오모테산도</a></strong>(다케시타 거리, 메이지 신궁 숲길, 오모테산도 건축), <strong><a href="https://maps.google.com/?q=야나카+도쿄" target="_blank">야나카</a></strong>(2차대전 생존 구도심, 야나카 긴자 상점가), <strong>스모 아침 연습</strong>(료고쿠 지역, 6~9시, 투어 예약), <strong><a href="https://maps.google.com/?q=긴자+도쿄" target="_blank">긴자</a></strong>(지하 식품관, 이토야 문구점), <strong><a href="https://maps.google.com/?q=모리미술관+롯폰기" target="_blank">롯폰기 / 모리 미술관</a></strong>(전망대, 현대 미술) 중 선택.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Final Tokyo dinner. Pack tonight for tomorrow\'s shinkansen to Magome. Consider forwarding bags to Kyoto via <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank">Yamato Transport</a> (ask hotel desk).',
+     ko:'도쿄 마지막 저녁. 내일 마고메행 신칸센을 위해 짐 챙기기. <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank">야마토 운송</a>으로 교토에 짐 미리 보내기 고려(호텔 문의).'}
+  ]},
+
+  // ─ DAY 6 ─────────────────────────────────
+  {n:6,date:'Thu Apr 8',label:'Magome',c:'jp',title:'Travel → Magome Ryokan',sub:'Tokyo → Nagoya → Nakatsugawa → Magome',tags:['travel','night'],img:IMG.magome,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Hikari shinkansen Tokyo Station→Nagoya (~1h 55min, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a> covered — take Hikari not Nozomi). Limited express Nagoya→Nakatsugawa (~45 min). Bus to Magome (~25–30 min, ¥800pp, runs hourly) or taxi from Nakatsugawa (~¥2,500 whole group).',
-     ko:'히카리 신칸센 도쿄역→나고야(약 1시간 55분, JR패스). 특급 열차 나고야→나카츠가와(약 45분). 마고메행 버스(약 25~30분, 800엔) 또는 택시(그룹 전체 약 2,500엔).'},
+     ko:'히카리 신칸센 도쿄역→나고야(약 1시간 55분, JR패스 — 히카리 탑승, 노조미 아님). 특급 열차 나고야→나카츠가와(약 45분). 마고메행 버스(약 25~30분, 800엔) 또는 택시(그룹 전체 약 2,500엔).'},
     {time:'Afternoon',timeKo:'오후',
      desc:'<strong>Magome ryokan check-in by 3pm. CASH ONLY.</strong> Change into yukata, drop bags. Short stroll up Magome-juku — beautifully preserved Edo-era post town, stone-paved slope with waterwheel mills and old inns. About 20–30 min end to end.',
      ko:'<strong>오후 3시까지 마고메 료칸 체크인. 현금만 가능.</strong> 유카타로 갈아입기. 마고메주쿠 산책 — 아름다운 에도 시대 역참 마을.',
@@ -511,8 +524,8 @@ var DAYS=[
      ko:'료칸 가이세키 저녁(오후 6~7시). 이후 전용 욕탕. 밤에는 마을이 완전히 고요해집니다.'}
   ]},
 
-  // ─ DAY 6 ─────────────────────────────────
-  {n:6,date:'Wed Apr 8',label:'Magome',c:'jp',title:'Magome — Nakasendo Hike Day',sub:'Magome → Tsumago trail · Ryokan Night 2',tags:['split','knee'],img:IMG.magome,
+  // ─ DAY 7 ─────────────────────────────────
+  {n:7,date:'Fri Apr 9',label:'Magome',c:'jp',title:'Magome — Nakasendo Hike Day',sub:'Magome → Tsumago trail · Ryokan Night 2',tags:['split','knee'],img:IMG.magome,
    split:[
     {who:'Walkers (8km, ~3h)',whoKo:'도보 참가자 (8km, 약 3시간)',whoFor:['steven','esther','rose','sally','gloria'],
      text:'The <a href="https://maps.google.com/?q=Nakasendo+Trail+Magome+Tsumago" target="_blank">Nakasendo trail</a> from Magome to Tsumago — gentle descent through cedar forest, past waterfalls and Edo-era milestones. Leave by 9am. One of the best easy hikes in Japan.',
@@ -534,8 +547,8 @@ var DAYS=[
      ko:'두 번째 가이세키 저녁 + 욕탕. 이틀 밤 모두 진정한 회복의 시간입니다.'}
   ]},
 
-  // ─ DAY 7 ─────────────────────────────────
-  {n:7,date:'Thu Apr 9',label:'Shirakawa-go',c:'jp',title:'Travel → Shirakawa-go Farmhouse',sub:'via Nagoya + Toyama · Check in by 5pm',tags:['travel','night'],img:IMG.shirakawa,
+  // ─ DAY 8 ─────────────────────────────────
+  {n:8,date:'Sat Apr 10',label:'Shirakawa-go',c:'jp',title:'Travel → Shirakawa-go Farmhouse',sub:'via Nagoya + Toyama · Check in by 5pm',tags:['travel','night'],img:IMG.shirakawa,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. Forward large bags to Kanazawa via <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank"><strong>Yamato Transport</strong></a> (ask ryokan staff — ~¥2,000–2,500/bag, arrives next day). Carry overnight bag only. Train→Nagoya→Toyama.',
@@ -548,8 +561,8 @@ var DAYS=[
      ko:'가정식 저녁 식사 포함 — 강생선과 산나물 요리. 오후 7~8시가 되면 당일 관광객이 떠나고 <a href="https://maps.google.com/?q=시라카와고+유네스코" target="_blank">갓쇼즈쿠리 초가집들</a>이 내부 불빛으로 빛납니다. 여행 중 가장 분위기 있는 밤.'}
   ]},
 
-  // ─ DAY 8 ─────────────────────────────────
-  {n:8,date:'Fri Apr 10',label:'Kanazawa',c:'jp',title:'Shirakawa-go → Kanazawa',sub:'Geisha district afternoon · Katamachi dinner',tags:['night'],img:IMG.kanazawa,
+  // ─ DAY 9 ─────────────────────────────────
+  {n:9,date:'Sun Apr 11',label:'Kanazawa',c:'jp',title:'Shirakawa-go → Kanazawa',sub:'Geisha district afternoon · Katamachi dinner',tags:['night'],img:IMG.kanazawa,
    activities:[
     {time:'Late Morning',timeKo:'오전 늦게',
      desc:'Bus to <a href="https://maps.google.com/?q=Kanazawa+Japan" target="_blank"><strong>Kanazawa</strong></a> (~1h 15min). Hotel check-in. Large bags from Magome should be waiting.',
@@ -562,8 +575,8 @@ var DAYS=[
      ko:'가타마치 지역에서 저녁. 추천: <em>지부니</em>(오리고기 조림, 가나자와 명물)와 <em>노도구로</em>(흑목가자미 — 이 지역에서만 맛볼 수 있는 생선).'}
   ]},
 
-  // ─ DAY 9 ─────────────────────────────────
-  {n:9,date:'Sat Apr 11',label:'Kanazawa',c:'jp',title:'Kanazawa — Gardens + Market + Samurai District',sub:'Kenrokuen · Omicho Market · Nagamachi',tags:['night'],img:IMG.kanazawa,
+  // ─ DAY 10 ─────────────────────────────────
+  {n:10,date:'Mon Apr 12',label:'Kanazawa',c:'jp',title:'Kanazawa — Gardens + Market + Samurai District',sub:'Kenrokuen · Omicho Market · Nagamachi',tags:['night'],img:IMG.kanazawa,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Kenrokuen+Garden+Kanazawa" target="_blank"><strong>Kenrokuen Garden</strong></a> — one of Japan\'s top 3 gardens. Allow 1.5–2h. Adjacent: <a href="https://maps.google.com/?q=Kanazawa+Castle+Park" target="_blank"><strong>Kanazawa Castle Park</strong></a> (free grounds). Both flat and accessible.',
@@ -575,26 +588,65 @@ var DAYS=[
      desc:'<a href="https://maps.google.com/?q=Nagamachi+Samurai+District+Kanazawa" target="_blank"><strong>Nagamachi Samurai District</strong></a> — flat walk through preserved earthen walls, drainage channels, narrow lanes. <a href="https://maps.google.com/?q=Nomura+Clan+House+Kanazawa" target="_blank">Nomura clan house</a> (¥550): beautiful garden, lacquerware collection, sword display. Worth 30 min inside.',
      ko:'<a href="https://maps.google.com/?q=나가마치+무사거리+가나자와" target="_blank"><strong>나가마치 무사 거리</strong></a> — 흙담과 배수로가 있는 평탄한 산책로. <a href="https://maps.google.com/?q=노무라가+가나자와" target="_blank">노무라가</a>(550엔): 정원, 옻칠 컬렉션, 검 전시.'},
     {time:'Evening',timeKo:'저녁',
-     desc:'Final Kanazawa evening. Katamachi for izakaya or Hakuza Bar in the Higashi Chaya area. Pack well for tomorrow\'s train to Kyoto.',
-     ko:'가나자와 마지막 저녁. 가타마치 이자카야 또는 히가시 차야의 하쿠자 바. 내일 교토행 기차를 위해 잘 챙겨두세요.'}
-  ]},
-
-  // ─ DAY 10 ─────────────────────────────────
-  {n:10,date:'Sun Apr 12',label:'Kyoto',c:'jp',title:'Travel → Kyoto',sub:'Kanazawa → Tsuruga → Kyoto · Settle in',tags:['travel','night'],img:IMG.kyoto,
-   activities:[
-    {time:'Morning',timeKo:'오전',
-     desc:'Hokuriku Shinkansen Kanazawa→Tsuruga (~45 min). Transfer to Thunderbird limited express→Kyoto (~55 min). Total ~1h 45min, one transfer. Have reserved seat tickets ready. Taxi to hotel.',
-     ko:'호쿠리쿠 신칸센 가나자와→쓰루가(약 45분). 썬더버드로 환승→교토(약 55분). 총 약 1시간 45분, 환승 1회.'},
-    {time:'Afternoon',timeKo:'오후',
-     desc:'Check in, drop bags. <a href="https://maps.google.com/?q=Kamo+River+Kyoto" target="_blank"><strong>Kamo River stroll</strong></a> — flat, cherry blossoms likely in mid-April, locals picnicking on the riverbanks. Keep it gentle — arriving Sunday in peak cherry blossom season means Kyoto is at maximum crowding.',
-     ko:'체크인. <a href="https://maps.google.com/?q=가모가와+교토" target="_blank"><strong>가모가와 강변 산책</strong></a> — 평탄, 4월 중순 벚꽃 가능. 일요일 벚꽃 시즌에 교토는 매우 붐빕니다 — 여유롭게.'},
-    {time:'Evening',timeKo:'저녁',
-     desc:'<a href="https://maps.google.com/?q=Pontocho+Alley+Kyoto" target="_blank"><strong>Pontocho</strong></a> for dinner — narrow lantern-lit alley running parallel to the Kamo River. First Kyoto dinner. Relaxed.',
-     ko:'<a href="https://maps.google.com/?q=폰토초+교토" target="_blank"><strong>폰토초</strong></a>에서 저녁 — 가모가와와 나란히 이어지는 등불 켜진 좁은 골목. 교토 첫 저녁 식사.'}
+     desc:'Final Kanazawa evening. Katamachi for izakaya or Hakuza Bar in the Higashi Chaya area. Pack well for tomorrow\'s train to Takayama.',
+     ko:'가나자와 마지막 저녁. 가타마치 이자카야 또는 히가시 차야의 하쿠자 바. 내일 다카야마행 기차를 위해 잘 챙겨두세요.'}
   ]},
 
   // ─ DAY 11 ─────────────────────────────────
-  {n:11,date:'Mon Apr 13',label:'Kyoto',c:'jp',title:"Kyoto — Philosopher's Path + Higashiyama + Gion",sub:'Full day in the historic east · Geisha district evening',tags:['night'],img:IMG.kyoto,
+  {n:11,date:'Tue Apr 13',label:'Takayama',c:'jp',title:'Kanazawa → Takayama',sub:'Sanmachi Suji old town · Hida beef · Festival eve',tags:['travel','night'],img:IMG.takayama,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Train <a href="https://maps.google.com/?q=Kanazawa+Station" target="_blank">Kanazawa</a> → Toyama → <a href="https://maps.google.com/?q=Takayama+Gifu+Japan" target="_blank">Takayama</a> (~2.5h via Toyama, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Scenic Hida mountain route.',
+     ko:'기차 가나자와 → 도야마 → <a href="https://maps.google.com/?q=다카야마+기후+일본" target="_blank">다카야마</a>(도야마 경유 약 2.5시간, JR패스). 히다 산악 경관.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Check in to Takayama hotel. <strong>BOOK 6+ MONTHS IN ADVANCE — festival accommodation fills fast.</strong> Stroll <a href="https://maps.google.com/?q=Sanmachi+Suji+Takayama" target="_blank"><strong>Sanmachi Suji</strong></a> historic merchant street — beautifully preserved Edo-era architecture, sake breweries with cedar balls hanging over the doors, craft shops. <a href="https://maps.google.com/?q=Miyagawa+Morning+Market+Takayama" target="_blank">Miyagawa Morning Market</a> may still have stalls into afternoon — pickles, Hida beef sticks, local sweets.',
+     ko:'다카야마 호텔 체크인. <strong>6개월 이상 전 예약 필수 — 축제 기간 숙박은 빠르게 마감됩니다.</strong> <a href="https://maps.google.com/?q=산마치+스지+다카야마" target="_blank"><strong>산마치 스지</strong></a>(에도 시대 상인 거리) 산책. 사케 양조장, 공예품 가게. <a href="https://maps.google.com/?q=미야가와+아침시장+다카야마" target="_blank">미야가와 아침 시장</a>에 오후에도 일부 노점 영업.',
+     knee:'Sanmachi Suji is flat cobblestone — easy walking for Rick.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<strong>Hida beef dinner</strong> — local A5 wagyu, often served as beef sushi or sukiyaki. The town buzzes with festival anticipation. Floats are already being prepared nearby.',
+     ko:'<strong>히다 소고기 저녁</strong> — 지역 A5 와규, 종종 소고기 스시나 스키야키로 제공. 축제 전날 밤 마을은 들뜬 분위기.'}
+  ]},
+
+  // ─ DAY 12 ─────────────────────────────────
+  {n:12,date:'Wed Apr 14',label:'Takayama',c:'jp',title:'Takayama — Festival Day 1',sub:'Float displays · Marionette performances · Lantern procession',tags:['festival','night','splurge'],img:IMG.takayama,
+   activities:[
+    {time:'9:30am',timeKo:'오전 9시 30분',
+     desc:'12 yatai (festival floats) on display from 9:30am throughout the <a href="https://maps.google.com/?q=Takayama+Sanmachi+Suji" target="_blank">old town historic core</a>. Each float is a masterwork of Hida carpentry, lacquerwork, and gold embellishments — some over 400 years old.',
+     ko:'오전 9시 30분부터 12개의 야타이(축제 수레) 전시. 히다 목공예, 옻칠, 금 장식으로 이루어진 400년 된 수레들.'},
+    {time:'Mid-Morning',timeKo:'오전 중반',
+     desc:'<strong>Karakuri (mechanical marionette) performances</strong> at <a href="https://maps.google.com/?q=Takayama+Jinya+Gifu" target="_blank">Takayama Jinya Historical Government House</a> — 3 floats with lifelike puppets controlled by 6–8 masters. Held mid-morning and early afternoon. Arrive early for a front-row view.',
+     ko:'<strong>가라쿠리(기계 꼭두각시) 공연</strong> — 다카야마 진야에서 6~8명의 인형 조종사가 다루는 3개의 수레. 오전 중반·오후 초에 공연. 앞줄 자리를 위해 일찍 도착하세요.'},
+    {time:'1pm',timeKo:'오후 1시',
+     desc:'Procession departs <a href="https://maps.google.com/?q=Hie+Shrine+Takayama+Gifu" target="_blank">Hie Shrine</a> at 1pm, winds through streets to Otabisho, arrives ~4pm. Hundreds of participants in Edo-period attire — musicians, attendants, children, priests.',
+     ko:'오후 1시 히에 신사 출발, 오타비쇼까지 행진(약 4시 도착). 에도 시대 복장을 입은 수백 명의 참가자.'},
+    {time:'5:30pm',timeKo:'오후 5시 30분',
+     desc:'Grab a spot along the procession route near <a href="https://maps.google.com/?q=Nakabashi+Bridge+Takayama" target="_blank">Nakabashi Bridge</a> by 5:30pm — <strong>streets fill fast for the night festival.</strong>',
+     ko:'오후 5시 30분까지 나카바시 다리 근처 행진 경로 자리 잡기 — <strong>야간 축제를 위해 거리가 빠르게 꽉 찹니다.</strong>'},
+    {time:'6–9pm',timeKo:'오후 6~9시',
+     desc:'<strong>Yomatsuri (night festival)</strong> — floats fitted with ~100 paper lanterns each, paraded through darkened streets. One of Japan\'s three most beautiful festivals (alongside Kyoto\'s Gion Matsuri and Chichibu Yomatsuri).',
+     ko:'<strong>요마츠리(야간 축제)</strong> — 수레마다 약 100개의 종이 등불을 달고 어두운 거리를 행진. 교토 기온 마츠리, 치치부 요마츠리와 함께 일본 3대 아름다운 축제.'}
+  ]},
+
+  // ─ DAY 13 ─────────────────────────────────
+  {n:13,date:'Thu Apr 15',label:'Kyoto',c:'jp',title:'Festival Day 2 Morning → Kyoto',sub:'Final floats · Hida limited express · Pontocho dinner',tags:['travel','night'],img:IMG.kyoto,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Final festival displays. Morning is the best time for uncrowded float viewing along Sanmachi Suji. The procession returns to <a href="https://maps.google.com/?q=Hie+Shrine+Takayama+Gifu" target="_blank">Hie Shrine</a> around 3:30pm but we leave earlier.',
+     ko:'오전에 마지막 축제 전시 관람. 사람이 적은 아침에 야타이 감상 최적. 행진은 오후 3시 30분 히에 신사로 귀환하지만, 우리는 오전 중에 출발.',
+     knee:'Easy flat walking in old town this morning.'},
+    {time:'Midday',timeKo:'정오',
+     desc:'Hida limited express Takayama → Kyoto (~2.5h direct, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Scenic mountain and valley route through Gifu and Shiga prefectures.',
+     ko:'히다 특급 열차 다카야마 → 교토(약 2.5시간 직행, JR패스). 기후·시가현을 통과하는 경치 좋은 산악·계곡 노선.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Arrive Kyoto. Hotel check-in — cherry blossom season, <strong>hardest hotel market in Japan</strong>. Recommended: <a href="https://maps.google.com/?q=The+Celestine+Kyoto+Gion" target="_blank">The Celestine Kyoto Gion</a> or <a href="https://maps.google.com/?q=Mitsui+Garden+Hotel+Kyoto+Sanjo" target="_blank">Mitsui Garden Sanjo</a>. <strong>Book immediately.</strong> Drop bags, short <a href="https://maps.google.com/?q=Kamo+River+Kyoto" target="_blank">Kamo River</a> walk.',
+     ko:'교토 도착. 호텔 체크인 — 벚꽃 시즌, <strong>일본에서 가장 예약 어려운 시기</strong>. 추천: <a href="https://maps.google.com/?q=더셀레스틴교토기온" target="_blank">더 셀레스틴 교토 기온</a> 또는 <a href="https://maps.google.com/?q=미쓰이가든교토산조" target="_blank">미쓰이 가든 산조</a>. <strong>즉시 예약하세요.</strong>'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Pontocho+Alley+Kyoto" target="_blank"><strong>Pontocho</strong></a> for dinner — narrow lantern-lit alley running alongside the Kamo River. First Kyoto dinner.',
+     ko:'<a href="https://maps.google.com/?q=폰토초+교토" target="_blank"><strong>폰토초</strong></a>에서 저녁 — 가모가와와 나란히 이어지는 등불 켜진 좁은 골목. 교토 첫 저녁 식사.'}
+  ]},
+
+  // ─ DAY 14 ─────────────────────────────────
+  {n:14,date:'Fri Apr 16',label:'Kyoto',c:'jp',title:"Kyoto — Philosopher's Path + Higashiyama + Gion",sub:'Full day in the historic east · Geisha district evening',tags:['night'],img:IMG.kyoto,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:"<a href='https://maps.google.com/?q=Philosophers+Path+Kyoto' target='_blank'><strong>Philosopher's Path</strong></a> — start at <a href='https://maps.google.com/?q=Ginkakuji+Kyoto' target='_blank'>Ginkaku-ji (Silver Pavilion)</a> and walk south. 2km, completely flat, canal lined with cherry trees. Detour: <a href='https://maps.google.com/?q=Honen-in+Kyoto' target='_blank'>Honen-in temple</a> (walled gate, moss-covered sand mounds, almost no crowds). South end: <a href='https://maps.google.com/?q=Nanzenji+Kyoto' target='_blank'><strong>Nanzen-ji complex</strong></a> (enormous Sanmon gate + unexpected aqueduct through the grounds).",
@@ -612,27 +664,27 @@ var DAYS=[
      ko:'<a href="https://maps.google.com/?q=기온+교토" target="_blank"><strong>기온</strong></a> — <a href="https://maps.google.com/?q=하나미코지+교토" target="_blank"><strong>하나미코지 거리</strong></a> 오후 5~7시 게이샤 목격 최적 시간. <a href="https://maps.google.com/?q=신바시도리+교토" target="_blank">신바시도리 운하</a>(버드나무, 교토 최고의 거리). 기온 또는 폰토초에서 저녁.'}
   ]},
 
-  // ─ DAY 12 ─────────────────────────────────
-  {n:12,date:'Tue Apr 14',label:'Kyoto',c:'jp',title:'Nishiki Market + Kinkaku-ji · Rick & Rose: Golf',sub:'Split day · Golden Pavilion · Michelin dinner',tags:['split','golf','splurge'],img:IMG.kyoto,
+  // ─ DAY 15 ─────────────────────────────────
+  {n:15,date:'Sat Apr 17',label:'Kyoto',c:'jp',title:'Nishiki Market + Kinkaku-ji · Rick & Rose: Golf',sub:'Split day · Nishiki Market · Kinkaku-ji',tags:['split','golf'],img:IMG.kyoto,
    split:[
     {who:'Rick + Rose 🏌️',whoKo:'Rick + Rose 🏌️',whoFor:['rick','rose'],cls:'golf',
      text:'<a href="https://maps.google.com/?q=Seta+Golf+Course+Otsu+Shiga" target="_blank"><strong>Seta Golf Course North</strong></a> (Shiga, ~30 min from Kyoto). Caddied. Hosted USLPGA Tour 14 times. Green fee ~¥20,000–30,000pp. Book via hotel concierge — Japanese courses rarely take English bookings directly.',
      ko:'<a href="https://maps.google.com/?q=세타골프장+오쓰+시가" target="_blank"><strong>세타 골프장 노스 코스</strong></a>(시가현, 교토에서 약 30분). 캐디 포함. 그린피 약 20,000~30,000엔. 호텔 컨시어지를 통해 예약.'},
     {who:'Non-golf group',whoKo:'골프 미참여 그룹',whoFor:['steven','esther','sally','gloria'],
-     text:'<a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank"><strong>Nishiki Market</strong></a> (400-year-old covered food market — pickles, tofu skin, fresh skewers, sake tastings, matcha sweets, 1.5–2h) then taxi/bus to <a href="https://maps.google.com/?q=Kinkakuji+Golden+Pavilion+Kyoto" target="_blank"><strong>Kinkaku-ji (Golden Pavilion)</strong></a> — gold-leaf covered temple on a mirror pond, one of the most iconic images in Japan (~45 min walk-through). Go early before the crowds build.',
+     text:'<a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank"><strong>Nishiki Market</strong></a> morning (400-year-old covered food market — pickles, tofu skin, fresh skewers, sake tastings, matcha sweets, 1.5–2h) then taxi/bus to <a href="https://maps.google.com/?q=Kinkakuji+Golden+Pavilion+Kyoto" target="_blank"><strong>Kinkaku-ji (Golden Pavilion)</strong></a> — gold-leaf covered temple on a mirror pond (~45 min walk-through). Go early before crowds build.',
      ko:'<a href="https://maps.google.com/?q=니시키시장+교토" target="_blank"><strong>니시키 시장</strong></a>(400년 역사 실내 시장, 절임 반찬·두부피·꼬치·사케 시음·말차 과자, 1.5~2시간) 후 <a href="https://maps.google.com/?q=킨카쿠지+교토" target="_blank"><strong>킨카쿠지(금각사)</strong></a>(금박 사원, 거울 연못 반영, 약 45분).'}
    ],
    activities:[
     {time:'Afternoon',timeKo:'오후',
-     desc:'Rest and prepare for the evening. Smart-casual dress for dinner — no trainers, no shorts.',
-     ko:'저녁 준비를 위해 휴식. 스마트 캐주얼 복장 — 운동화와 반바지는 안 됩니다.'},
-    {time:'Evening 6pm',timeKo:'저녁 6시',
-     desc:'⭐ <strong>Michelin kaiseki dinner.</strong> Private room for all 6. 8–12 courses, allow 2.5–3h. Book via <a href="https://www.omakaseje.com/" target="_blank"><strong>omakaseje.com</strong></a> or <a href="https://www.pocketconcierge.jp/en/" target="_blank">pocketconcierge.jp</a> — <strong>do this immediately.</strong> Top picks: <a href="https://maps.google.com/?q=Kyoyamato+Kyoto" target="_blank">Kyoyamato</a> (historic ryotei since 1877), <a href="https://maps.google.com/?q=Noguchi+Tsunagu+Kyoto" target="_blank">Noguchi Tsunagu</a> (1★, kappo-style), <a href="https://maps.google.com/?q=Miyawaki+Kyoto" target="_blank">Miyawaki</a> (1★, omakase).',
-     ko:'⭐ <strong>미슐랭 가이세키 저녁.</strong> 6인 전용 룸. 8~12코스, 2.5~3시간. <a href="https://www.omakaseje.com/" target="_blank"><strong>omakaseje.com</strong></a> 또는 <a href="https://www.pocketconcierge.jp/en/" target="_blank">pocketconcierge.jp</a>에서 <strong>즉시 예약.</strong>'}
+     desc:'Regroup. Rest at the hotel.',
+     ko:'재합류. 호텔에서 휴식.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Casual group dinner — izakaya, ramen, or wherever the group feels like. Tomorrow is the big Michelin night.',
+     ko:'캐주얼 그룹 저녁 — 이자카야, 라멘, 그룹이 원하는 곳으로. 내일이 미슐랭 저녁입니다.'}
   ]},
 
-  // ─ DAY 13 ─────────────────────────────────
-  {n:13,date:'Wed Apr 15',label:'Kyoto',c:'jp',title:'Arashiyama + ⭐ Michelin Dinner Evening',sub:'Bamboo grove · Bridge · Stroll garden · Big dinner',tags:['splurge','night'],img:IMG.kyoto,
+  // ─ DAY 16 ─────────────────────────────────
+  {n:16,date:'Sun Apr 18',label:'Kyoto',c:'jp',title:'Arashiyama + ⭐ Michelin Dinner',sub:'Bamboo grove · Bridge · Stroll garden · Big dinner',tags:['splurge','night'],img:IMG.kyoto,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Bus or taxi to <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank"><strong>Arashiyama</strong></a> (~30 min from central Kyoto). Go early — it fills up by 10am. Three things right next to each other: <strong>bamboo grove</strong> (flat, dramatic 10-min walk through towering green columns — one of the most photographed spots in Japan), <a href="https://maps.google.com/?q=Togetsukyo+Bridge+Arashiyama" target="_blank"><strong>Togetsukyo bridge</strong></a> over the Oi River (wide, scenic, beautiful in spring light), and <a href="https://maps.google.com/?q=Tenryuji+Temple+Arashiyama" target="_blank"><strong>Tenryu-ji stroll garden</strong></a> (¥500, walk through rather than sit-down, cherry blossoms and central pond). Allow 2–3h total. Craft shops and food along the main street.',
@@ -646,22 +698,30 @@ var DAYS=[
      ko:'⭐ <strong>미슐랭 가이세키 저녁</strong> — 최고의 밤. 전용 룸, 전원 참석, 저녁 전체를 여유롭게.'}
   ]},
 
-  // ─ DAY 14 ─────────────────────────────────
-  {n:14,date:'Thu Apr 16',label:'Hiroshima',c:'jp',title:'Travel → Hiroshima',sub:'Peace Park + Museum · Okonomiyaki night',tags:['travel','night'],img:IMG.hiroshima,
+  // ─ DAY 17 ─────────────────────────────────
+  {n:17,date:'Mon Apr 19',label:'Hiroshima',c:'jp',title:'Kyoto → Himeji Castle → Hiroshima',sub:'En-route castle stop · Peace Park afternoon',tags:['travel','night'],img:IMG.himeji,
    activities:[
     {time:'Morning',timeKo:'오전',
-     desc:'Hikari shinkansen Kyoto→Hiroshima (~1h 44min, JR Pass — <strong>do not take Nozomi</strong>). Hotel check-in.',
-     ko:'히카리 신칸센 교토→히로시마(약 1시간 44분, JR패스 — <strong>노조미는 타지 마세요</strong>). 호텔 체크인.'},
+     desc:'Hikari Shinkansen <a href="https://maps.google.com/?q=Kyoto+Station" target="_blank">Kyoto</a> → <a href="https://maps.google.com/?q=Himeji+Station" target="_blank">Himeji</a> (~50 min, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Drop bags in coin lockers at Himeji Station (¥500–700). 15-min walk to the castle.',
+     ko:'히카리 신칸센 교토 → 히메지(약 50분, JR패스). 히메지역 코인 로커에 짐 보관(500~700엔). 성까지 도보 15분.'},
+    {time:'Himeji',timeKo:'히메지',
+     desc:'<a href="https://maps.google.com/?q=Himeji+Castle+Japan" target="_blank"><strong>Himeji Castle</strong></a> — finest surviving feudal castle in Japan. Unlike almost all others (which are concrete reconstructions), Himeji is entirely original — white, enormous, completely intact. Allow 2–3h. Optional: adjacent <a href="https://maps.google.com/?q=Koko-en+Garden+Himeji" target="_blank">Koko-en garden</a> (¥310, beautiful complement).',
+     ko:'<a href="https://maps.google.com/?q=히메지성+일본" target="_blank"><strong>히메지 성</strong></a> — 일본에서 현존하는 가장 아름다운 봉건 성. 대부분의 다른 성과 달리 원형 그대로 보존. 2~3시간 소요. 선택: 인접한 <a href="https://maps.google.com/?q=코코엔+히메지" target="_blank">코코엔 정원</a>(310엔).',
+     knee:'Castle grounds are mostly flat and easy. Optional climb to upper floors — skip if preferred and enjoy the grounds and gardens instead.'},
     {time:'Afternoon',timeKo:'오후',
-     desc:'<a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Park" target="_blank"><strong>Hiroshima Peace Memorial Park</strong></a> — flat, spacious, profound. Allow 2–3h. The <a href="https://maps.google.com/?q=Atomic+Bomb+Dome+Hiroshima" target="_blank">A-Bomb Dome (Genbaku Domu)</a> is visible from the river at all hours. <a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Museum" target="_blank">Peace Memorial Museum</a> (allow 1.5h — harrowing and essential, group goes at their own pace, no obligation to do every floor). <a href="https://maps.google.com/?q=Children+Peace+Monument+Hiroshima" target="_blank">Children\'s Peace Monument</a> with origami cranes.',
-     ko:'<a href="https://maps.google.com/?q=히로시마평화기념공원" target="_blank"><strong>히로시마 평화 기념 공원</strong></a> — 평탄, 넓고, 깊은 감동. 2~3시간 소요. <a href="https://maps.google.com/?q=원폭돔+히로시마" target="_blank">원폭 돔</a>, <a href="https://maps.google.com/?q=히로시마평화기념관" target="_blank">평화 기념 박물관</a>(1.5시간, 각자 페이스에 맞게), <a href="https://maps.google.com/?q=어린이평화기념비+히로시마" target="_blank">어린이 평화 기념비</a>.'},
+     desc:'Shinkansen <a href="https://maps.google.com/?q=Himeji+Station" target="_blank">Himeji</a> → <a href="https://maps.google.com/?q=Hiroshima+Station" target="_blank">Hiroshima</a> (~45 min, JR Pass). Hotel check-in.',
+     ko:'신칸센 히메지 → 히로시마(약 45분, JR패스). 호텔 체크인.'},
+    {time:'Late Afternoon',timeKo:'오후 늦게',
+     desc:'<a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Park" target="_blank"><strong>Peace Memorial Park</strong></a> — <a href="https://maps.google.com/?q=Atomic+Bomb+Dome+Hiroshima" target="_blank">A-Bomb Dome</a>, <a href="https://maps.google.com/?q=Children+Peace+Monument+Hiroshima" target="_blank">Children\'s Peace Monument</a>. Allow what time remains. <a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Museum" target="_blank">Peace Memorial Museum</a> can be done tomorrow morning if preferred.',
+     ko:'<a href="https://maps.google.com/?q=히로시마평화기념공원" target="_blank"><strong>평화 기념 공원</strong></a> — <a href="https://maps.google.com/?q=원폭돔+히로시마" target="_blank">원폭 돔</a>, <a href="https://maps.google.com/?q=어린이평화기념비+히로시마" target="_blank">어린이 평화 기념비</a>. <a href="https://maps.google.com/?q=히로시마평화기념관" target="_blank">평화 기념 박물관</a>은 내일 아침에 해도 됩니다.',
+     knee:'Peace Park is flat and spacious — fully accessible for Rick.'},
     {time:'Evening',timeKo:'저녁',
-     desc:'<a href="https://maps.google.com/?q=Okonomi-mura+Hiroshima" target="_blank"><strong>Hiroshima-style okonomiyaki at Okonomi-mura</strong></a> — 3-floor building of individual stalls. Hiroshima style layers noodles inside the pancake. Sit at a counter, watch the cook. ~¥1,200–1,500pp. Short walk after — the <a href="https://maps.google.com/?q=Atomic+Bomb+Dome+Hiroshima" target="_blank">A-Bomb Dome is illuminated at night</a>.',
-     ko:'<a href="https://maps.google.com/?q=오코노미무라+히로시마" target="_blank"><strong>오코노미무라 히로시마식 오코노미야키</strong></a> — 3층 포장마차 건물. 카운터에 앉아 요리사가 만드는 것을 구경. 1인당 약 1,200~1,500엔.'}
+     desc:'<a href="https://maps.google.com/?q=Okonomi-mura+Hiroshima" target="_blank"><strong>Hiroshima-style okonomiyaki at Okonomi-mura</strong></a> — 3-floor building of individual stalls, Hiroshima style layers noodles inside the pancake. ~¥1,200–1,500pp. Short walk after — A-Bomb Dome illuminated at night.',
+     ko:'<a href="https://maps.google.com/?q=오코노미무라+히로시마" target="_blank"><strong>오코노미무라 히로시마식 오코노미야키</strong></a> — 3층 포장마차 건물. 1인당 약 1,200~1,500엔. 야간 산책 후 조명 켜진 원폭 돔 감상.'}
   ]},
 
-  // ─ DAY 15 ─────────────────────────────────
-  {n:15,date:'Fri Apr 17',label:'Miyajima',c:'jp',title:'Miyajima Island Day Trip',sub:'Floating torii · Oysters · Ropeway optional',tags:['split','night'],img:IMG.miyajima,
+  // ─ DAY 18 ─────────────────────────────────
+  {n:18,date:'Tue Apr 20',label:'Miyajima',c:'jp',title:'Miyajima Island Day Trip',sub:'Floating torii · Oysters · Ropeway optional',tags:['split','night'],img:IMG.miyajima,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'JR to <a href="https://maps.google.com/?q=Miyajimaguchi+Station" target="_blank">Miyajimaguchi</a> (~30 min, JR Pass) + JR ferry (~10 min, JR Pass included). Arrive before 9am — busy by 10am. Check tide table before going: <a href="https://www.miyajima.or.jp/english/information/info_tide.html" target="_blank">high tide</a> = floating torii, low tide = walk to its base. Both worth seeing.',
@@ -675,12 +735,12 @@ var DAYS=[
      ko:'<strong>선택:</strong> 활동적 → <a href="https://maps.google.com/?q=미야지마+로프웨이" target="_blank">미센산 로프웨이</a>(약 2,000엔, 세토내해 전망). 여유로운 → 해변 카페, <a href="https://maps.google.com/?q=센조카쿠+미야지마" target="_blank">센조카쿠 누각</a>(무료), 기념품 쇼핑.',
      knee:'Rick stays at the shrine and waterfront level — entirely flat.'},
     {time:'Evening',timeKo:'저녁',
-     desc:'Return to Hiroshima by 5–6pm. <strong>Farewell Japan dinner</strong> — okonomiyaki again or a nicer sit-down restaurant. Pack tonight for the Korea flight tomorrow.',
-     ko:'오후 5~6시 히로시마로 귀환. <strong>일본 마지막 저녁 식사</strong> — 오코노미야키 또는 고급 레스토랑. 내일 한국 비행을 위해 짐을 챙기세요.'}
+     desc:'Return to Hiroshima by 5–6pm. Or visit <a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Museum" target="_blank">Peace Memorial Museum</a> if not done yesterday. <strong>Farewell Japan dinner</strong> — okonomiyaki again or a nicer sit-down restaurant. Pack tonight for the Korea flight tomorrow.',
+     ko:'오후 5~6시 히로시마로 귀환. 어제 못 한 <a href="https://maps.google.com/?q=히로시마평화기념관" target="_blank">평화 기념 박물관</a> 관람 가능. <strong>일본 마지막 저녁 식사</strong> — 오코노미야키 또는 고급 레스토랑. 내일 한국 비행을 위해 짐을 챙기세요.'}
   ]},
 
-  // ─ DAY 16 ─────────────────────────────────
-  {n:16,date:'Sat Apr 18',label:'Seoul',c:'jp',title:'Hiroshima → Seoul',sub:'Japan ends · Korea begins · Gloria at ICN',tags:['travel'],img:IMG.seoul,
+  // ─ DAY 19 ─────────────────────────────────
+  {n:19,date:'Wed Apr 21',label:'Seoul',c:'jp',title:'Hiroshima → Seoul',sub:'Japan ends · Korea begins · Gloria at ICN',tags:['travel'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. Ship heavy bags home via post office if needed. Travel light to Korea.',
@@ -694,8 +754,8 @@ var DAYS=[
      ko:'서울 도착. <a href="https://www.arex.or.kr/ko/" target="_blank"><strong>AREX 일반열차</strong></a>로 시내(약 51분, T-머니 약 4,150원). 공항 편의점에서 T-머니 구입. 첫날 저녁은 한국 BBQ — 글로리아가 식당을 고릅니다!'}
   ]},
 
-  // ─ DAY 17 ─────────────────────────────────
-  {n:17,date:'Sun Apr 19',label:'Seoul',c:'kr',title:'Seoul — Palaces + Korean BBQ',sub:'Gyeongbokgung · Insadong · N Seoul Tower · BBQ dinner',tags:['night','korea'],img:IMG.seoul,
+  // ─ DAY 20 ─────────────────────────────────
+  {n:20,date:'Thu Apr 22',label:'Seoul',c:'kr',title:'Seoul — Palaces + Korean BBQ',sub:'Gyeongbokgung · Insadong · N Seoul Tower · BBQ dinner',tags:['night','korea'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'<a href="https://maps.google.com/?q=Gyeongbokgung+Palace+Seoul" target="_blank"><strong>Gyeongbokgung Palace</strong></a> — grandest of Seoul\'s five royal palaces (1395). Changing of the guard at 10am + 2pm. Free entry with rented hanbok (~₩20,000/2h at east gate). All flat, paved, spacious.',
@@ -713,44 +773,25 @@ var DAYS=[
      ko:'<strong>한국 BBQ 저녁</strong> — 갈비와 삼겹살, 숯불에 직접 구워 먹기. 반찬은 계속 리필(무료). 마포 또는 홍대 지역 맛집.'}
   ]},
 
-  // ─ DAY 18 ─────────────────────────────────
-  {n:18,date:'Mon Apr 20',label:'Seoul',c:'kr',title:'Seoul — Markets + Han River',sub:"Gwangjang Market · Gloria's day to lead",tags:['night','korea'],img:IMG.gwangjang,
+  // ─ DAY 21 ─────────────────────────────────
+  {n:21,date:'Fri Apr 23',label:'Seoul',c:'kr',title:'Seoul — Markets + Gloria Leads + Farewell',sub:"Gwangjang Market · Gloria's day · Final dinner",tags:['night','korea'],img:IMG.gwangjang,
    activities:[
     {time:'Morning',timeKo:'오전',
-     desc:'<a href="https://maps.google.com/?q=Gwangjang+Market+Seoul" target="_blank"><strong>Gwangjang Market</strong></a> — Seoul\'s oldest traditional market (1905). Must try: <em>bindaetteok</em> (crispy mung bean pancakes), <em>mayak gimbap</em> (tiny addictive rice rolls), <em>yukhoe</em> (raw beef tartare with pear and egg yolk).',
-     ko:'<a href="https://maps.google.com/?q=광장시장+서울" target="_blank"><strong>광장시장</strong></a> — 서울 최고령 전통 시장(1905년). 필수: <em>빈대떡</em>, <em>마약 김밥</em>, <em>육회</em>.',
-     gloriaNote:'Gloria: 광장시장에서 좋아하는 음식 소개해 주세요! 맛집 추천 부탁드려요.'},
+     desc:'<a href="https://maps.google.com/?q=Gwangjang+Market+Seoul" target="_blank"><strong>Gwangjang Market</strong></a> (1905) — Seoul\'s oldest traditional market. Must try: <em>bindaetteok</em> (crispy mung bean pancakes), <em>mayak gimbap</em> (tiny addictive rice rolls), <em>yukhoe</em> (raw beef tartare with pear and egg yolk).',
+     ko:'<a href="https://maps.google.com/?q=광장시장+서울" target="_blank"><strong>광장시장</strong></a>(1905년) — 서울 최고령 전통 시장. 필수: <em>빈대떡</em>, <em>마약 김밥</em>, <em>육회</em>.',
+     gloriaNote:'Gloria: 광장시장에서 좋아하는 음식 소개해 주세요!'},
     {time:'Afternoon',timeKo:'오후',
-     desc:'<strong>Gloria leads.</strong> She shows everyone somewhere she loves in Seoul. Options: <a href="https://maps.google.com/?q=Hangang+Park+Seoul" target="_blank">Han River Park</a> by hire bike (flat, ~₩3,000/h) or <a href="https://maps.google.com/?q=Myeongdong+Seoul" target="_blank">Myeongdong</a> for K-beauty shopping.',
-     ko:'<strong>글로리아가 이끄는 시간!</strong> 자신이 좋아하는 서울의 명소를 소개해 주세요. 선택: <a href="https://maps.google.com/?q=한강공원+서울" target="_blank">한강 공원</a> 자전거(평탄, 시간당 약 3,000원) 또는 <a href="https://maps.google.com/?q=명동+서울" target="_blank">명동</a> K-뷰티 쇼핑.'},
+     desc:'<strong>Gloria leads.</strong> <a href="https://maps.google.com/?q=Hangang+Park+Seoul" target="_blank">Han River Park</a> by hire bike (flat, ~₩3,000/h), <a href="https://maps.google.com/?q=Myeongdong+Seoul" target="_blank">Myeongdong</a> K-beauty shopping, or her favourite Seoul spot.',
+     ko:'<strong>글로리아가 이끄는 시간!</strong> <a href="https://maps.google.com/?q=한강공원+서울" target="_blank">한강 공원</a> 자전거(평탄, 시간당 약 3,000원), <a href="https://maps.google.com/?q=명동+서울" target="_blank">명동</a> K-뷰티 쇼핑, 또는 글로리아 최애 명소.',
+     gloriaNote:'Gloria: 자신이 가장 좋아하는 서울의 장소로 그룹을 안내해 주세요!'},
     {time:'Evening',timeKo:'저녁',
-     desc:'<a href="https://maps.google.com/?q=Itaewon+Seoul" target="_blank"><strong>Itaewon</strong></a> or <a href="https://maps.google.com/?q=Gangnam+Seoul" target="_blank"><strong>Gangnam</strong></a> for dinner. Optional: <a href="https://maps.google.com/?q=Noraebang+Seoul" target="_blank"><strong>noraebang</strong></a> (private karaoke room, ~₩15,000–20,000pp/h) — great for a group of 6, strongly recommended.',
-     ko:'저녁은 <a href="https://maps.google.com/?q=이태원+서울" target="_blank"><strong>이태원</strong></a> 또는 <a href="https://maps.google.com/?q=강남+서울" target="_blank"><strong>강남</strong></a>에서. 선택: <a href="https://maps.google.com/?q=노래방+서울" target="_blank"><strong>노래방</strong></a>(전용 룸, 시간당 약 15,000~20,000원) — 강력 추천.'}
+     desc:'<strong>Farewell dinner — Gloria picks.</strong> Hanjeonsik (Korean full-course with 20+ banchan), Gangnam rooftop, or her favourite restaurant. Optional: <a href="https://maps.google.com/?q=Noraebang+Seoul" target="_blank"><strong>noraebang</strong></a> (private karaoke, ~₩15,000–20,000pp/h) — strongly recommended for a group of 6.',
+     ko:'<strong>작별 저녁 — 글로리아가 선택합니다.</strong> 한정식(20가지 이상 반찬), 강남 루프탑, 또는 글로리아 최애 맛집. 선택: <a href="https://maps.google.com/?q=노래방+서울" target="_blank"><strong>노래방</strong></a>(전용 룸, 시간당 약 15,000~20,000원) — 강력 추천.',
+     gloriaNote:'Gloria: 마지막 저녁 식당 미리 예약해 주세요!'}
   ]},
 
-  // ─ DAY 19 ─────────────────────────────────
-  {n:19,date:'Tue Apr 21',label:'Seoul',c:'kr',title:'Seoul — DMZ or Busan or Free Day',sub:'Final full day · Farewell dinner · Gloria picks',tags:['split','korea'],img:IMG.dmz,
-   split:[
-    {who:'Option A: DMZ',whoKo:'선택 A: DMZ',whoFor:['all'],
-     text:'<a href="https://maps.google.com/?q=DMZ+South+Korea" target="_blank"><strong>DMZ day tour</strong></a> — North Korean border, ~1h from Seoul. Guided tour (<a href="https://www.klook.com/" target="_blank">Klook</a>, ~$60–80pp). 3rd Tunnel, Dora Observatory, Dorasan Station. Deeply moving after Hiroshima.',
-     ko:'<a href="https://maps.google.com/?q=비무장지대+한국" target="_blank"><strong>DMZ 당일 투어</strong></a> — 북한 경계선, 서울에서 약 1시간. 가이드 투어(<a href="https://www.klook.com/" target="_blank">클룩</a>, 약 $60~80). 히로시마 방문 후 더욱 깊은 감동.'},
-    {who:'Option B: Busan',whoKo:'선택 B: 부산',whoFor:['all'],
-     text:'<a href="https://www.letskorail.com/" target="_blank"><strong>KTX</strong></a> to Busan (~2h 30min, ~₩60,000). Gamcheon Culture Village + Jagalchi Fish Market + Haeundae Beach. Return evening KTX.',
-     ko:'<a href="https://www.letskorail.com/" target="_blank"><strong>KTX</strong></a>로 부산(약 2시간 30분, 약 60,000원). 감천 문화마을 + 자갈치 시장 + 해운대.'},
-    {who:'Option C: Free Seoul',whoKo:'선택 C: 자유 서울',whoFor:['all'],
-     text:'Hongdae creative district or a morning <a href="https://maps.google.com/?q=Jjimjilbang+Seoul" target="_blank"><strong>jjimjilbang</strong></a> (Korean bathhouse). Gloria leads.',
-     ko:'홍대 창작 거리 또는 오전에 <a href="https://maps.google.com/?q=찜질방+서울" target="_blank"><strong>찜질방</strong></a>. 글로리아가 이끕니다.',
-     knee:'Jjimjilbang heated floor rooms are excellent for bad knees. Ideal for Rick.',
-     gloriaNote:'Gloria: 좋아하는 서울 명소로 안내해 주세요.'}
-   ],
-   activities:[
-    {time:'Evening',timeKo:'저녁',
-     desc:'Farewell dinner — <strong>Gloria picks.</strong> Hanjeonsik (Korean full-course with 20+ dishes), Gangnam rooftop, or a personal favourite. Last group dinner of the whole 20-night trip.',
-     ko:'작별 저녁 — <strong>글로리아가 선택합니다.</strong> 한정식(20가지 이상 반찬), 강남 루프탑, 또는 글로리아 최애 맛집. 20박 여행의 마지막 그룹 식사.'}
-  ]},
-
-  // ─ DAY 20 ─────────────────────────────────
-  {n:20,date:'Wed Apr 22',label:'Depart',c:'kr',title:'Depart Seoul — Everyone Flies Home',sub:'AREX to Incheon · Allow 3h for international flights',tags:['travel'],img:IMG.seoul,
+  // ─ DAY 22 ─────────────────────────────────
+  {n:22,date:'Sat Apr 24',label:'Depart',c:'kr',title:'Depart Seoul — Everyone Flies Home',sub:'AREX to Incheon · Saturday departure',tags:['travel'],img:IMG.seoul,
    activities:[
     {time:'Morning',timeKo:'오전',
      desc:'Check out. <a href="https://www.arex.or.kr/en/" target="_blank"><strong>AREX Express</strong></a> to Incheon Airport (43 min from Seoul Station, ~₩9,500). Allow 3h before international departure.',
@@ -772,36 +813,37 @@ var DAYS=[
 /* ─── CHECKLIST DATA ─────────────────────────────────── */
 var CL={
   red:[
-    {t:'Magome Ryokan — Apr 6–8 (2 nights)',s:'Tajimaya or Magomechaya. japaneseguesthouses.com. Request private bath. CASH ONLY, check in before 5pm.'},
-    {t:'Shirakawa-go Farmhouse — Apr 8–9 (1 night)',s:'Magoemon or Yokichi. japaneseguesthouses.com. No large bags. CASH ONLY. Before 5pm.'},
-    {t:'Kyoto Michelin Dinner — Apr 14',s:'omakaseje.com. Private room for 5–6. 6pm seating. Kyoyamato, Noguchi Tsunagu, or Miyawaki.'},
-    {t:'Kyoto Hotel — Apr 11–15 (4 nights)',s:'Cherry blossom season = hardest hotel market in Japan. Book now. The Celestine Kyoto Gion or Mitsui Garden Sanjo.'},
-    {t:'Rick + Rose: Golf at Seta — Apr 13',s:'Book via Kyoto hotel concierge — courses do not take direct English bookings. Green fee ~¥20,000–30,000pp.'}
+    {t:'Magome Ryokan — Apr 8–10 (2 nights)',s:'Magomechaya on japaneseguesthouses.com. Request private bath. CASH ONLY, check in before 3pm.'},
+    {t:'Shirakawa-go Farmhouse — Apr 10–11 (1 night)',s:'Minshuku Kanjiya on Booking.com. Also email japaneseguesthouses.com as backup. Onyado Yuinosho fallback. CASH ONLY. Before 5pm.'},
+    {t:'Takayama Hotel — Apr 13–15 (2 nights) ⚠️ CRITICAL',s:'Spring festival books out 6–12 months ahead. Book immediately. Festival dates: Apr 14–15 (Sanno Matsuri).'},
+    {t:'Kyoto Hotel — Apr 15–19 (4 nights)',s:'Cherry blossom season = hardest hotel market in Japan. The Celestine Kyoto Gion or Mitsui Garden Sanjo.'},
+    {t:'Kyoto Michelin Dinner — Apr 18',s:'omakaseje.com or pocketconcierge.jp. Private room for 6. 6pm seating. Kyoyamato, Noguchi Tsunagu, or Miyawaki.'},
+    {t:'Rick + Rose: Golf at Seta — Apr 17',s:'Book via Kyoto hotel concierge — courses do not take direct English bookings. Green fee ~¥20,000–30,000pp.'},
+    {t:'TeamLab Planets — Apr 6',s:'Book 2pm or 3pm slot at teamlab.art/e/planets/ — sells out fast.'}
   ],
   yellow:[
-    {t:'Kyoto Tea Ceremony — removed',s:'Private/semi-private for 5–6. 90 min. Higashiyama or Gion area.'},
-    {t:'Shinkansen Reserved Seats',s:'Tokyo→Nagoya (Hikari), Kanazawa→Tsuruga→Kyoto, Kyoto→Hiroshima. Block of 6.'},
+    {t:'Shinkansen Reserved Seats',s:'Tokyo→Nagoya (Hikari), Kanazawa→Toyama→Takayama, Hida Takayama→Kyoto, Kyoto→Himeji→Hiroshima. Block of 6.'},
     {t:'Toyama → Shirakawa-go Bus',s:'Only 3 buses/day. Sells out fast in April. japanbusonline.com.'},
-    {t:'JR Pass — 21-day (all 6)',s:'Buy before departure at jrpass.com. Nozomi needs supplement. Activate Day 2–3.'}
+    {t:'JR Pass — 21-day (all 6)',s:'Buy before departure at jrpass.com. Nozomi needs supplement. Activate Day 1.'}
   ],
   green:[
-    {t:'Flights — SFO→HND (Steven + Esther)',s:'ANA or JAL nonstop. ~$900–1,100 USD economy. ana.co.jp or jal.com.'},
-    {t:'Flights — YWG→NRT/HND (Rick, Rose, Sally)',s:'Air Canada via Vancouver. ~C$1,400–1,800. aircanada.com.'},
-    {t:'Flights — HIJ→ICN (all 6, Apr 17)',s:'Jeju Air direct. ~$80–150pp. jejuair.com or google.com/flights.'},
-    {t:'Flights — ICN→SFO (Steven + Esther, Apr 22)',s:'Korean Air or Asiana direct. ~10h.'},
-    {t:'Flights — ICN→YWG (Rick, Rose, Sally, Apr 22)',s:'Air Canada via Vancouver. ~17–19h total.'},
-    {t:'Gloria — ICN→HND (Apr 3)',s:'Korean Air or Asiana nonstop. ~2h. Confirmed!'},
-    {t:'Tokyo Hotel — Apr 3–6',s:'Shinjuku Granbell or Dormy Inn Premium Shibuya.'},
-    {t:'Kanazawa Hotel — Apr 9–11',s:'APA Hotel Kanazawa-Ekimae or Dormy Inn Kanazawa.'},
-    {t:'Hiroshima Hotel — Apr 15–17',s:'Dormy Inn Hiroshima or Cross Hotel.'},
-    {t:'Seoul Hotel — Apr 17–21',s:'Myeongdong or Hongdae area. Easy subway access.'}
+    {t:'Flights — SFO→HND Apr 3 (Steven + Esther)',s:'ANA or JAL nonstop. ~$900–1,100 USD economy. ana.co.jp or jal.com.'},
+    {t:'Flights — YWG→NRT/HND Apr 3 (Rick, Rose, Sally)',s:'Air Canada via Vancouver. ~C$1,400–1,800. aircanada.com.'},
+    {t:'Flights — HIJ→ICN Apr 21 (all 6)',s:'Jeju Air direct. ~$80–150pp. jejuair.net.'},
+    {t:'Flights — ICN→SFO Apr 24 (Steven + Esther)',s:'Korean Air or Asiana direct. ~10h.'},
+    {t:'Flights — ICN→YWG Apr 24 (Rick, Rose, Sally)',s:'Air Canada via Vancouver. ~17–19h total.'},
+    {t:'Gloria — ICN→HND Apr 3',s:'Korean Air or Asiana nonstop. ~2h. Confirmed!'},
+    {t:'Tokyo Hotel — Apr 3–8 (5 nights)',s:'Central or south Shinjuku. Dormy Inn Premium Shinjuku (great value, has onsen) or Park Hyatt Tokyo.'},
+    {t:'Kanazawa Hotel — Apr 11–13 (2 nights)',s:'APA Hotel Kanazawa-Ekimae or Dormy Inn Kanazawa.'},
+    {t:'Hiroshima Hotel — Apr 19–21 (2 nights)',s:'Dormy Inn Hiroshima or Cross Hotel.'},
+    {t:'Seoul Hotel — Apr 21–24 (3 nights)',s:'Myeongdong or Hongdae area. Easy subway access.'}
   ]
 };
 
 /* ─── PACKING DATA ─────────────────────────────────── */
 var PACK_CATS=[
   {id:'docs',icon:'📄',name:'Documents & Money',items:[
-    {id:'p1',label:'Passport (valid 6+ months past Apr 21)',tags:['essential'],note:'Check expiry now'},
+    {id:'p1',label:'Passport (valid 6+ months past Apr 24)',tags:['essential'],note:'Check expiry now'},
     {id:'p2',label:'JR Pass (printed or on phone)',tags:['essential'],note:'Activate in Tokyo — jrpass.com'},
     {id:'p3',label:'Travel insurance cards',tags:['essential']},
     {id:'p4',label:'Yen cash — ¥80,000+ per person',tags:['essential'],note:'ATMs unreliable in rural Magome + Shirakawa-go'},
@@ -813,12 +855,12 @@ var PACK_CATS=[
     {id:'c1',label:'Light jacket or fleece',tags:[],note:'Spring nights are cool (8–14°C in mountains)'},
     {id:'c2',label:'Slip-on shoes',tags:['essential'],note:'Removing shoes constantly at temples — essential'},
     {id:'c3',label:'Comfortable walking shoes',tags:['essential'],note:'Expect 6–10km on active days'},
-    {id:'c4',label:'Smart-casual outfit for Michelin dinner (Apr 14)',tags:['essential'],note:'No trainers or shorts'},
-    {id:'c5',label:'Clothes you can kneel in for tea ceremony',tags:['essential'],note:'Apr 13 — no tight trousers'},
+    {id:'c4',label:'Smart-casual outfit for Michelin dinner (Apr 18)',tags:['essential'],note:'No trainers or shorts'},
     {id:'c6',label:'Lightweight rain layer / compact umbrella',tags:[],note:'April has occasional showers'},
-    {id:'c7',label:'Warm layers for Magome + Shirakawa-go',tags:[],note:'Mountain areas, Apr 6–9, can be 8–10°C at night'},
+    {id:'c7',label:'Warm layers for Magome + Shirakawa-go + Takayama',tags:[],note:'Mountain areas, Apr 8–15, can be 5–12°C at night'},
+    {id:'c10',label:'Extra warm layer for Takayama Festival (Apr 13–14)',tags:[],note:'Lantern procession is outdoors 6–9pm, mountain evening temps 5–12°C'},
     {id:'c8',label:'Comfortable loose clothes for jjimjilbang (Seoul)',tags:['korea'],note:'Provided at bathhouse but bring underwear'},
-    {id:'c9',label:'Golf attire — collared shirt + trousers',tags:['golf'],note:'Rick + Rose only — Apr 13 Seta Golf Course'}
+    {id:'c9',label:'Golf attire — collared shirt + trousers',tags:['golf'],note:'Rick + Rose only — Apr 17 Seta Golf Course'}
   ]},
   {id:'tech',icon:'📱',name:'Tech & Transport',items:[
     {id:'t1',label:'Phone + charger',tags:['essential']},
@@ -850,8 +892,8 @@ var PACK_CATS=[
   {id:'gloria',icon:'🇰🇷',name:'Gloria — Korea Extras',items:[
     {id:'g1',label:'Korean ID / passport',tags:['gloria','essential']},
     {id:'g2',label:'Group WhatsApp set up before Apr 3',tags:['gloria'],note:'Help coordinate arrival at Tokyo hotel'},
-    {id:'g3',label:'Restaurant shortlist for Apr 19 afternoon lead',tags:['gloria'],note:'Show the group somewhere you love in Seoul'},
-    {id:'g4',label:'Farewell dinner reservation (Apr 20)',tags:['gloria'],note:'Gloria picks — book in advance if upscale'},
+    {id:'g3',label:'Restaurant shortlist for Apr 23 afternoon lead',tags:['gloria'],note:'Show the group somewhere you love in Seoul'},
+    {id:'g4',label:'Farewell dinner reservation (Apr 23)',tags:['gloria'],note:'Gloria picks — book in advance if upscale'},
     {id:'g5',label:'T-money card topped up for group Seoul days',tags:['gloria','korea']}
   ]}
 ];
@@ -861,13 +903,13 @@ var PACK_CATS=[
 var BUDGET_ROWS=[
   {icon:'✈️',n:'Flights — SFO (Steven + Esther)',s:'ANA/JAL SFO→HND + HIJ→ICN + ICN→SFO',sfo:'$1,100–1,300 USD',ywg:null,gloria:null},
   {icon:'✈️',n:'Flights — YWG (Rick, Rose, Sally)',s:'Air Canada via YVR + HIJ→ICN + ICN→YWG',sfo:null,ywg:'C$1,700–2,100 CAD',gloria:null,note:'Connecting flight via Vancouver adds ~C$400–600 vs SFO direct'},
-  {icon:'✈️',n:'Flights — ICN (Gloria)',s:'Korean Air/Asiana short-haul only',sfo:null,ywg:null,gloria:'₩250–400K KRW'},
-  {icon:'🏨',n:'Accommodation (18 nights)',s:'City hotels + ryokan + farmhouse + Seoul',sfo:'$1,400–2,000 USD',ywg:'C$1,900–2,700 CAD',gloria:'₩500K–900K KRW',note:'Per person share of rooms'},
+  {icon:'✈️',n:'Flights — ICN (Gloria)',s:'Korean Air/Asiana ICN→HND Apr 3 + HIJ→ICN Apr 21',sfo:null,ywg:null,gloria:'₩250–400K KRW'},
+  {icon:'🏨',n:'Accommodation (21 nights)',s:'City hotels + ryokan + farmhouse + Seoul',sfo:'$1,600–2,300 USD',ywg:'C$2,200–3,100 CAD',gloria:'₩600K–1,000K KRW',note:'Per person share of rooms'},
   {icon:'🚄',n:'JR Pass — 21-day',s:'Buy before departure at jrpass.com',sfo:'$500–600 USD',ywg:'C$680–810 CAD',gloria:'$500–600 USD'},
-  {icon:'🍜',n:'Food — casual (18 days)',s:'~$35/day izakaya, ramen, street food',sfo:'$500–650 USD',ywg:'C$680–880 CAD',gloria:'₩600K–900K KRW'},
-  {icon:'⭐',n:'Michelin dinner — Apr 14',s:'Private room, drinks included',sfo:'$200–500 USD',ywg:'C$270–680 CAD',gloria:'$200–500 USD',note:'Biggest single night variable'},
+  {icon:'🍜',n:'Food — casual (21 days)',s:'~$35/day izakaya, ramen, street food',sfo:'$600–800 USD',ywg:'C$810–1,080 CAD',gloria:'₩700K–1,100K KRW'},
+  {icon:'⭐',n:'Michelin dinner — Apr 18',s:'Private room, drinks included',sfo:'$200–500 USD',ywg:'C$270–680 CAD',gloria:'$200–500 USD',note:'Biggest single night variable'},
   {icon:'🏠',n:'Ryokan + farmhouse meals',s:'Magome 2 nights + Shirakawa 1 night',sfo:'Included',ywg:'Included',gloria:'Included'},
-  {icon:'🎭',n:'Activities + entrances',s:'Temples, tea ceremony, Miyajima, Seoul tours',sfo:'$150–250 USD',ywg:'C$200–340 CAD',gloria:'₩150K–300K KRW'},
+  {icon:'🎭',n:'Activities + entrances',s:'Temples, TeamLab, Takayama festival, Miyajima, Himeji, Seoul',sfo:'$180–300 USD',ywg:'C$240–400 CAD',gloria:'₩150K–300K KRW'},
   {icon:'🛅',n:'Luggage forwarding (4 legs)',s:'Yamato Transport ~¥2,000/bag/leg',sfo:'$50–80 USD',ywg:'C$70–110 CAD',gloria:'$50–80 USD'},
   {icon:'💴',n:'Cash + misc + shopping',s:'Rural yen, souvenirs, personal spending',sfo:'$250–450 USD',ywg:'C$340–610 CAD',gloria:'₩300K–600K KRW'},
   {icon:'🏌️',n:'Golf — Rick + Rose only',s:'Seta North Course, caddy + clubhouse lunch',sfo:null,ywg:'C$180–270 CAD',gloria:null}
@@ -1017,7 +1059,7 @@ function goDay(i){if(i<0||i>=DAYS.length)return;curIdx=i;buildToday(i);document.
 /* ─── TIMELINE ─────────────────────────────────────── */
 function buildTimeline(){
   var jp=document.getElementById('tl-jp'),kr=document.getElementById('tl-kr');
-  var tagMap={night:'Night',travel:'Transit',golf:'Golf',split:'Split',knee:'Rick flag',splurge:'Splurge',korea:'Korea'};
+  var tagMap={night:'Night',travel:'Transit',golf:'Golf',split:'Split',knee:'Rick flag',splurge:'Splurge',festival:'Festival',korea:'Korea'};
   DAYS.forEach(function(d){
     var el=d.c==='kr'?kr:jp,isKr=d.c==='kr';
     var tags=d.tags.map(function(t){return'<span class="dtag '+t+'">'+(tagMap[t]||t)+'</span>';}).join('');
