@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JP-KR 2027">
+<meta name="theme-color" content="#0f0f1a">
+<title>Japan · Korea 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cherry:#c0395b;--cherry-l:#fde8ee;--gold:#b8860b;--gold-l:#fdf5d8;--teal:#0f7a65;--teal-l:#d4f0e8;--ink:#0f0f1a;--ink2:#1e1e30;--slate:#5a5a7a;--muted:#9090a8;--surface:#f8f7f4;--white:#fff;--border:rgba(15,15,26,0.08);--accent:var(--cherry);--accent-l:var(--cherry-l);--font-d:'Playfair Display',serif;--font-b:'DM Sans',sans-serif;--nav-h:68px;--safe:env(safe-area-inset-bottom,0px);--r:16px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--ink);font-family:var(--font-b)}
+body{display:flex;flex-direction:column;height:100dvh}
+
+/* PROFILE PICKER */
+.profile-screen{position:fixed;inset:0;background:var(--ink);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px}
+.profile-screen h1{font-family:var(--font-d);font-size:26px;color:#fff;text-align:center;margin-bottom:6px}
+.profile-screen p{font-size:13px;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:32px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:340px}
+.profile-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r);padding:16px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all 0.15s}
+.profile-btn:active{transform:scale(0.97)}
+.profile-btn .pavatar{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:18px;font-weight:700;color:#fff}
+.profile-btn .pname{font-size:14px;font-weight:600;color:#fff}
+.profile-btn .prole{font-size:11px;color:rgba(255,255,255,0.4);text-align:center}
+.profile-btn .ptag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:8px;margin-top:2px}
+.profile-btn.selected{border-color:var(--cherry);background:rgba(192,57,91,0.15)}
+
+/* HEADER */
+.app-header{background:var(--ink);padding:54px 20px 14px;flex-shrink:0;position:relative}
+.hdr-top{display:flex;align-items:flex-start;justify-content:space-between}
+.app-header h1{font-family:var(--font-d);font-size:22px;color:#fff;font-weight:700;flex:1}
+.profile-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);border-radius:20px;padding:5px 12px 5px 7px;cursor:pointer;flex-shrink:0;margin-left:12px;margin-top:2px}
+.profile-pill .pp-av{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.profile-pill span{font-size:12px;font-weight:500;color:rgba(255,255,255,0.7)}
+.header-sub{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:4px}
+.header-chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chip{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5)}
+.chip.on{background:var(--cherry);border-color:var(--cherry);color:#fff}
+.chip.tl{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* BODY & TABS */
+.app-body{flex:1;overflow:hidden;background:var(--surface)}
+.tab-pane{display:none;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(var(--nav-h) + var(--safe) + 16px)}
+.tab-pane.active{display:block}
+
+/* BOTTOM NAV */
+.bottom-nav{background:var(--ink2);border-top:1px solid rgba(255,255,255,0.06);height:calc(var(--nav-h) + var(--safe));padding-bottom:var(--safe);display:flex;flex-shrink:0}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer}
+.nav-btn .ni{font-size:21px;line-height:1}
+.nav-btn .nl{font-size:10px;font-weight:500;color:rgba(255,255,255,0.28);letter-spacing:0.04em;font-family:var(--font-b)}
+.nav-btn.active .nl{color:var(--accent)}
+
+/* TODAY */
+#tab-today{padding:0}
+.today-hero{position:relative;height:270px;overflow:hidden;background:var(--ink2)}
+.today-hero img{width:100%;height:100%;object-fit:cover;opacity:0.75;transition:opacity 0.4s}
+.today-hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,15,26,0.1) 0%,rgba(15,15,26,0.88) 100%)}
+.today-hero-content{position:absolute;bottom:0;left:0;right:0;padding:18px}
+.tday-badge{display:inline-flex;align-items:center;gap:6px;background:var(--cherry);border-radius:20px;padding:4px 12px;margin-bottom:8px}
+.tday-badge span{font-size:12px;font-weight:600;color:#fff}
+.tday-badge.kr{background:var(--teal)}
+.today-hero h2{font-family:var(--font-d);font-size:26px;font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em}
+.today-hero .tdate{font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px}
+.today-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 10px;background:var(--white);border-bottom:1px solid var(--border)}
+.tnav-btn{padding:7px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);font-size:13px;font-weight:500;color:var(--slate);cursor:pointer}
+.tnav-center{font-size:13px;font-weight:600;color:var(--ink);text-align:center}
+.tnav-center small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:1px}
+.today-body{padding:14px}
+.t-sec{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.t-sec:first-child{margin-top:0}
+.act-card{background:var(--white);border-radius:var(--r);margin-bottom:10px;overflow:hidden;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.act-inner{display:flex;align-items:flex-start;gap:12px;padding:14px 16px}
+.act-time{font-size:11px;font-weight:600;color:var(--cherry);min-width:64px;padding-top:2px;flex-shrink:0}
+.act-time.kr{color:var(--teal)}
+.act-desc{font-size:14px;color:var(--ink);line-height:1.5;flex:1}
+.act-desc strong{font-weight:600}
+.knee-alert{margin:0 16px 12px;padding:9px 12px;background:#fff8f0;border:1px solid #ffd0a0;border-radius:10px;font-size:12px;color:#c45000;display:flex;gap:8px;line-height:1.4}
+.highlight-you{border-left:3px solid var(--accent);padding-left:10px;background:rgba(192,57,91,0.04);border-radius:0 8px 8px 0;margin-bottom:6px}
+.split-wrap{border-top:1px solid var(--border);padding:12px 16px}
+.split-lbl{font-size:10px;font-weight:600;color:var(--slate);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.split-row{display:flex;gap:8px;flex-wrap:wrap}
+.split-opt{flex:1;min-width:130px;background:var(--surface);border-radius:10px;padding:10px 12px;border:1px solid var(--border)}
+.split-opt.you-opt{border-color:var(--accent);background:var(--accent-l)}
+.split-opt .who{font-size:11px;font-weight:600;color:var(--cherry);margin-bottom:3px}
+.split-opt .who.golf{color:#2e7d32}
+.split-opt p{font-size:12px;color:var(--slate);line-height:1.4}
+.knee-mini{font-size:11px;color:#c45000;margin-top:4px;display:flex;gap:4px}
+.weather-b{background:var(--ink2);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
+.weather-b .temp{font-size:28px;font-weight:300;color:#fff}
+.weather-b .wloc{font-size:13px;font-weight:500;color:rgba(255,255,255,0.8)}
+.weather-b .wcond{font-size:12px;color:rgba(255,255,255,0.45);margin-top:2px}
+.photo-strip{display:flex;gap:8px;overflow-x:auto;padding:0 0 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.photo-strip::-webkit-scrollbar{display:none}
+.photo-item{flex-shrink:0;width:155px;height:104px;border-radius:12px;overflow:hidden;scroll-snap-align:start;position:relative}
+.photo-item img{width:100%;height:100%;object-fit:cover}
+.photo-item .plbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:16px 8px 6px;font-size:10px;font-weight:500;color:#fff}
+
+/* TIMELINE */
+#tab-timeline{padding:0}
+.tl-hdr{padding:16px 16px 12px;background:var(--surface);position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border)}
+.tl-country{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.tl-title{font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--ink);margin-top:2px}
+.tl-dates{font-size:12px;color:var(--muted);margin-top:2px}
+.day-card{background:var(--white);border-bottom:1px solid var(--border);overflow:hidden}
+.day-card-hdr{display:flex;cursor:pointer;user-select:none}
+.day-card-img{width:88px;height:88px;object-fit:cover;flex-shrink:0;background:var(--ink2)}
+.day-card-nfo{flex:1;padding:11px 12px;display:flex;flex-direction:column;justify-content:center}
+.day-num-lbl{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
+.day-title-t{font-size:15px;font-weight:600;color:var(--ink);margin-top:2px;line-height:1.2}
+.day-sub-t{font-size:12px;color:var(--slate);margin-top:2px}
+.day-tags-t{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.dtag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px}
+.dtag.night{background:var(--cherry-l);color:var(--cherry)}
+.dtag.travel{background:#ede9f8;color:#5c35c0}
+.dtag.golf{background:#e8f5e9;color:#2e7d32}
+.dtag.split{background:#e3f2fd;color:#1565c0}
+.dtag.knee{background:#fff3e0;color:#c45000}
+.dtag.splurge{background:var(--gold-l);color:var(--gold)}
+.dtag.festival{background:#fff0d4;color:#b05000}
+.dtag.korea{background:var(--teal-l);color:var(--teal)}
+.day-chev{padding:0 12px;display:flex;align-items:center;color:var(--border);font-size:20px;transition:transform 0.2s}
+.day-chev.open{transform:rotate(90deg);color:var(--cherry)}
+.day-body{display:none;border-top:1px solid var(--border)}
+.day-body.open{display:block}
+.db-act{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border)}
+.db-act:last-child{border-bottom:none}
+.db-time{font-size:11px;font-weight:600;color:var(--cherry);min-width:68px;flex-shrink:0;padding-top:1px}
+.db-time.kr{color:var(--teal)}
+.db-desc{font-size:13px;color:var(--slate);line-height:1.5;flex:1}
+.db-desc strong{color:var(--ink);font-weight:600}
+.knee-note{margin-top:5px;padding:6px 10px;background:#fff8f0;border-radius:8px;font-size:11px;color:#c45000;display:flex;gap:6px}
+.profile-highlight{background:rgba(192,57,91,0.05);border-left:2px solid var(--accent);padding-left:8px;border-radius:0 6px 6px 0}
+
+/* CHECKLIST */
+#tab-checklist{padding:12px}
+.cl-sec{margin-bottom:12px}
+.cl-sec-hd{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:8px 4px 6px;color:var(--muted)}
+.cl-card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.cl-item:last-child{border-bottom:none}
+.cl-chk{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.cl-chk.done{background:var(--teal);border-color:var(--teal)}
+.cl-chk.done::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
+.cl-chk.urgent{border-color:var(--cherry)}
+.cl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.cl-dot.r{background:var(--cherry)}.cl-dot.y{background:var(--gold)}.cl-dot.g{background:var(--teal)}
+.cl-t{font-size:14px;font-weight:500;color:var(--ink);line-height:1.3}
+.cl-t.done{text-decoration:line-through;color:#bbb}
+.cl-s{font-size:12px;color:var(--slate);margin-top:2px;line-height:1.4}
+
+/* PACKING */
+#tab-packing{padding:12px}
+.pack-cat{background:var(--white);border-radius:var(--r);overflow:hidden;margin-bottom:12px;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.pack-cat-hdr{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--border)}
+.pack-cat-hdr .picon{font-size:20px;flex-shrink:0}
+.pack-cat-hdr .pname{font-size:14px;font-weight:600;color:var(--ink);flex:1}
+.pack-cat-hdr .pcount{font-size:11px;color:var(--muted)}
+.pack-cat-hdr .pchev{font-size:18px;color:var(--border);transition:transform 0.2s}
+.pack-cat-hdr.open .pchev{transform:rotate(90deg);color:var(--cherry)}
+.pack-items{display:none}
+.pack-items.open{display:block}
+.pack-item{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.pack-item:last-child{border-bottom:none}
+.pack-cb{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.pack-cb.done{background:var(--teal);border-color:var(--teal)}
+.pack-cb.done::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.pack-cb.warn{border-color:var(--gold)}
+.pack-label{font-size:13px;color:var(--ink);flex:1;line-height:1.3}
+.pack-label.done{text-decoration:line-through;color:#bbb}
+.pack-note{font-size:11px;color:var(--muted);margin-top:1px}
+.pack-tag{font-size:10px;font-weight:500;padding:1px 6px;border-radius:6px;flex-shrink:0}
+.pack-tag.essential{background:var(--cherry-l);color:var(--cherry)}
+.pack-tag.knee{background:#fff3e0;color:#c45000}
+.pack-tag.korea{background:var(--teal-l);color:var(--teal)}
+.pack-tag.golf{background:#e8f5e9;color:#2e7d32}
+.pack-tag.gloria{background:#f3e5f5;color:#6a1b9a}
+.pack-progress{margin:12px;background:var(--white);border-radius:var(--r);padding:14px 16px;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.pack-progress-label{font-size:12px;color:var(--slate);margin-bottom:8px;display:flex;justify-content:space-between}
+.pack-bar-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.pack-bar-fill{height:100%;background:var(--teal);border-radius:3px;transition:width 0.3s}
+
+/* BUDGET */
+#tab-budget{padding:0}
+.bdg-hero{background:var(--ink);padding:24px 20px 20px}
+.bdg-lbl{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:14px}
+.bdg-cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.bdg-cards::-webkit-scrollbar{display:none}
+.bdg-c{flex-shrink:0;background:rgba(255,255,255,0.07);border-radius:14px;padding:14px;min-width:120px}
+.bdg-c .flag{font-size:18px;margin-bottom:5px}
+.bdg-c .amt{font-size:19px;font-weight:700;color:#fff}
+.bdg-c .amtsub{font-size:10px;color:rgba(255,255,255,0.35);margin-top:1px}
+.bdg-c .who{font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px;line-height:1.3}
+.bdg-rows{padding:12px}
+.bdg-card{background:var(--white);border-radius:var(--r);overflow:hidden;margin-bottom:10px;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.bdg-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.bdg-row:last-child{border-bottom:none}
+.bdg-icon{font-size:20px;flex-shrink:0}
+.bdg-cat{flex:1}
+.bdg-cn{font-size:13px;font-weight:500;color:var(--ink)}
+.bdg-cs{font-size:11px;color:var(--muted);margin-top:1px}
+.bdg-rng{font-size:13px;font-weight:600;color:var(--ink);text-align:right;white-space:nowrap}
+.bdg-ty{font-size:10px;color:var(--muted);text-align:right;margin-top:1px}
+.note-box{margin:12px;background:var(--gold-l);border:1px solid rgba(184,134,11,0.2);border-radius:var(--r);padding:12px 14px;font-size:12px;color:var(--slate);line-height:1.5}
+.note-box strong{color:var(--ink)}
+
+/* CREW */
+#tab-crew{padding:12px}
+.crew-card{background:var(--white);border-radius:var(--r);overflow:hidden;margin-bottom:12px;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.crew-m{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.crew-m:last-child{border-bottom:none}
+.crew-m.you-m{background:rgba(192,57,91,0.04)}
+.crew-av{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.crew-nm{font-size:14px;font-weight:600;color:var(--ink)}
+.crew-rl{font-size:12px;color:var(--slate);margin-top:1px}
+.crew-tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
+.ctag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px}
+.ctag.lead{background:var(--cherry-l);color:var(--cherry)}
+.ctag.knee{background:#fff3e0;color:#c45000}
+.ctag.golf{background:#e8f5e9;color:#2e7d32}
+.ctag.sf{background:#e3f2fd;color:#1565c0}
+.ctag.ywg{background:#e8f5e9;color:#2e7d32}
+.ctag.seoul{background:var(--teal-l);color:var(--teal)}
+.ctag.you{background:var(--cherry);color:#fff}
+.info-blk{background:var(--white);border-radius:var(--r);overflow:hidden;margin-bottom:12px;box-shadow:0 1px 8px rgba(15,15,26,0.06)}
+.info-blk-hdr{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border)}
+.info-blk-hdr h3{font-size:14px;font-weight:600;color:var(--ink);flex:1}
+.info-blk-body{display:none}
+.info-blk-body.open{display:block}
+.irow{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border)}
+.irow:last-child{border-bottom:none}
+.il{font-size:11px;font-weight:600;color:var(--cherry);min-width:64px;flex-shrink:0;padding-top:1px}
+.il.ok{color:var(--teal)}.il.warn{color:var(--gold)}.il.no{color:var(--cherry)}
+.ir{font-size:13px;color:var(--slate);line-height:1.5;flex:1}
+.inst{background:var(--ink2);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.inst p{font-size:12px;color:rgba(255,255,255,0.55);flex:1;line-height:1.5}
+.inst p strong{color:#fff;display:block;margin-bottom:3px;font-size:13px}
+
+/* Korean text support */
+.ko{font-size:13px;color:var(--teal);font-weight:500}
+</style>
+</head>
+<body>
+
+<!-- PROFILE PICKER OVERLAY -->
+<div class="profile-screen" id="profile-screen">
+  <h1>Japan · Korea 2027 🌸</h1>
+  <p>Who are you? We'll personalise the app for you.</p>
+  <div class="profile-grid" id="profile-grid"></div>
+</div>
+
+<div class="app-header">
+  <div class="hdr-top">
+    <h1>Japan · Korea 2027 🌸</h1>
+    <div class="profile-pill" onclick="showProfilePicker()" id="profile-pill">
+      <div class="pp-av" id="pp-av"></div>
+      <span id="pp-name"></span>
+    </div>
+  </div>
+  <div class="header-sub">Apr 3 – Apr 24 · 21 Nights · 6 Travellers</div>
+  <div class="header-chips">
+    <span class="chip on" id="hchip-lead">Steven on point</span>
+    <span class="chip" id="hchip-knee">Rick: knee flags</span>
+    <span class="chip tl">Gloria confirmed ✓</span>
+  </div>
+</div>
+<div class="app-body">
+  <div class="tab-pane active" id="tab-today"><div id="today-content"></div></div>
+  <div class="tab-pane" id="tab-timeline">
+    <div class="tl-hdr"><div class="tl-country">Japan</div><div class="tl-title">April 3 – 22</div><div class="tl-dates">Tokyo · Magome · Shirakawa-go · Kanazawa · Takayama · Kyoto · Himeji · Hiroshima</div></div>
+    <div id="tl-jp"></div>
+    <div class="tl-hdr" style="background:#f0faf7"><div class="tl-country" style="color:var(--teal)">Korea</div><div class="tl-title">April 21 – 24</div><div class="tl-dates">Seoul</div></div>
+    <div id="tl-kr"></div>
+  </div>
+  <div class="tab-pane" id="tab-checklist">
+    <div class="inst"><span style="font-size:22px">👆</span><p><strong>Tap to mark confirmed</strong>State saves on your phone. Steven handles all bookings.</p></div>
+    <div class="cl-sec"><div class="cl-sec-hd">🔴 Book immediately</div><div class="cl-card" id="cl-red"></div></div>
+    <div class="cl-sec"><div class="cl-sec-hd">🟡 Book 3 months out</div><div class="cl-card" id="cl-yellow"></div></div>
+    <div class="cl-sec"><div class="cl-sec-hd">🟢 Book 4–6 months out</div><div class="cl-card" id="cl-green"></div></div>
+  </div>
+  <div class="tab-pane" id="tab-packing">
+    <div class="pack-progress">
+      <div class="pack-progress-label"><span>Packing progress</span><span id="pack-count">0 / 0 packed</span></div>
+      <div class="pack-bar-bg"><div class="pack-bar-fill" id="pack-bar" style="width:0%"></div></div>
+    </div>
+    <div id="pack-categories"></div>
+  </div>
+  <div class="tab-pane" id="tab-budget">
+    <div class="bdg-hero"><div class="bdg-lbl">Estimated total per person</div><div class="bdg-cards" id="bdg-summary"></div></div>
+    <div class="note-box" style="margin-top:0">
+      <strong>Why the numbers differ</strong> — YWG flights require connections through Vancouver (adding ~C$400–600 vs SFO direct). The CAD/USD exchange rate (~0.73) means C$5,500 ≈ $4,000 USD — so Winnipeg travellers pay more in local currency for a comparable trip. All in-Japan and Korea costs are identical across both groups.
+    </div>
+    <div class="bdg-rows"><div class="bdg-card" id="bdg-rows"></div></div>
+  </div>
+  <div class="tab-pane" id="tab-crew">
+    <div class="crew-card" id="crew-list"></div>
+    <div class="info-blk" id="knee-section">
+      <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🦵</span><h3>Rick's Knee Guide</h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
+      <div class="info-blk-body">
+        <div class="irow"><div class="il ok">Fine</div><div class="ir">TeamLab Planets (flat throughout), Arashiyama bamboo grove + bridge (flat), Nagamachi samurai district (flat), Himeji Castle grounds (mostly flat — skip upper floors), Takayama old town / Sanmachi Suji (flat), Philosopher's Path (flat), Kenrokuen (flat), Gyeongbokgung Seoul (flat), Fushimi Inari lower section, Miyajima waterfront, N Seoul Tower cable car.</div></div>
+        <div class="irow"><div class="il warn">Careful</div><div class="ir">Magome-juku stone slope — short, manageable, uneven. Take it slow, use the wooden posts.</div></div>
+        <div class="irow"><div class="il no">Skip</div><div class="ir">Magome→Tsumago 8km hike (take bus). Shirakawa-go viewpoint (15-min uphill). Miyajima ropeway hike. Full Fushimi Inari trail.</div></div>
+        <div class="irow"><div class="il ok">Bonus</div><div class="ir">Seoul jjimjilbang (bathhouse) — heated floor rooms are excellent for bad knees. Highly recommended on the free Seoul day.</div></div>
+      </div>
+    </div>
+    <div class="info-blk">
+      <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🌸</span><h3>Cherry Blossom Timing</h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
+      <div class="info-blk-body">
+        <div class="irow"><div class="il">Tokyo</div><div class="ir">Apr 3–7: likely at or near peak. Nakameguro canal and Ueno Park are the highlights on this route.</div></div>
+        <div class="irow"><div class="il">Kyoto</div><div class="ir">Apr 15–18: late blossoms possible. Philosopher's Path is the classic spot.</div></div>
+        <div class="irow"><div class="il">Magome/Takayama</div><div class="ir">Mountain elevation may push blossoms slightly later — possible bonus Apr 8–14.</div></div>
+        <div class="irow"><div class="il">Note</div><div class="ir">Cherry blossoms are a bonus, not the agenda — group preference is to enjoy them naturally rather than over-optimise.</div></div>
+      </div>
+    </div>
+    <div class="info-blk" id="gloria-section">
+      <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🇰🇷</span><h3>Gloria's Korea Guide <span class="ko">글로리아 안내</span></h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
+      <div class="info-blk-body">
+        <div class="irow"><div class="il" style="color:var(--teal)">합류</div><div class="ir">Apr 3 — ICN → HND (Korean Air or Asiana, ~2h). Meet the group at Tokyo hotel evening. <span class="ko">4월 3일 합류, 도쿄 호텔에서 만나요.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">Day 19</div><div class="ir">Apr 21 — Meet group at ICN (HIJ→ICN Jeju Air flight). Guide everyone on AREX to Seoul hotel. <span class="ko">4월 21일 인천공항에서 그룹 픽업, AREX 안내 부탁드려요.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">Day 21</div><div class="ir">Apr 23 — Your day to lead. Gwangjang Market in the morning, then take everyone somewhere you love in Seoul. <span class="ko">4월 23일은 글로리아가 이끄는 날입니다.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">저녁식사</div><div class="ir">Apr 23 — Farewell dinner is your pick. Hanjeonsik or Gangnam rooftop or your favourite. <span class="ko">4월 23일 작별 저녁식사는 글로리아가 선택합니다.</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">귀가</div><div class="ir">Apr 24 — Everyone else flies home. You're already there! <span class="ko">4월 24일 — 글로리아는 이미 집에 있네요! 🎉</span></div></div>
+        <div class="irow"><div class="il" style="color:var(--teal)">팁</div><div class="ir">Group doesn't know Seoul well — be ready to help navigate T-money, recommend restaurants, translate menus. <span class="ko">그룹이 서울을 잘 모르니 도움을 부탁드려요.</span></div></div>
+      </div>
+    </div>
+    <div class="info-blk">
+      <div class="info-blk-hdr" onclick="toggleBlk(this)"><span style="font-size:20px">🆘</span><h3>Emergency Contacts</h3><span style="font-size:18px;color:var(--border);transition:transform 0.2s" class="bchev">›</span></div>
+      <div class="info-blk-body">
+        <div class="irow"><div class="il">Japan</div><div class="ir">Police: 110 · Ambulance: 119 · Canadian Embassy Tokyo: +81-3-5412-6200</div></div>
+        <div class="irow"><div class="il">Korea</div><div class="ir">Police: 112 · Ambulance: 119 · Canadian Embassy Seoul: +82-2-3783-6000 · English helpline: 1330</div></div>
+        <div class="irow"><div class="il">ATMs</div><div class="ir">Japan: 7-Eleven + Japan Post accept foreign cards 24/7. Korea: convenience store ATMs. Always carry cash for rural Japan.</div></div>
+      </div>
+    </div>
+    <div class="inst"><span style="font-size:22px">📲</span><p><strong>Add to home screen for offline use</strong>iOS: Share → Add to Home Screen. Android: Chrome → Add to Home Screen. Works without internet.</p></div>
+  </div>
+</div>
+<nav class="bottom-nav">
+  <button class="nav-btn active" onclick="switchTab('today',this)"><span class="ni">📍</span><span class="nl">TODAY</span></button>
+  <button class="nav-btn" onclick="switchTab('timeline',this)"><span class="ni">📅</span><span class="nl">ALL DAYS</span></button>
+  <button class="nav-btn" onclick="switchTab('checklist',this)"><span class="ni">✅</span><span class="nl">BOOKINGS</span></button>
+  <button class="nav-btn" onclick="switchTab('packing',this)"><span class="ni">🧳</span><span class="nl">PACKING</span></button>
+  <button class="nav-btn" onclick="switchTab('budget',this)"><span class="ni">💴</span><span class="nl">BUDGET</span></button>
+</nav>
+
+<script>
+/* ─── PROFILES ─────────────────────────────────────── */
+var PROFILES=[
+  {id:'steven',name:'Steven Gin',init:'SG',col:'#c0395b',role:'SF · Trip lead',tags:[{c:'lead',t:'Trip lead'},{c:'sf',t:'San Francisco'}],group:'sfo',isKnee:false,isGloria:false,isGolf:false},
+  {id:'esther',name:'Esther Nam',init:'EN',col:'#e87095',role:'SF · Travelling with Steven',tags:[{c:'sf',t:'San Francisco'}],group:'sfo',isKnee:false,isGloria:false,isGolf:false},
+  {id:'rick',name:'Rick Tucker',init:'RT',col:'#0f7a65',role:'Winnipeg · Bad knees · Golfer',tags:[{c:'ywg',t:'Winnipeg'},{c:'knee',t:'Bad knees'},{c:'golf',t:'Golfer'}],group:'ywg',isKnee:true,isGloria:false,isGolf:true},
+  {id:'rose',name:'Rose Rucker',init:'RR',col:'#5c6bc0',role:'Winnipeg · Golfer',tags:[{c:'ywg',t:'Winnipeg'},{c:'golf',t:'Golfer'}],group:'ywg',isKnee:false,isGloria:false,isGolf:true},
+  {id:'sally',name:'Sally Gin',init:'SG',col:'#b8860b',role:'Winnipeg',tags:[{c:'ywg',t:'Winnipeg'}],group:'ywg',isKnee:false,isGloria:false,isGolf:false},
+  {id:'gloria',name:'Gloria Nam',init:'GN',col:'#0f7a65',role:'Seoul · Korea local',tags:[{c:'seoul',t:'Seoul local'},{c:'conf',t:'Confirmed ✓'}],group:'gloria',isKnee:false,isGloria:true,isGolf:false}
+];
+var currentProfile=null;
+
+function buildProfileGrid(){
+  var g=document.getElementById('profile-grid');
+  PROFILES.forEach(function(p){
+    var btn=document.createElement('button');
+    btn.className='profile-btn';
+    btn.innerHTML='<div class="pavatar" style="background:'+p.col+'">'+p.init+'</div><div class="pname">'+p.name.split(' ')[0]+'</div><div class="prole">'+p.role.split(' · ')[0]+'</div>';
+    btn.onclick=function(){selectProfile(p.id);};
+    g.appendChild(btn);
+  });
+}
+
+function selectProfile(id){
+  currentProfile=PROFILES.find(function(p){return p.id===id;});
+  try{localStorage.setItem('jp27_profile',id);}catch(e){}
+  document.getElementById('profile-screen').style.display='none';
+  applyProfile();
+}
+
+function showProfilePicker(){
+  document.getElementById('profile-screen').style.display='flex';
+}
+
+function applyProfile(){
+  var p=currentProfile;
+  if(!p)return;
+  // Update header pill
+  document.getElementById('pp-av').style.background=p.col;
+  document.getElementById('pp-av').textContent=p.init;
+  document.getElementById('pp-name').textContent=p.name.split(' ')[0];
+  // Show/hide knee section
+  document.getElementById('knee-section').style.display=p.isKnee?'block':'block'; // always show
+  // Show/hide gloria section
+  document.getElementById('gloria-section').style.display=p.isGloria?'block':'block';
+  // Update accent colour based on group
+  if(p.group==='gloria'){
+    document.documentElement.style.setProperty('--accent','var(--teal)');
+    document.documentElement.style.setProperty('--accent-l','var(--teal-l)');
+  }else{
+    document.documentElement.style.setProperty('--accent','var(--cherry)');
+    document.documentElement.style.setProperty('--accent-l','var(--cherry-l)');
+  }
+  // Re-render budget with profile-specific view
+  buildBudget();
+  // Re-render crew highlighting this member
+  buildCrew();
+  // Re-render packing with profile tags
+  buildPacking();
+  // Re-render today
+  buildToday(curIdx);
+}
+
+/* ─── DAYS DATA ─────────────────────────────────────── */
+var IMG={
+  tokyo:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75',
+  magome:'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=800&q=75',
+  shirakawa:'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=75',
+  kanazawa:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=75',
+  takayama:'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&q=75',
+  kyoto:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75',
+  himeji:'https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=800&q=75',
+  hiroshima:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=800&q=75',
+  miyajima:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=75',
+  seoul:'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=75',
+  gwangjang:'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=75'
+};
+
+var DAYS=[
+  // ─ DAY 1 ─────────────────────────────────
+  {n:1,date:'Sat Apr 3',label:'Tokyo',c:'jp',title:'Tokyo — Arrive',sub:'Shinjuku hotel · Izakaya welcome dinner',tags:['travel','night'],img:IMG.tokyo,
+   wt:{t:'14°C',cond:'Partly cloudy, cool evening',icon:'🌤️'},
+   activities:[
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Arrive <strong>HND (Haneda Airport)</strong> (preferred — 30 min to centre via monorail) or NRT (Narita, 60 min via N\'EX). Pick up <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank"><strong>Suica IC cards</strong></a> at the airport — works on every train, bus, and convenience store in Japan.',
+     ko:'<strong>하네다 공항(HND)</strong>(선호 — 모노레일로 시내 30분) 또는 나리타 공항(NRT, N\'EX 60분) 도착. 공항에서 <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank"><strong>스이카 IC 카드</strong></a>를 받으세요.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Check in to <strong>Shinjuku hotel</strong> (central or south Shinjuku, near JR station). Recommended: <a href="https://maps.google.com/?q=Dormy+Inn+Premium+Shinjuku" target="_blank">Dormy Inn Premium Shinjuku</a>, Hyatt Regency Tokyo, Keio Plaza, or Park Hyatt. Welcome dinner at an <strong>izakaya</strong> nearby — order everything, share everything. Early night.',
+     ko:'신주쿠 호텔 체크인 — 신주쿠역 근처 중심 또는 남쪽. 추천: 도르미 인 프리미엄 신주쿠, 하얏트 리젠시, 케이오 플라자, 파크 하얏트. 근처 <strong>이자카야</strong>에서 환영 저녁 식사. 일찍 주무세요.'},
+    {time:'Tonight',timeKo:'오늘 밤',
+     desc:'Put a ¥5,000 note in your wallet — you\'ll need cash tomorrow.',
+     ko:'지갑에 5,000엔 지폐를 넣어두세요 — 내일 필요합니다.'}
+  ]},
+
+  // ─ DAY 2 ─────────────────────────────────
+  {n:2,date:'Sun Apr 4',label:'Tokyo',c:'jp',title:'Tokyo — Asakusa + Ueno + Shibuya Night',sub:'Old Tokyo · Cherry blossoms · Iconic crossing',tags:['night'],img:IMG.tokyo,
+   activities:[
+    {time:'Early Morning',timeKo:'이른 아침',
+     desc:'Head to <a href="https://maps.google.com/?q=Asakusa,Tokyo" target="_blank"><strong>Asakusa</strong></a> early — before 8am on a Saturday it\'s magical, by 9:30am it\'s mobbed. Direct JR Chuo-Sobu Line from Shinjuku.',
+     ko:'<a href="https://maps.google.com/?q=아사쿠사,도쿄" target="_blank"><strong>아사쿠사</strong></a>에 일찍 도착하세요 — 토요일 오전 8시 이전은 마법 같고, 9시 30분이면 관광객이 넘칩니다. 신주쿠에서 JR 주오-소부선 직행.'},
+    {time:'Asakusa',timeKo:'아사쿠사',
+     desc:'<a href="https://www.senso-ji.jp/english/" target="_blank"><strong>Senso-ji Temple</strong></a> (Tokyo\'s oldest, 628 AD) through the Kaminarimon Thunder Gate. Nakamise-dori for snacks: ningyo-yaki cakes, kaminari-okoshi rice crackers. <a href="https://maps.google.com/?q=Kappabashi+Street+Tokyo" target="_blank"><strong>Kappabashi knife street</strong></a> (10 min walk) — 100+ shops, professional Japanese knives make excellent gifts. Sumida Park along the river for cherry blossoms.',
+     ko:'<a href="https://www.senso-ji.jp/english/" target="_blank"><strong>센소지 절</strong></a>(628년 도쿄 최고령 사원) 가미나리몬을 통해 입장. 나카미세도리에서 간식. <a href="https://maps.google.com/?q=갓파바시+도쿄" target="_blank"><strong>갓파바시 칼 거리</strong></a>(도보 10분) — 전문 일본 칼. 스미다 공원에서 벚꽃.'},
+    {time:'Mid-Morning',timeKo:'오전 중반',
+     desc:'Subway to <a href="https://maps.google.com/?q=Ueno+Park+Tokyo" target="_blank"><strong>Ueno Park</strong></a> (~10 min). Tokyo\'s most famous cherry blossom park — locals picnicking under the trees in big numbers on a Saturday in April.',
+     ko:'지하철로 <a href="https://maps.google.com/?q=우에노공원+도쿄" target="_blank"><strong>우에노 공원</strong></a>(약 10분). 도쿄 최고의 벚꽃 명소 — 4월 토요일에 현지인들이 피크닉을 즐깁니다.'},
+    {time:'Lunch',timeKo:'점심',
+     desc:'Lunch near Asakusa or Ueno. Options: <a href="https://maps.google.com/?q=Daikokuya+Tempura+Asakusa" target="_blank">Daikokuya</a> (tempura since 1887, expect a queue), Sometaro (DIY okonomiyaki), or graze Nakamise snacks.',
+     ko:'아사쿠사 또는 우에노 근처에서 점심. 추천: <a href="https://maps.google.com/?q=다이코쿠야+아사쿠사" target="_blank">다이코쿠야</a>(1887년 텐푸라, 줄 서야 함), 소메타로(직접 굽는 오코노미야키).'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Free afternoon — return to Shinjuku, rest, explore the neighbourhood, or head to <a href="https://maps.google.com/?q=Harajuku+Tokyo" target="_blank">Harajuku</a> if curious (Takeshita Street for street fashion, one stop from Shinjuku on the Yamanote).',
+     ko:'자유 오후 — 신주쿠로 돌아가 휴식하거나 <a href="https://maps.google.com/?q=하라주쿠+도쿄" target="_blank">하라주쿠</a> 탐방(다케시타 거리, 야마노테선으로 신주쿠에서 한 정거장).'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Shibuya+Crossing+Tokyo" target="_blank"><strong>Shibuya Crossing at night</strong></a> — stand on the corner, watch one full cycle of 3,000 people crossing simultaneously, then cross it yourself. One of the great urban spectacles in the world. Then Shinjuku for dinner: <a href="https://maps.google.com/?q=Golden+Gai+Shinjuku" target="_blank">Golden Gai</a> (tiny 6-seat bars, incredible atmosphere) or <a href="https://maps.google.com/?q=Omoide+Yokocho+Shinjuku" target="_blank">Omoide Yokocho</a> (yakitori under the train tracks).',
+     ko:'<a href="https://maps.google.com/?q=시부야+스크램블교차로" target="_blank"><strong>야간 시부야 스크램블 교차로</strong></a> — 3,000명이 동시에 건너는 광경을 보세요. 신주쿠로 돌아와 저녁: <a href="https://maps.google.com/?q=골든가이+신주쿠" target="_blank">골든 가이</a>(작은 바) 또는 <a href="https://maps.google.com/?q=오모이데요코초+신주쿠" target="_blank">오모이데 요코초</a>(야키토리 골목).'}
+  ]},
+
+  // ─ DAY 3 ─────────────────────────────────
+  {n:3,date:'Mon Apr 5',label:'Tokyo',c:'jp',title:'Tokyo — Shinjuku Gyoen + Nakameguro + Shimokitazawa',sub:'Garden · Canal · Vintage neighbourhoods',tags:['night'],img:IMG.tokyo,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'<a href="https://maps.google.com/?q=Shinjuku+Gyoen+Tokyo" target="_blank"><strong>Shinjuku Gyoen</strong></a> — 10-min walk from the hotel. Japan\'s most refined cherry blossom garden: Japanese, French, and English landscape sections in one park. No alcohol, so it\'s calm rather than party-like. ¥500 entry. Allow 1–1.5h. <strong>Closes 4:30pm</strong> — only need the morning here.',
+     ko:'<a href="https://maps.google.com/?q=신주쿠교엔" target="_blank"><strong>신주쿠 교엔</strong></a> — 호텔에서 도보 10분. 일본, 프랑스식, 영국식 정원이 한 곳에. 음주 금지라 조용합니다. 입장료 500엔. 1~1.5시간 소요.'},
+    {time:'Late Morning',timeKo:'오전 늦게',
+     desc:'Subway to <a href="https://maps.google.com/?q=Nakameguro+Tokyo" target="_blank"><strong>Nakameguro</strong></a> (~20 min via Tokyu Toyoko Line from Shibuya, one stop from Shinjuku on the Yamanote). The canal is lined with hundreds of cherry trees — walk both banks slowly, stop at cafes that spill onto the canal terrace. Tokyo\'s most photogenic spring spot.',
+     ko:'지하철로 <a href="https://maps.google.com/?q=나카메구로+도쿄" target="_blank"><strong>나카메구로</strong></a>로 이동(야마노테선으로 시부야에서 환승, 약 20분). 수백 그루의 벚나무가 운하를 따라 늘어서 있습니다. 도쿄에서 가장 아름다운 봄 풍경.'},
+    {time:'Lunch',timeKo:'점심',
+     desc:'<a href="https://maps.google.com/?q=Daikanyama+Tokyo" target="_blank"><strong>Daikanyama</strong></a> (10-min walk uphill from Nakameguro). Nakameguro\'s refined older sibling — <a href="https://maps.google.com/?q=Tsutaya+Books+Daikanyama" target="_blank"><strong>Tsutaya Books</strong></a> (three wooden pavilions, considered Japan\'s most beautiful bookshop), curated boutiques, excellent coffee. Lunch in one of the neighbourhood cafes or restaurants.',
+     ko:'<a href="https://maps.google.com/?q=다이칸야마+도쿄" target="_blank"><strong>다이칸야마</strong></a>(나카메구로에서 도보 10분). <a href="https://maps.google.com/?q=츠타야+서점+다이칸야마" target="_blank"><strong>츠타야 북스</strong></a>(일본에서 가장 아름다운 서점). 카페나 레스토랑에서 점심.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://maps.google.com/?q=Shimokitazawa+Tokyo" target="_blank"><strong>Shimokitazawa</strong></a> (~15 min on the Keio Line from Shinjuku, or taxi from Daikanyama). Tokyo\'s bohemian hub — dense lanes packed with <strong>vintage clothes shops, record stores, live music venues, tiny theatres</strong>. No chains, everything independent. Best for wandering with no plan. Great for shopping.',
+     ko:'<a href="https://maps.google.com/?q=시모키타자와+도쿄" target="_blank"><strong>시모키타자와</strong></a>(신주쿠에서 게이오선으로 15분). 빈티지 의류, 레코드 가게, 라이브 공연장. 계획 없이 걷기에 최고.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Dinner in Shimokitazawa (excellent standing ramen bars, tiny izakayas, live venues) or back to Shinjuku. Golden Gai for drinks if skipped last night.',
+     ko:'시모키타자와에서 저녁(라멘, 이자카야, 라이브 공연) 또는 신주쿠로 귀환. 어젯밤에 빠졌다면 골든 가이에서 한 잔.'}
+  ]},
+
+  // ─ DAY 4 ─────────────────────────────────
+  {n:4,date:'Tue Apr 6',label:'Tokyo',c:'jp',title:'Tokyo — Tsukiji + Akihabara + TeamLab',sub:'Market breakfast · Arcades · Digital art',tags:['night'],img:IMG.tokyo,
+   activities:[
+    {time:'Early Morning',timeKo:'이른 아침',
+     desc:'<a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank"><strong>Tsukiji Outer Market</strong></a> — arrive by 8–9am, stalls wind down by 10–11am. One of the great food experiences in Japan: fresh uni on rice, tamagoyaki (sweet omelette) on sticks, the best sushi breakfast of the trip from tiny stalls. No reservation, just arrive and eat.',
+     ko:'<a href="https://maps.google.com/?q=츠키지외시장+도쿄" target="_blank"><strong>츠키지 외시장</strong></a> — 오전 8~9시 도착, 11시면 마감. 일본 최고의 음식 경험 중 하나: 우니 덮밥, 계란말이, 최고의 아침 스시.'},
+    {time:'Mid-Morning',timeKo:'오전 중반',
+     desc:'JR Chuo-Sobu Line to <a href="https://maps.google.com/?q=Akihabara+Tokyo" target="_blank"><strong>Akihabara</strong></a> (~15 min from Tsukiji direction). The electronics and anime district: 8-storey electronics shops, <a href="https://maps.google.com/?q=@home+maid+cafe+Akihabara" target="_blank">@home maid cafe</a> (fun and kitsch, ~45 min — girls in French maid costumes, themed drinks and food), arcade floors packed with <strong>claw machines</strong>. Taito Station and SEGA arcades have the best machines.',
+     ko:'JR로 <a href="https://maps.google.com/?q=아키하바라+도쿄" target="_blank"><strong>아키하바라</strong></a>로 이동(약 15분). 전자 상가, <a href="https://maps.google.com/?q=앳홈카페+아키하바라" target="_blank">@home 메이드 카페</a>(약 45분, 귀엽고 재미있음), 크레인 게임 아케이드.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://teamlab.art/e/planets/" target="_blank"><strong>TeamLab Planets</strong></a> in Toyosu (~30–40 min from Akihabara by subway). Book a <strong>2pm or 3pm slot online in advance — it sells out.</strong> ~1.5–2h experience: walk through water, immersive digital art rooms, one of the most extraordinary sensory experiences in Japan. Rick-friendly — flat throughout.',
+     ko:'도요스 <a href="https://teamlab.art/e/planets/" target="_blank"><strong>팀랩 플래닛</strong></a>(아키하바라에서 지하철 30~40분). <strong>오후 2~3시 슬롯 사전 예약 필수 — 매진됩니다.</strong> 1.5~2시간 체험: 물 위를 걷고, 몰입형 디지털 아트.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Kurazushi+Tokyo" target="_blank"><strong>Revolving sushi at Kurazushi</strong></a> — every 5 plates you eat earns a spin of a capsule toy dispenser. Fun for the whole group. Near any major station. Then Shinjuku for final Tokyo night.',
+     ko:'<a href="https://maps.google.com/?q=쿠라스시+도쿄" target="_blank"><strong>쿠라즈시 회전 초밥</strong></a> — 5접시마다 캡슐 장난감 뽑기. 그룹 모두 즐길 수 있음. 도쿄 마지막 밤은 신주쿠에서.'}
+  ]},
+
+  // ─ DAY 5 ─────────────────────────────────
+  {n:5,date:'Wed Apr 7',label:'Tokyo',c:'jp',title:'Tokyo — Free Day · Wander or Add-Ons',sub:'Harajuku · Yanaka · Sumo practice · Or just wander',tags:['night'],img:IMG.tokyo,
+   activities:[
+    {time:'Options',timeKo:'선택지',
+     desc:'This day is intentionally loose. Group picks from: <strong><a href="https://maps.google.com/?q=Harajuku+Tokyo" target="_blank">Harajuku + Meiji Shrine + Omotesando</a></strong> — Takeshita St for street fashion, forested Meiji Shrine grounds, Omotesando for luxury architecture. OR <strong><a href="https://maps.google.com/?q=Yanaka+Tokyo" target="_blank">Yanaka</a></strong> — old Tokyo that survived WWII, cemetery walk, Yanaka Ginza shopping street, cats, almost no tourists. OR <strong>Sumo morning practice</strong> — Ryogoku district, 6–9am, watch wrestlers train (book through tour operator). OR <strong><a href="https://maps.google.com/?q=Ginza+Tokyo" target="_blank">Ginza</a></strong> — depachika basement food halls, Itoya stationery store. OR <strong><a href="https://maps.google.com/?q=Mori+Art+Museum+Roppongi" target="_blank">Roppongi / Mori Art Museum</a></strong> — observation deck, contemporary art. OR just wander Shinjuku — knife shopping, more izakaya, prep for the rural section ahead.',
+     ko:'이날은 여유롭게 자유 행동. 선택지: <strong><a href="https://maps.google.com/?q=하라주쿠+도쿄" target="_blank">하라주쿠 + 메이지 신궁 + 오모테산도</a></strong>(다케시타 거리, 메이지 신궁 숲길, 오모테산도 건축), <strong><a href="https://maps.google.com/?q=야나카+도쿄" target="_blank">야나카</a></strong>(2차대전 생존 구도심, 야나카 긴자 상점가), <strong>스모 아침 연습</strong>(료고쿠 지역, 6~9시, 투어 예약), <strong><a href="https://maps.google.com/?q=긴자+도쿄" target="_blank">긴자</a></strong>(지하 식품관, 이토야 문구점), <strong><a href="https://maps.google.com/?q=모리미술관+롯폰기" target="_blank">롯폰기 / 모리 미술관</a></strong>(전망대, 현대 미술) 중 선택.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Final Tokyo dinner. Pack tonight for tomorrow\'s shinkansen to Magome. Consider forwarding bags to Kyoto via <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank">Yamato Transport</a> (ask hotel desk).',
+     ko:'도쿄 마지막 저녁. 내일 마고메행 신칸센을 위해 짐 챙기기. <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank">야마토 운송</a>으로 교토에 짐 미리 보내기 고려(호텔 문의).'}
+  ]},
+
+  // ─ DAY 6 ─────────────────────────────────
+  {n:6,date:'Thu Apr 8',label:'Magome',c:'jp',title:'Travel → Magome Ryokan',sub:'Tokyo → Nagoya → Nakatsugawa → Magome',tags:['travel','night'],img:IMG.magome,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Hikari shinkansen Tokyo Station→Nagoya (~1h 55min, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a> covered — take Hikari not Nozomi). Limited express Nagoya→Nakatsugawa (~45 min). Bus to Magome (~25–30 min, ¥800pp, runs hourly) or taxi from Nakatsugawa (~¥2,500 whole group).',
+     ko:'히카리 신칸센 도쿄역→나고야(약 1시간 55분, JR패스 — 히카리 탑승, 노조미 아님). 특급 열차 나고야→나카츠가와(약 45분). 마고메행 버스(약 25~30분, 800엔) 또는 택시(그룹 전체 약 2,500엔).'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<strong>Magome ryokan check-in by 3pm. CASH ONLY.</strong> Change into yukata, drop bags. Short stroll up Magome-juku — beautifully preserved Edo-era post town, stone-paved slope with waterwheel mills and old inns. About 20–30 min end to end.',
+     ko:'<strong>오후 3시까지 마고메 료칸 체크인. 현금만 가능.</strong> 유카타로 갈아입기. 마고메주쿠 산책 — 아름다운 에도 시대 역참 마을.',
+     knee:'Magome-juku is a sloped stone street — short and manageable. Take it slow, use the wooden posts.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Kaiseki dinner at the ryokan (~6–7pm) — seasonal small dishes served in procession. Then the private baths. The village after dark is completely silent.',
+     ko:'료칸 가이세키 저녁(오후 6~7시). 이후 전용 욕탕. 밤에는 마을이 완전히 고요해집니다.'}
+  ]},
+
+  // ─ DAY 7 ─────────────────────────────────
+  {n:7,date:'Fri Apr 9',label:'Magome',c:'jp',title:'Magome — Nakasendo Hike Day',sub:'Magome → Tsumago trail · Ryokan Night 2',tags:['split','knee'],img:IMG.magome,
+   split:[
+    {who:'Walkers (8km, ~3h)',whoKo:'도보 참가자 (8km, 약 3시간)',whoFor:['steven','esther','rose','sally','gloria'],
+     text:'The <a href="https://maps.google.com/?q=Nakasendo+Trail+Magome+Tsumago" target="_blank">Nakasendo trail</a> from Magome to Tsumago — gentle descent through cedar forest, past waterfalls and Edo-era milestones. Leave by 9am. One of the best easy hikes in Japan.',
+     ko:'마고메→츠마고 <a href="https://maps.google.com/?q=나카센도+마고메+츠마고" target="_blank">나카센도 트레일</a> — 삼나무 숲, 폭포, 에도 시대 이정표를 지나는 완만한 내리막길(약 3시간). 오전 9시 출발.'},
+    {who:'Rick → bus to Tsumago',whoKo:'Rick → 버스로 츠마고',whoFor:['rick'],
+     text:'Direct bus or taxi Magome to <a href="https://maps.google.com/?q=Tsumago+Nagiso" target="_blank">Tsumago</a> (~20 min). Arrive before walkers, explore the flat village at your own pace.',
+     ko:'마고메→<a href="https://maps.google.com/?q=츠마고+나기소" target="_blank">츠마고</a> 버스 또는 택시(약 20분). 도보 팀보다 먼저 도착해 평탄한 마을을 여유롭게 구경.',
+     knee:'Tsumago village is entirely flat and easy. The bus is perfectly fine.'}
+   ],
+   activities:[
+    {time:'Tsumago',timeKo:'츠마고',
+     desc:'Rejoin in <a href="https://maps.google.com/?q=Tsumago+Nagiso" target="_blank"><strong>Tsumago</strong></a> — arguably more authentic than Magome. Lunch at a preserved Edo-era teahouse (soba or bento). Browse lacquerware, washi paper, local sake.',
+     ko:'<a href="https://maps.google.com/?q=츠마고+나기소" target="_blank"><strong>츠마고</strong></a>에서 재합류. 에도 시대 찻집에서 점심. 옻칠 공예품, 화지, 지역 사케 쇼핑.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Bus back to Magome (~30 min). Rest, baths, quiet afternoon.',
+     ko:'버스로 마고메 귀환(약 30분). 휴식, 욕탕 이용.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Second kaiseki dinner + more baths. Both nights here are genuinely restorative.',
+     ko:'두 번째 가이세키 저녁 + 욕탕. 이틀 밤 모두 진정한 회복의 시간입니다.'}
+  ]},
+
+  // ─ DAY 8 ─────────────────────────────────
+  {n:8,date:'Sat Apr 10',label:'Shirakawa-go',c:'jp',title:'Travel → Shirakawa-go Farmhouse',sub:'via Nagoya + Toyama · Check in by 5pm',tags:['travel','night'],img:IMG.shirakawa,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Check out. Forward large bags to Kanazawa via <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank"><strong>Yamato Transport</strong></a> (ask ryokan staff — ~¥2,000–2,500/bag, arrives next day). Carry overnight bag only. Train→Nagoya→Toyama.',
+     ko:'체크아웃. <a href="https://www.kuronekoyamato.co.jp/en/" target="_blank"><strong>야마토 운송</strong></a>으로 큰 짐을 가나자와 호텔로 발송(직원에게 부탁, 짐당 약 2,000~2,500엔, 다음날 도착). 작은 짐만 들고 이동.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://www.japanbusonline.com/" target="_blank"><strong>Express bus Toyama→Shirakawa-go</strong></a> (~90 min, ¥2,800pp). Only 3 buses/day — <strong>pre-booked.</strong> Check in before 5pm. <strong>CASH ONLY.</strong>',
+     ko:'<a href="https://www.japanbusonline.com/" target="_blank"><strong>도야마→시라카와고 직행 버스</strong></a>(약 90분, 1인 2,800엔). 하루 3편만 — <strong>사전 예약 완료.</strong> 오후 5시 전 체크인. <strong>현금만 가능.</strong>'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Farmhouse dinner included — home-style mountain cooking with river fish and mountain vegetables. After dinner, all day-trippers leave by 7–8pm. The <a href="https://maps.google.com/?q=Shirakawa-go+UNESCO" target="_blank">gassho-zukuri farmhouses</a> glow from within at night. Most atmospheric night of the trip.',
+     ko:'가정식 저녁 식사 포함 — 강생선과 산나물 요리. 오후 7~8시가 되면 당일 관광객이 떠나고 <a href="https://maps.google.com/?q=시라카와고+유네스코" target="_blank">갓쇼즈쿠리 초가집들</a>이 내부 불빛으로 빛납니다. 여행 중 가장 분위기 있는 밤.'}
+  ]},
+
+  // ─ DAY 9 ─────────────────────────────────
+  {n:9,date:'Sun Apr 11',label:'Kanazawa',c:'jp',title:'Shirakawa-go → Kanazawa',sub:'Geisha district afternoon · Katamachi dinner',tags:['night'],img:IMG.kanazawa,
+   activities:[
+    {time:'Late Morning',timeKo:'오전 늦게',
+     desc:'Bus to <a href="https://maps.google.com/?q=Kanazawa+Japan" target="_blank"><strong>Kanazawa</strong></a> (~1h 15min). Hotel check-in. Large bags from Magome should be waiting.',
+     ko:'버스로 <a href="https://maps.google.com/?q=가나자와+일본" target="_blank"><strong>가나자와</strong></a> 이동(약 1시간 15분). 호텔 체크인. 마고메에서 보낸 짐이 도착해 있을 겁니다.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://maps.google.com/?q=Higashi+Chaya+District+Kanazawa" target="_blank"><strong>Higashi Chaya District</strong></a> — Kanazawa\'s beautifully preserved geisha quarter. Flat walk, much less crowded than Kyoto Gion. <a href="https://maps.google.com/?q=Kaikaro+Kanazawa" target="_blank">Kaikaro teahouse</a> interior open to visitors (¥700), gold-leaf shops, matcha cafes. Also nearby: Nishi Chaya (smaller, quieter) and Kazuemachi canal district.',
+     ko:'<a href="https://maps.google.com/?q=히가시차야+가나자와" target="_blank"><strong>히가시 차야 거리</strong></a> — 아름답게 보존된 게이샤 거리. 교토 기온보다 한적합니다. <a href="https://maps.google.com/?q=가이카로+가나자와" target="_blank">가이카로 찻집</a>(700엔 입장), 금박 공예품 가게, 말차 카페.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Katamachi area for dinner. Look for: <em>jibu-ni</em> (duck + wheat gluten stew, Kanazawa\'s signature dish) and <em>nodoguro</em> (blackthroat sea perch — the city\'s prized fish, hard to find outside this region).',
+     ko:'가타마치 지역에서 저녁. 추천: <em>지부니</em>(오리고기 조림, 가나자와 명물)와 <em>노도구로</em>(흑목가자미 — 이 지역에서만 맛볼 수 있는 생선).'}
+  ]},
+
+  // ─ DAY 10 ─────────────────────────────────
+  {n:10,date:'Mon Apr 12',label:'Kanazawa',c:'jp',title:'Kanazawa — Gardens + Market + Samurai District',sub:'Kenrokuen · Omicho Market · Nagamachi',tags:['night'],img:IMG.kanazawa,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'<a href="https://maps.google.com/?q=Kenrokuen+Garden+Kanazawa" target="_blank"><strong>Kenrokuen Garden</strong></a> — one of Japan\'s top 3 gardens. Allow 1.5–2h. Adjacent: <a href="https://maps.google.com/?q=Kanazawa+Castle+Park" target="_blank"><strong>Kanazawa Castle Park</strong></a> (free grounds). Both flat and accessible.',
+     ko:'<a href="https://maps.google.com/?q=겐로쿠엔+가나자와" target="_blank"><strong>겐로쿠엔 정원</strong></a> — 일본 3대 정원 중 하나. 1.5~2시간 소요. 옆에 <a href="https://maps.google.com/?q=가나자와성+공원" target="_blank"><strong>가나자와 성 공원</strong></a>(무료 입장). 두 곳 모두 평탄.'},
+    {time:'Lunch',timeKo:'점심',
+     desc:'<a href="https://maps.google.com/?q=Omicho+Market+Kanazawa" target="_blank"><strong>Omicho Market</strong></a> — the city\'s covered seafood market since 1721. Fresh crab, uni, snow crab sushi, live shellfish. Go hungry. Allow 1.5–2h freely browsing and eating. One of the best meals on the entire trip.',
+     ko:'<a href="https://maps.google.com/?q=오미초시장+가나자와" target="_blank"><strong>오미초 시장</strong></a> — 1721년부터 이어온 가나자와 어시장. 신선한 게, 성게, 눈 게 스시. 배고픈 상태로 가세요. 여행 전체에서 가장 맛있는 식사 중 하나.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://maps.google.com/?q=Nagamachi+Samurai+District+Kanazawa" target="_blank"><strong>Nagamachi Samurai District</strong></a> — flat walk through preserved earthen walls, drainage channels, narrow lanes. <a href="https://maps.google.com/?q=Nomura+Clan+House+Kanazawa" target="_blank">Nomura clan house</a> (¥550): beautiful garden, lacquerware collection, sword display. Worth 30 min inside.',
+     ko:'<a href="https://maps.google.com/?q=나가마치+무사거리+가나자와" target="_blank"><strong>나가마치 무사 거리</strong></a> — 흙담과 배수로가 있는 평탄한 산책로. <a href="https://maps.google.com/?q=노무라가+가나자와" target="_blank">노무라가</a>(550엔): 정원, 옻칠 컬렉션, 검 전시.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Final Kanazawa evening. Katamachi for izakaya or Hakuza Bar in the Higashi Chaya area. Pack well for tomorrow\'s train to Takayama.',
+     ko:'가나자와 마지막 저녁. 가타마치 이자카야 또는 히가시 차야의 하쿠자 바. 내일 다카야마행 기차를 위해 잘 챙겨두세요.'}
+  ]},
+
+  // ─ DAY 11 ─────────────────────────────────
+  {n:11,date:'Tue Apr 13',label:'Takayama',c:'jp',title:'Kanazawa → Takayama',sub:'Sanmachi Suji old town · Hida beef · Festival eve',tags:['travel','night'],img:IMG.takayama,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Train <a href="https://maps.google.com/?q=Kanazawa+Station" target="_blank">Kanazawa</a> → Toyama → <a href="https://maps.google.com/?q=Takayama+Gifu+Japan" target="_blank">Takayama</a> (~2.5h via Toyama, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Scenic Hida mountain route.',
+     ko:'기차 가나자와 → 도야마 → <a href="https://maps.google.com/?q=다카야마+기후+일본" target="_blank">다카야마</a>(도야마 경유 약 2.5시간, JR패스). 히다 산악 경관.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Check in to Takayama hotel. <strong>BOOK 6+ MONTHS IN ADVANCE — festival accommodation fills fast.</strong> Stroll <a href="https://maps.google.com/?q=Sanmachi+Suji+Takayama" target="_blank"><strong>Sanmachi Suji</strong></a> historic merchant street — beautifully preserved Edo-era architecture, sake breweries with cedar balls hanging over the doors, craft shops. <a href="https://maps.google.com/?q=Miyagawa+Morning+Market+Takayama" target="_blank">Miyagawa Morning Market</a> may still have stalls into afternoon — pickles, Hida beef sticks, local sweets.',
+     ko:'다카야마 호텔 체크인. <strong>6개월 이상 전 예약 필수 — 축제 기간 숙박은 빠르게 마감됩니다.</strong> <a href="https://maps.google.com/?q=산마치+스지+다카야마" target="_blank"><strong>산마치 스지</strong></a>(에도 시대 상인 거리) 산책. 사케 양조장, 공예품 가게. <a href="https://maps.google.com/?q=미야가와+아침시장+다카야마" target="_blank">미야가와 아침 시장</a>에 오후에도 일부 노점 영업.',
+     knee:'Sanmachi Suji is flat cobblestone — easy walking for Rick.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<strong>Hida beef dinner</strong> — local A5 wagyu, often served as beef sushi or sukiyaki. The town buzzes with festival anticipation. Floats are already being prepared nearby.',
+     ko:'<strong>히다 소고기 저녁</strong> — 지역 A5 와규, 종종 소고기 스시나 스키야키로 제공. 축제 전날 밤 마을은 들뜬 분위기.'}
+  ]},
+
+  // ─ DAY 12 ─────────────────────────────────
+  {n:12,date:'Wed Apr 14',label:'Takayama',c:'jp',title:'Takayama — Festival Day 1',sub:'Float displays · Marionette performances · Lantern procession',tags:['festival','night','splurge'],img:IMG.takayama,
+   activities:[
+    {time:'9:30am',timeKo:'오전 9시 30분',
+     desc:'12 yatai (festival floats) on display from 9:30am throughout the <a href="https://maps.google.com/?q=Takayama+Sanmachi+Suji" target="_blank">old town historic core</a>. Each float is a masterwork of Hida carpentry, lacquerwork, and gold embellishments — some over 400 years old.',
+     ko:'오전 9시 30분부터 12개의 야타이(축제 수레) 전시. 히다 목공예, 옻칠, 금 장식으로 이루어진 400년 된 수레들.'},
+    {time:'Mid-Morning',timeKo:'오전 중반',
+     desc:'<strong>Karakuri (mechanical marionette) performances</strong> at <a href="https://maps.google.com/?q=Takayama+Jinya+Gifu" target="_blank">Takayama Jinya Historical Government House</a> — 3 floats with lifelike puppets controlled by 6–8 masters. Held mid-morning and early afternoon. Arrive early for a front-row view.',
+     ko:'<strong>가라쿠리(기계 꼭두각시) 공연</strong> — 다카야마 진야에서 6~8명의 인형 조종사가 다루는 3개의 수레. 오전 중반·오후 초에 공연. 앞줄 자리를 위해 일찍 도착하세요.'},
+    {time:'1pm',timeKo:'오후 1시',
+     desc:'Procession departs <a href="https://maps.google.com/?q=Hie+Shrine+Takayama+Gifu" target="_blank">Hie Shrine</a> at 1pm, winds through streets to Otabisho, arrives ~4pm. Hundreds of participants in Edo-period attire — musicians, attendants, children, priests.',
+     ko:'오후 1시 히에 신사 출발, 오타비쇼까지 행진(약 4시 도착). 에도 시대 복장을 입은 수백 명의 참가자.'},
+    {time:'5:30pm',timeKo:'오후 5시 30분',
+     desc:'Grab a spot along the procession route near <a href="https://maps.google.com/?q=Nakabashi+Bridge+Takayama" target="_blank">Nakabashi Bridge</a> by 5:30pm — <strong>streets fill fast for the night festival.</strong>',
+     ko:'오후 5시 30분까지 나카바시 다리 근처 행진 경로 자리 잡기 — <strong>야간 축제를 위해 거리가 빠르게 꽉 찹니다.</strong>'},
+    {time:'6–9pm',timeKo:'오후 6~9시',
+     desc:'<strong>Yomatsuri (night festival)</strong> — floats fitted with ~100 paper lanterns each, paraded through darkened streets. One of Japan\'s three most beautiful festivals (alongside Kyoto\'s Gion Matsuri and Chichibu Yomatsuri).',
+     ko:'<strong>요마츠리(야간 축제)</strong> — 수레마다 약 100개의 종이 등불을 달고 어두운 거리를 행진. 교토 기온 마츠리, 치치부 요마츠리와 함께 일본 3대 아름다운 축제.'}
+  ]},
+
+  // ─ DAY 13 ─────────────────────────────────
+  {n:13,date:'Thu Apr 15',label:'Kyoto',c:'jp',title:'Festival Day 2 Morning → Kyoto',sub:'Final floats · Hida limited express · Pontocho dinner',tags:['travel','night'],img:IMG.kyoto,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Final festival displays. Morning is the best time for uncrowded float viewing along Sanmachi Suji. The procession returns to <a href="https://maps.google.com/?q=Hie+Shrine+Takayama+Gifu" target="_blank">Hie Shrine</a> around 3:30pm but we leave earlier.',
+     ko:'오전에 마지막 축제 전시 관람. 사람이 적은 아침에 야타이 감상 최적. 행진은 오후 3시 30분 히에 신사로 귀환하지만, 우리는 오전 중에 출발.',
+     knee:'Easy flat walking in old town this morning.'},
+    {time:'Midday',timeKo:'정오',
+     desc:'Hida limited express Takayama → Kyoto (~2.5h direct, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Scenic mountain and valley route through Gifu and Shiga prefectures.',
+     ko:'히다 특급 열차 다카야마 → 교토(약 2.5시간 직행, JR패스). 기후·시가현을 통과하는 경치 좋은 산악·계곡 노선.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Arrive Kyoto. Hotel check-in — cherry blossom season, <strong>hardest hotel market in Japan</strong>. Recommended: <a href="https://maps.google.com/?q=The+Celestine+Kyoto+Gion" target="_blank">The Celestine Kyoto Gion</a> or <a href="https://maps.google.com/?q=Mitsui+Garden+Hotel+Kyoto+Sanjo" target="_blank">Mitsui Garden Sanjo</a>. <strong>Book immediately.</strong> Drop bags, short <a href="https://maps.google.com/?q=Kamo+River+Kyoto" target="_blank">Kamo River</a> walk.',
+     ko:'교토 도착. 호텔 체크인 — 벚꽃 시즌, <strong>일본에서 가장 예약 어려운 시기</strong>. 추천: <a href="https://maps.google.com/?q=더셀레스틴교토기온" target="_blank">더 셀레스틴 교토 기온</a> 또는 <a href="https://maps.google.com/?q=미쓰이가든교토산조" target="_blank">미쓰이 가든 산조</a>. <strong>즉시 예약하세요.</strong>'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Pontocho+Alley+Kyoto" target="_blank"><strong>Pontocho</strong></a> for dinner — narrow lantern-lit alley running alongside the Kamo River. First Kyoto dinner.',
+     ko:'<a href="https://maps.google.com/?q=폰토초+교토" target="_blank"><strong>폰토초</strong></a>에서 저녁 — 가모가와와 나란히 이어지는 등불 켜진 좁은 골목. 교토 첫 저녁 식사.'}
+  ]},
+
+  // ─ DAY 14 ─────────────────────────────────
+  {n:14,date:'Fri Apr 16',label:'Kyoto',c:'jp',title:"Kyoto — Philosopher's Path + Higashiyama + Gion",sub:'Full day in the historic east · Geisha district evening',tags:['night'],img:IMG.kyoto,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:"<a href='https://maps.google.com/?q=Philosophers+Path+Kyoto' target='_blank'><strong>Philosopher's Path</strong></a> — start at <a href='https://maps.google.com/?q=Ginkakuji+Kyoto' target='_blank'>Ginkaku-ji (Silver Pavilion)</a> and walk south. 2km, completely flat, canal lined with cherry trees. Detour: <a href='https://maps.google.com/?q=Honen-in+Kyoto' target='_blank'>Honen-in temple</a> (walled gate, moss-covered sand mounds, almost no crowds). South end: <a href='https://maps.google.com/?q=Nanzenji+Kyoto' target='_blank'><strong>Nanzen-ji complex</strong></a> (enormous Sanmon gate + unexpected aqueduct through the grounds).",
+     ko:"<a href='https://maps.google.com/?q=철학의길+교토' target='_blank'><strong>철학의 길</strong></a> — <a href='https://maps.google.com/?q=긴카쿠지+교토' target='_blank'>긴카쿠지(은각사)</a>에서 시작해 남쪽으로. 2km, 완전 평탄. 들를 곳: <a href='https://maps.google.com/?q=호넨인+교토' target='_blank'>호넨인 절</a>(조용, 거의 비어있음). 남쪽 끝: <a href='https://maps.google.com/?q=난젠지+교토' target='_blank'><strong>난젠지</strong></a>(거대한 삼문 + 경내를 가로지르는 수로).",
+     knee:"Philosopher's Path is flat and paved. Easy and beautiful — perfect for Rick."},
+    {time:'Midday',timeKo:'정오',
+     desc:'<a href="https://maps.google.com/?q=Higashiyama+Kyoto" target="_blank"><strong>Higashiyama</strong></a> for lunch — <a href="https://maps.google.com/?q=Ninenzaka+Kyoto" target="_blank">Ninenzaka and Sannenzaka</a> stone-paved lanes, most photographed streets in Kyoto. Food: yudofu (silken tofu), matcha soft-serve, kaiseki lunch sets, skewers. Good for shopping too: ceramics, lacquerware, fans, fabric goods.',
+     ko:'<a href="https://maps.google.com/?q=히가시야마+교토" target="_blank"><strong>히가시야마</strong></a>에서 점심 — <a href="https://maps.google.com/?q=니넨자카+교토" target="_blank">니넨자카·산넨자카</a> 돌길. 교토에서 가장 많이 사진 찍히는 거리. 쇼핑도 좋음: 도자기, 옻칠, 부채, 직물.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<strong>Optional:</strong> <a href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank"><strong>Fushimi Inari</strong></a> (Keihan Line south, ~10 min) — thousands of vermilion torii gates. Lower section is flat and spectacular on its own (~20 min). Or: browse Higashiyama more, find a cafe, rest before the evening.',
+     ko:'<strong>선택 사항:</strong> <a href="https://maps.google.com/?q=후시미이나리+교토" target="_blank"><strong>후시미 이나리</strong></a>(게이한선 남쪽, 약 10분) — 수천 개의 주홍색 도리이. 또는: 히가시야마 쇼핑 더 즐기거나 저녁 전 휴식.',
+     knee:'Rick does flat lower section only (~20 min). Skip if tired — already a full day.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Gion+Kyoto" target="_blank"><strong>Gion</strong></a> — best geisha-spotting time is 5–7pm on <a href="https://maps.google.com/?q=Hanamikoji+Street+Kyoto" target="_blank"><strong>Hanamikoji Street</strong></a>. Also: <a href="https://maps.google.com/?q=Shinbashi+Dori+Kyoto" target="_blank">Shinbashi-dori canal</a> (willow trees, most beautiful street in Japan), antique shops on <a href="https://maps.google.com/?q=Shinmonzen+Street+Kyoto" target="_blank">Shinmonzen Street</a>. Dinner in Gion or back to Pontocho.',
+     ko:'<a href="https://maps.google.com/?q=기온+교토" target="_blank"><strong>기온</strong></a> — <a href="https://maps.google.com/?q=하나미코지+교토" target="_blank"><strong>하나미코지 거리</strong></a> 오후 5~7시 게이샤 목격 최적 시간. <a href="https://maps.google.com/?q=신바시도리+교토" target="_blank">신바시도리 운하</a>(버드나무, 교토 최고의 거리). 기온 또는 폰토초에서 저녁.'}
+  ]},
+
+  // ─ DAY 15 ─────────────────────────────────
+  {n:15,date:'Sat Apr 17',label:'Kyoto',c:'jp',title:'Nishiki Market + Kinkaku-ji · Rick & Rose: Golf',sub:'Split day · Nishiki Market · Kinkaku-ji',tags:['split','golf'],img:IMG.kyoto,
+   split:[
+    {who:'Rick + Rose 🏌️',whoKo:'Rick + Rose 🏌️',whoFor:['rick','rose'],cls:'golf',
+     text:'<a href="https://maps.google.com/?q=Seta+Golf+Course+Otsu+Shiga" target="_blank"><strong>Seta Golf Course North</strong></a> (Shiga, ~30 min from Kyoto). Caddied. Hosted USLPGA Tour 14 times. Green fee ~¥20,000–30,000pp. Book via hotel concierge — Japanese courses rarely take English bookings directly.',
+     ko:'<a href="https://maps.google.com/?q=세타골프장+오쓰+시가" target="_blank"><strong>세타 골프장 노스 코스</strong></a>(시가현, 교토에서 약 30분). 캐디 포함. 그린피 약 20,000~30,000엔. 호텔 컨시어지를 통해 예약.'},
+    {who:'Non-golf group',whoKo:'골프 미참여 그룹',whoFor:['steven','esther','sally','gloria'],
+     text:'<a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank"><strong>Nishiki Market</strong></a> morning (400-year-old covered food market — pickles, tofu skin, fresh skewers, sake tastings, matcha sweets, 1.5–2h) then taxi/bus to <a href="https://maps.google.com/?q=Kinkakuji+Golden+Pavilion+Kyoto" target="_blank"><strong>Kinkaku-ji (Golden Pavilion)</strong></a> — gold-leaf covered temple on a mirror pond (~45 min walk-through). Go early before crowds build.',
+     ko:'<a href="https://maps.google.com/?q=니시키시장+교토" target="_blank"><strong>니시키 시장</strong></a>(400년 역사 실내 시장, 절임 반찬·두부피·꼬치·사케 시음·말차 과자, 1.5~2시간) 후 <a href="https://maps.google.com/?q=킨카쿠지+교토" target="_blank"><strong>킨카쿠지(금각사)</strong></a>(금박 사원, 거울 연못 반영, 약 45분).'}
+   ],
+   activities:[
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Regroup. Rest at the hotel.',
+     ko:'재합류. 호텔에서 휴식.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Casual group dinner — izakaya, ramen, or wherever the group feels like. Tomorrow is the big Michelin night.',
+     ko:'캐주얼 그룹 저녁 — 이자카야, 라멘, 그룹이 원하는 곳으로. 내일이 미슐랭 저녁입니다.'}
+  ]},
+
+  // ─ DAY 16 ─────────────────────────────────
+  {n:16,date:'Sun Apr 18',label:'Kyoto',c:'jp',title:'Arashiyama + ⭐ Michelin Dinner',sub:'Bamboo grove · Bridge · Stroll garden · Big dinner',tags:['splurge','night'],img:IMG.kyoto,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Bus or taxi to <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank"><strong>Arashiyama</strong></a> (~30 min from central Kyoto). Go early — it fills up by 10am. Three things right next to each other: <strong>bamboo grove</strong> (flat, dramatic 10-min walk through towering green columns — one of the most photographed spots in Japan), <a href="https://maps.google.com/?q=Togetsukyo+Bridge+Arashiyama" target="_blank"><strong>Togetsukyo bridge</strong></a> over the Oi River (wide, scenic, beautiful in spring light), and <a href="https://maps.google.com/?q=Tenryuji+Temple+Arashiyama" target="_blank"><strong>Tenryu-ji stroll garden</strong></a> (¥500, walk through rather than sit-down, cherry blossoms and central pond). Allow 2–3h total. Craft shops and food along the main street.',
+     ko:'버스 또는 택시로 <a href="https://maps.google.com/?q=아라시야마+대나무숲+교토" target="_blank"><strong>아라시야마</strong></a>(약 30분). 일찍 가세요 — 오전 10시면 붐빕니다. 세 곳이 나란히: <strong>대나무 숲</strong>(평탄, 10분 걷기), <a href="https://maps.google.com/?q=토게츠교+아라시야마" target="_blank"><strong>토게츠교</strong></a>(넓고 아름다운 다리), <a href="https://maps.google.com/?q=텐류지+아라시야마" target="_blank"><strong>텐류지 정원</strong></a>(500엔, 걸으며 감상). 총 2~3시간.',
+     knee:'Bamboo grove, bridge, and Tenryu-ji garden are all flat. Easy for Rick.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Return to central Kyoto. Rest, spa, or wander Gion at leisure before the big dinner.',
+     ko:'교토 중심부로 귀환. 저녁 큰 식사 전에 휴식, 스파, 또는 기온 산책.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'⭐ <strong>Michelin kaiseki dinner</strong> — the big night. Private room, full group, allow the whole evening. Smart-casual.',
+     ko:'⭐ <strong>미슐랭 가이세키 저녁</strong> — 최고의 밤. 전용 룸, 전원 참석, 저녁 전체를 여유롭게.'}
+  ]},
+
+  // ─ DAY 17 ─────────────────────────────────
+  {n:17,date:'Mon Apr 19',label:'Hiroshima',c:'jp',title:'Kyoto → Himeji Castle → Hiroshima',sub:'En-route castle stop · Peace Park afternoon',tags:['travel','night'],img:IMG.himeji,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Hikari Shinkansen <a href="https://maps.google.com/?q=Kyoto+Station" target="_blank">Kyoto</a> → <a href="https://maps.google.com/?q=Himeji+Station" target="_blank">Himeji</a> (~50 min, <a href="https://www.jrpass.com/" target="_blank">JR Pass</a>). Drop bags in coin lockers at Himeji Station (¥500–700). 15-min walk to the castle.',
+     ko:'히카리 신칸센 교토 → 히메지(약 50분, JR패스). 히메지역 코인 로커에 짐 보관(500~700엔). 성까지 도보 15분.'},
+    {time:'Himeji',timeKo:'히메지',
+     desc:'<a href="https://maps.google.com/?q=Himeji+Castle+Japan" target="_blank"><strong>Himeji Castle</strong></a> — finest surviving feudal castle in Japan. Unlike almost all others (which are concrete reconstructions), Himeji is entirely original — white, enormous, completely intact. Allow 2–3h. Optional: adjacent <a href="https://maps.google.com/?q=Koko-en+Garden+Himeji" target="_blank">Koko-en garden</a> (¥310, beautiful complement).',
+     ko:'<a href="https://maps.google.com/?q=히메지성+일본" target="_blank"><strong>히메지 성</strong></a> — 일본에서 현존하는 가장 아름다운 봉건 성. 대부분의 다른 성과 달리 원형 그대로 보존. 2~3시간 소요. 선택: 인접한 <a href="https://maps.google.com/?q=코코엔+히메지" target="_blank">코코엔 정원</a>(310엔).',
+     knee:'Castle grounds are mostly flat and easy. Optional climb to upper floors — skip if preferred and enjoy the grounds and gardens instead.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'Shinkansen <a href="https://maps.google.com/?q=Himeji+Station" target="_blank">Himeji</a> → <a href="https://maps.google.com/?q=Hiroshima+Station" target="_blank">Hiroshima</a> (~45 min, JR Pass). Hotel check-in.',
+     ko:'신칸센 히메지 → 히로시마(약 45분, JR패스). 호텔 체크인.'},
+    {time:'Late Afternoon',timeKo:'오후 늦게',
+     desc:'<a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Park" target="_blank"><strong>Peace Memorial Park</strong></a> — <a href="https://maps.google.com/?q=Atomic+Bomb+Dome+Hiroshima" target="_blank">A-Bomb Dome</a>, <a href="https://maps.google.com/?q=Children+Peace+Monument+Hiroshima" target="_blank">Children\'s Peace Monument</a>. Allow what time remains. <a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Museum" target="_blank">Peace Memorial Museum</a> can be done tomorrow morning if preferred.',
+     ko:'<a href="https://maps.google.com/?q=히로시마평화기념공원" target="_blank"><strong>평화 기념 공원</strong></a> — <a href="https://maps.google.com/?q=원폭돔+히로시마" target="_blank">원폭 돔</a>, <a href="https://maps.google.com/?q=어린이평화기념비+히로시마" target="_blank">어린이 평화 기념비</a>. <a href="https://maps.google.com/?q=히로시마평화기념관" target="_blank">평화 기념 박물관</a>은 내일 아침에 해도 됩니다.',
+     knee:'Peace Park is flat and spacious — fully accessible for Rick.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<a href="https://maps.google.com/?q=Okonomi-mura+Hiroshima" target="_blank"><strong>Hiroshima-style okonomiyaki at Okonomi-mura</strong></a> — 3-floor building of individual stalls, Hiroshima style layers noodles inside the pancake. ~¥1,200–1,500pp. Short walk after — A-Bomb Dome illuminated at night.',
+     ko:'<a href="https://maps.google.com/?q=오코노미무라+히로시마" target="_blank"><strong>오코노미무라 히로시마식 오코노미야키</strong></a> — 3층 포장마차 건물. 1인당 약 1,200~1,500엔. 야간 산책 후 조명 켜진 원폭 돔 감상.'}
+  ]},
+
+  // ─ DAY 18 ─────────────────────────────────
+  {n:18,date:'Tue Apr 20',label:'Miyajima',c:'jp',title:'Miyajima Island Day Trip',sub:'Floating torii · Oysters · Ropeway optional',tags:['split','night'],img:IMG.miyajima,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'JR to <a href="https://maps.google.com/?q=Miyajimaguchi+Station" target="_blank">Miyajimaguchi</a> (~30 min, JR Pass) + JR ferry (~10 min, JR Pass included). Arrive before 9am — busy by 10am. Check tide table before going: <a href="https://www.miyajima.or.jp/english/information/info_tide.html" target="_blank">high tide</a> = floating torii, low tide = walk to its base. Both worth seeing.',
+     ko:'JR로 <a href="https://maps.google.com/?q=미야지마구치역" target="_blank">미야지마구치</a>(약 30분) + JR 페리(약 10분). 오전 9시 전 도착 목표. 가기 전 <a href="https://www.miyajima.or.jp/english/information/info_tide.html" target="_blank">조석표</a> 확인: 만조 = 물 위에 뜬 도리이.'},
+    {time:'Midday',timeKo:'정오',
+     desc:'<a href="https://maps.google.com/?q=Itsukushima+Shrine+Miyajima" target="_blank"><strong>Itsukushima Shrine</strong></a> + floating torii. Lunch: <strong>fresh grilled oysters</strong> from a waterfront stall (Hiroshima Prefecture produces some of Japan\'s finest) and <strong>anago-meshi</strong> (conger eel rice — the island\'s signature dish). Momiji manju (maple-leaf red bean cakes) for dessert. <strong>Note: deer roam freely and will try to eat your map, bag, anything.</strong>',
+     ko:'<a href="https://maps.google.com/?q=이쓰쿠시마신사+미야지마" target="_blank"><strong>이쓰쿠시마 신사</strong></a> + 물 위의 도리이. 점심: 해변에서 <strong>신선한 구운 굴</strong>과 <strong>아나고메시</strong>(붕장어 밥). 모미지 만주. <strong>주의: 사슴이 자유롭게 돌아다니며 지도, 가방 등 뭐든 먹으려 합니다.</strong>',
+     knee:'Shrine waterfront and main village are entirely flat. Easy for Rick.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<strong>Split:</strong> Active → <a href="https://maps.google.com/?q=Miyajima+Ropeway" target="_blank">ropeway to Mt. Misen</a> (~¥2,000pp, panoramic Inland Sea views). Relaxed → waterfront cafes, <a href="https://maps.google.com/?q=Senjokaku+Pavilion+Miyajima" target="_blank">Senjokaku Pavilion</a> (enormous wooden hall, free), souvenir shopping.',
+     ko:'<strong>선택:</strong> 활동적 → <a href="https://maps.google.com/?q=미야지마+로프웨이" target="_blank">미센산 로프웨이</a>(약 2,000엔, 세토내해 전망). 여유로운 → 해변 카페, <a href="https://maps.google.com/?q=센조카쿠+미야지마" target="_blank">센조카쿠 누각</a>(무료), 기념품 쇼핑.',
+     knee:'Rick stays at the shrine and waterfront level — entirely flat.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Return to Hiroshima by 5–6pm. Or visit <a href="https://maps.google.com/?q=Hiroshima+Peace+Memorial+Museum" target="_blank">Peace Memorial Museum</a> if not done yesterday. <strong>Farewell Japan dinner</strong> — okonomiyaki again or a nicer sit-down restaurant. Pack tonight for the Korea flight tomorrow.',
+     ko:'오후 5~6시 히로시마로 귀환. 어제 못 한 <a href="https://maps.google.com/?q=히로시마평화기념관" target="_blank">평화 기념 박물관</a> 관람 가능. <strong>일본 마지막 저녁 식사</strong> — 오코노미야키 또는 고급 레스토랑. 내일 한국 비행을 위해 짐을 챙기세요.'}
+  ]},
+
+  // ─ DAY 19 ─────────────────────────────────
+  {n:19,date:'Wed Apr 21',label:'Seoul',c:'jp',title:'Hiroshima → Seoul',sub:'Japan ends · Korea begins · Gloria at ICN',tags:['travel'],img:IMG.seoul,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Check out. Ship heavy bags home via post office if needed. Travel light to Korea.',
+     ko:'체크아웃. 필요하면 우체국에서 무거운 짐을 집으로. 한국에는 가볍게.'},
+    {time:'Flight',timeKo:'비행',
+     desc:'<a href="https://www.jejuair.net/en/main.do" target="_blank"><strong>Jeju Air HIJ→ICN</strong></a> direct, ~1h 50min, ~$80–150pp. Same timezone (UTC+9). Gloria meets at ICN.',
+     ko:'<a href="https://www.jejuair.net/ko/main.do" target="_blank"><strong>제주항공 히로시마(HIJ)→인천(ICN)</strong></a> 직항, 약 1시간 50분. 인천 공항에서 글로리아가 기다립니다!',
+     gloriaNote:'Gloria: 인천 공항에서 그룹을 만나거나 직접 합류하세요. 미리 호텔 주소 공유해 주세요.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'Arrive Seoul. <a href="https://www.arex.or.kr/en/" target="_blank"><strong>AREX all-stop train</strong></a> to city centre (~51 min, ~₩4,150 with T-money). Buy Korean T-money cards at airport convenience store. Hotel in <a href="https://maps.google.com/?q=Myeongdong+Seoul" target="_blank">Myeongdong</a> or <a href="https://maps.google.com/?q=Hongdae+Seoul" target="_blank">Hongdae</a>. Welcome-to-Korea dinner: Korean BBQ — Gloria picks.',
+     ko:'서울 도착. <a href="https://www.arex.or.kr/ko/" target="_blank"><strong>AREX 일반열차</strong></a>로 시내(약 51분, T-머니 약 4,150원). 공항 편의점에서 T-머니 구입. 첫날 저녁은 한국 BBQ — 글로리아가 식당을 고릅니다!'}
+  ]},
+
+  // ─ DAY 20 ─────────────────────────────────
+  {n:20,date:'Thu Apr 22',label:'Seoul',c:'kr',title:'Seoul — Palaces + Korean BBQ',sub:'Gyeongbokgung · Insadong · N Seoul Tower · BBQ dinner',tags:['night','korea'],img:IMG.seoul,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'<a href="https://maps.google.com/?q=Gyeongbokgung+Palace+Seoul" target="_blank"><strong>Gyeongbokgung Palace</strong></a> — grandest of Seoul\'s five royal palaces (1395). Changing of the guard at 10am + 2pm. Free entry with rented hanbok (~₩20,000/2h at east gate). All flat, paved, spacious.',
+     ko:'<a href="https://maps.google.com/?q=경복궁+서울" target="_blank"><strong>경복궁</strong></a> — 서울 5대 궁궐 중 가장 웅장(1395년). 수문장 교대식 오전 10시 + 오후 2시. 한복 대여 시 무료 입장(동문, 2시간 약 20,000원).',
+     knee:'Gyeongbokgung is flat and very accessible. One of the best days on the trip for Rick.'},
+    {time:'Lunch',timeKo:'점심',
+     desc:'<a href="https://maps.google.com/?q=Insadong+Seoul" target="_blank"><strong>Insadong</strong></a> — traditional craft neighbourhood. <a href="https://maps.google.com/?q=Ssamziegil+Insadong" target="_blank">Ssamziegil market</a> (indie boutiques, food stalls), traditional tea houses, street food: hotteok (sweet pancakes), bungeoppang (fish-shaped pastry).',
+     ko:'<a href="https://maps.google.com/?q=인사동+서울" target="_blank"><strong>인사동</strong></a> — 전통 공예 동네. <a href="https://maps.google.com/?q=쌈지길+인사동" target="_blank">쌈지길</a>(독립 부티크, 음식 포장마차), 찻집, 호떡, 붕어빵.',
+     gloriaNote:'Gloria: 인사동에서 좋아하는 숨겨진 명소 소개해 주세요! 인근 추천 맛집도 부탁드려요.'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<a href="https://maps.google.com/?q=N+Seoul+Tower+Namsan" target="_blank"><strong>N Seoul Tower</strong></a> — cable car up from Myeongdong (no walking required, ~₩9,000 return). Panoramic city views. Gloria leads.',
+     ko:'<a href="https://maps.google.com/?q=N서울타워+남산" target="_blank"><strong>N서울타워</strong></a> — 명동에서 케이블카(도보 불필요, 왕복 약 9,000원). 전망. 글로리아가 이끕니다.'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<strong>Korean BBQ dinner</strong> — galbi (beef short ribs) and samgyeopsal (pork belly), group grills their own over charcoal. Banchan side dishes keep coming (refillable, free). Mapo or Hongdae for authentic spots.',
+     ko:'<strong>한국 BBQ 저녁</strong> — 갈비와 삼겹살, 숯불에 직접 구워 먹기. 반찬은 계속 리필(무료). 마포 또는 홍대 지역 맛집.'}
+  ]},
+
+  // ─ DAY 21 ─────────────────────────────────
+  {n:21,date:'Fri Apr 23',label:'Seoul',c:'kr',title:'Seoul — Markets + Gloria Leads + Farewell',sub:"Gwangjang Market · Gloria's day · Final dinner",tags:['night','korea'],img:IMG.gwangjang,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'<a href="https://maps.google.com/?q=Gwangjang+Market+Seoul" target="_blank"><strong>Gwangjang Market</strong></a> (1905) — Seoul\'s oldest traditional market. Must try: <em>bindaetteok</em> (crispy mung bean pancakes), <em>mayak gimbap</em> (tiny addictive rice rolls), <em>yukhoe</em> (raw beef tartare with pear and egg yolk).',
+     ko:'<a href="https://maps.google.com/?q=광장시장+서울" target="_blank"><strong>광장시장</strong></a>(1905년) — 서울 최고령 전통 시장. 필수: <em>빈대떡</em>, <em>마약 김밥</em>, <em>육회</em>.',
+     gloriaNote:'Gloria: 광장시장에서 좋아하는 음식 소개해 주세요!'},
+    {time:'Afternoon',timeKo:'오후',
+     desc:'<strong>Gloria leads.</strong> <a href="https://maps.google.com/?q=Hangang+Park+Seoul" target="_blank">Han River Park</a> by hire bike (flat, ~₩3,000/h), <a href="https://maps.google.com/?q=Myeongdong+Seoul" target="_blank">Myeongdong</a> K-beauty shopping, or her favourite Seoul spot.',
+     ko:'<strong>글로리아가 이끄는 시간!</strong> <a href="https://maps.google.com/?q=한강공원+서울" target="_blank">한강 공원</a> 자전거(평탄, 시간당 약 3,000원), <a href="https://maps.google.com/?q=명동+서울" target="_blank">명동</a> K-뷰티 쇼핑, 또는 글로리아 최애 명소.',
+     gloriaNote:'Gloria: 자신이 가장 좋아하는 서울의 장소로 그룹을 안내해 주세요!'},
+    {time:'Evening',timeKo:'저녁',
+     desc:'<strong>Farewell dinner — Gloria picks.</strong> Hanjeonsik (Korean full-course with 20+ banchan), Gangnam rooftop, or her favourite restaurant. Optional: <a href="https://maps.google.com/?q=Noraebang+Seoul" target="_blank"><strong>noraebang</strong></a> (private karaoke, ~₩15,000–20,000pp/h) — strongly recommended for a group of 6.',
+     ko:'<strong>작별 저녁 — 글로리아가 선택합니다.</strong> 한정식(20가지 이상 반찬), 강남 루프탑, 또는 글로리아 최애 맛집. 선택: <a href="https://maps.google.com/?q=노래방+서울" target="_blank"><strong>노래방</strong></a>(전용 룸, 시간당 약 15,000~20,000원) — 강력 추천.',
+     gloriaNote:'Gloria: 마지막 저녁 식당 미리 예약해 주세요!'}
+  ]},
+
+  // ─ DAY 22 ─────────────────────────────────
+  {n:22,date:'Sat Apr 24',label:'Depart',c:'kr',title:'Depart Seoul — Everyone Flies Home',sub:'AREX to Incheon · Saturday departure',tags:['travel'],img:IMG.seoul,
+   activities:[
+    {time:'Morning',timeKo:'오전',
+     desc:'Check out. <a href="https://www.arex.or.kr/en/" target="_blank"><strong>AREX Express</strong></a> to Incheon Airport (43 min from Seoul Station, ~₩9,500). Allow 3h before international departure.',
+     ko:'체크아웃. <a href="https://www.arex.or.kr/ko/" target="_blank"><strong>AREX 직통열차</strong></a>로 인천 공항(서울역에서 43분, 약 9,500원). 국제선 출발 3시간 전 도착.'},
+    {time:'Steven + Esther',timeKo:'스티븐 + 에스더',
+     desc:'ICN → SFO direct. Korean Air, Asiana, or United. ~10h.',
+     ko:'인천(ICN) → 샌프란시스코(SFO) 직항. 대한항공, 아시아나, 또는 유나이티드. 약 10시간.'},
+    {time:'Rick, Rose, Sally',timeKo:'Rick, Rose, Sally',
+     desc:'ICN → YWG via Vancouver (Air Canada). ~17–19h total.',
+     ko:'인천(ICN) → 위니펙(YWG) 밴쿠버 경유(에어캐나다). 총 약 17~19시간.'},
+    {time:'Gloria',timeKo:'글로리아',
+     desc:'Already home in Seoul! 🎉 The city is hers.',
+     ko:'글로리아는 이미 집에 있습니다! 🎉 서울은 당신의 도시입니다. 모두 수고했어요!'}
+  ]}
+];
+
+
+
+/* ─── CHECKLIST DATA ─────────────────────────────────── */
+var CL={
+  red:[
+    {t:'Magome Ryokan — Apr 8–10 (2 nights)',s:'Magomechaya on japaneseguesthouses.com. Request private bath. CASH ONLY, check in before 3pm.'},
+    {t:'Shirakawa-go Farmhouse — Apr 10–11 (1 night)',s:'Minshuku Kanjiya on Booking.com. Also email japaneseguesthouses.com as backup. Onyado Yuinosho fallback. CASH ONLY. Before 5pm.'},
+    {t:'Takayama Hotel — Apr 13–15 (2 nights) ⚠️ CRITICAL',s:'Spring festival books out 6–12 months ahead. Book immediately. Festival dates: Apr 14–15 (Sanno Matsuri).'},
+    {t:'Kyoto Hotel — Apr 15–19 (4 nights)',s:'Cherry blossom season = hardest hotel market in Japan. The Celestine Kyoto Gion or Mitsui Garden Sanjo.'},
+    {t:'Kyoto Michelin Dinner — Apr 18',s:'omakaseje.com or pocketconcierge.jp. Private room for 6. 6pm seating. Kyoyamato, Noguchi Tsunagu, or Miyawaki.'},
+    {t:'Rick + Rose: Golf at Seta — Apr 17',s:'Book via Kyoto hotel concierge — courses do not take direct English bookings. Green fee ~¥20,000–30,000pp.'},
+    {t:'TeamLab Planets — Apr 6',s:'Book 2pm or 3pm slot at teamlab.art/e/planets/ — sells out fast.'}
+  ],
+  yellow:[
+    {t:'Shinkansen Reserved Seats',s:'Tokyo→Nagoya (Hikari), Kanazawa→Toyama→Takayama, Hida Takayama→Kyoto, Kyoto→Himeji→Hiroshima. Block of 6.'},
+    {t:'Toyama → Shirakawa-go Bus',s:'Only 3 buses/day. Sells out fast in April. japanbusonline.com.'},
+    {t:'JR Pass — 21-day (all 6)',s:'Buy before departure at jrpass.com. Nozomi needs supplement. Activate Day 1.'}
+  ],
+  green:[
+    {t:'Flights — SFO→HND Apr 3 (Steven + Esther)',s:'ANA or JAL nonstop. ~$900–1,100 USD economy. ana.co.jp or jal.com.'},
+    {t:'Flights — YWG→NRT/HND Apr 3 (Rick, Rose, Sally)',s:'Air Canada via Vancouver. ~C$1,400–1,800. aircanada.com.'},
+    {t:'Flights — HIJ→ICN Apr 21 (all 6)',s:'Jeju Air direct. ~$80–150pp. jejuair.net.'},
+    {t:'Flights — ICN→SFO Apr 24 (Steven + Esther)',s:'Korean Air or Asiana direct. ~10h.'},
+    {t:'Flights — ICN→YWG Apr 24 (Rick, Rose, Sally)',s:'Air Canada via Vancouver. ~17–19h total.'},
+    {t:'Gloria — ICN→HND Apr 3',s:'Korean Air or Asiana nonstop. ~2h. Confirmed!'},
+    {t:'Tokyo Hotel — Apr 3–8 (5 nights)',s:'Central or south Shinjuku. Dormy Inn Premium Shinjuku (great value, has onsen) or Park Hyatt Tokyo.'},
+    {t:'Kanazawa Hotel — Apr 11–13 (2 nights)',s:'APA Hotel Kanazawa-Ekimae or Dormy Inn Kanazawa.'},
+    {t:'Hiroshima Hotel — Apr 19–21 (2 nights)',s:'Dormy Inn Hiroshima or Cross Hotel.'},
+    {t:'Seoul Hotel — Apr 21–24 (3 nights)',s:'Myeongdong or Hongdae area. Easy subway access.'}
+  ]
+};
+
+/* ─── PACKING DATA ─────────────────────────────────── */
+var PACK_CATS=[
+  {id:'docs',icon:'📄',name:'Documents & Money',items:[
+    {id:'p1',label:'Passport (valid 6+ months past Apr 24)',tags:['essential'],note:'Check expiry now'},
+    {id:'p2',label:'JR Pass (printed or on phone)',tags:['essential'],note:'Activate in Tokyo — jrpass.com'},
+    {id:'p3',label:'Travel insurance cards',tags:['essential']},
+    {id:'p4',label:'Yen cash — ¥80,000+ per person',tags:['essential'],note:'ATMs unreliable in rural Magome + Shirakawa-go'},
+    {id:'p5',label:'Korean Won — ₩100,000+ per person',tags:['korea'],note:'For arrival day, ATMs everywhere in Seoul'},
+    {id:'p6',label:'Credit cards (Visa/Mastercard)',tags:[]},
+    {id:'p7',label:'Emergency contacts written down',tags:['essential']}
+  ]},
+  {id:'clothes',icon:'👕',name:'Clothing',items:[
+    {id:'c1',label:'Light jacket or fleece',tags:[],note:'Spring nights are cool (8–14°C in mountains)'},
+    {id:'c2',label:'Slip-on shoes',tags:['essential'],note:'Removing shoes constantly at temples — essential'},
+    {id:'c3',label:'Comfortable walking shoes',tags:['essential'],note:'Expect 6–10km on active days'},
+    {id:'c4',label:'Smart-casual outfit for Michelin dinner (Apr 18)',tags:['essential'],note:'No trainers or shorts'},
+    {id:'c6',label:'Lightweight rain layer / compact umbrella',tags:[],note:'April has occasional showers'},
+    {id:'c7',label:'Warm layers for Magome + Shirakawa-go + Takayama',tags:[],note:'Mountain areas, Apr 8–15, can be 5–12°C at night'},
+    {id:'c10',label:'Extra warm layer for Takayama Festival (Apr 13–14)',tags:[],note:'Lantern procession is outdoors 6–9pm, mountain evening temps 5–12°C'},
+    {id:'c8',label:'Comfortable loose clothes for jjimjilbang (Seoul)',tags:['korea'],note:'Provided at bathhouse but bring underwear'},
+    {id:'c9',label:'Golf attire — collared shirt + trousers',tags:['golf'],note:'Rick + Rose only — Apr 17 Seta Golf Course'}
+  ]},
+  {id:'tech',icon:'📱',name:'Tech & Transport',items:[
+    {id:'t1',label:'Phone + charger',tags:['essential']},
+    {id:'t2',label:'Universal adapter (Japan uses Type A)',tags:['essential']},
+    {id:'t3',label:'Portable battery / powerbank',tags:[],note:'Long days out, stations have few plugs'},
+    {id:'t4',label:'Download Google Maps offline — Japan + Seoul',tags:['essential'],note:'Works without data in Japan'},
+    {id:'t5',label:'Download this app to home screen (works offline)',tags:['essential']},
+    {id:'t6',label:'Japan eSIM or pocket WiFi — book in advance',tags:[],note:'Pocket WiFi: pick up at airport'},
+    {id:'t7',label:'Korea eSIM or T-money card',tags:['korea'],note:'T-money for Seoul subway + buses'}
+  ]},
+  {id:'health',icon:'💊',name:'Health & Comfort',items:[
+    {id:'h1',label:'Prescribed medications (full supply)',tags:['essential']},
+    {id:'h2',label:'Knee support brace or bandage',tags:['knee'],note:'Rick — walking surfaces are varied'},
+    {id:'h3',label:'Anti-inflammatory tablets (ibuprofen etc)',tags:['knee'],note:'Rick — long days on feet'},
+    {id:'h4',label:'Blister plasters',tags:[],note:'New shoes + stone streets'},
+    {id:'h5',label:'Hand sanitiser + tissues',tags:[],note:'Public toilets sometimes lack paper'},
+    {id:'h6',label:'Travel sickness tablets if needed',tags:[],note:'Mountain bus roads can be winding'},
+    {id:'h7',label:'Sunscreen',tags:[],note:'April sun can be strong, especially Miyajima'}
+  ]},
+  {id:'etiquette',icon:'🎌',name:'Japan Etiquette Reminders',items:[
+    {id:'e1',label:'IC card charged (Suica — collect at airport)',tags:['essential'],note:'Works on all Tokyo trains + convenience stores'},
+    {id:'e2',label:'No eating while walking in Japan',tags:[]},
+    {id:'e3',label:'Cash for rural stops (Magome, Shirakawa-go)',tags:['essential'],note:'ATMs close at night — get cash before leaving cities'},
+    {id:'e4',label:'Luggage forwarding booked for rural legs',tags:[],note:'Yamato Transport — book at hotel desk or conbini'},
+    {id:'e5',label:'Small towel for onsen/baths',tags:[],note:'Ryokans provide yukata but small towels handy'},
+    {id:'e6',label:'Quiet voice on trains',tags:[]},
+    {id:'e7',label:'No tipping anywhere in Japan or Korea',tags:[]}
+  ]},
+  {id:'gloria',icon:'🇰🇷',name:'Gloria — Korea Extras',items:[
+    {id:'g1',label:'Korean ID / passport',tags:['gloria','essential']},
+    {id:'g2',label:'Group WhatsApp set up before Apr 3',tags:['gloria'],note:'Help coordinate arrival at Tokyo hotel'},
+    {id:'g3',label:'Restaurant shortlist for Apr 23 afternoon lead',tags:['gloria'],note:'Show the group somewhere you love in Seoul'},
+    {id:'g4',label:'Farewell dinner reservation (Apr 23)',tags:['gloria'],note:'Gloria picks — book in advance if upscale'},
+    {id:'g5',label:'T-money card topped up for group Seoul days',tags:['gloria','korea']}
+  ]}
+];
+
+/* ─── BUDGET DATA ─────────────────────────────────── */
+/* CORRECTED: SFO and YWG are genuinely different */
+var BUDGET_ROWS=[
+  {icon:'✈️',n:'Flights — SFO (Steven + Esther)',s:'ANA/JAL SFO→HND + HIJ→ICN + ICN→SFO',sfo:'$1,100–1,300 USD',ywg:null,gloria:null},
+  {icon:'✈️',n:'Flights — YWG (Rick, Rose, Sally)',s:'Air Canada via YVR + HIJ→ICN + ICN→YWG',sfo:null,ywg:'C$1,700–2,100 CAD',gloria:null,note:'Connecting flight via Vancouver adds ~C$400–600 vs SFO direct'},
+  {icon:'✈️',n:'Flights — ICN (Gloria)',s:'Korean Air/Asiana ICN→HND Apr 3 + HIJ→ICN Apr 21',sfo:null,ywg:null,gloria:'₩250–400K KRW'},
+  {icon:'🏨',n:'Accommodation (21 nights)',s:'City hotels + ryokan + farmhouse + Seoul',sfo:'$1,600–2,300 USD',ywg:'C$2,200–3,100 CAD',gloria:'₩600K–1,000K KRW',note:'Per person share of rooms'},
+  {icon:'🚄',n:'JR Pass — 21-day',s:'Buy before departure at jrpass.com',sfo:'$500–600 USD',ywg:'C$680–810 CAD',gloria:'$500–600 USD'},
+  {icon:'🍜',n:'Food — casual (21 days)',s:'~$35/day izakaya, ramen, street food',sfo:'$600–800 USD',ywg:'C$810–1,080 CAD',gloria:'₩700K–1,100K KRW'},
+  {icon:'⭐',n:'Michelin dinner — Apr 18',s:'Private room, drinks included',sfo:'$200–500 USD',ywg:'C$270–680 CAD',gloria:'$200–500 USD',note:'Biggest single night variable'},
+  {icon:'🏠',n:'Ryokan + farmhouse meals',s:'Magome 2 nights + Shirakawa 1 night',sfo:'Included',ywg:'Included',gloria:'Included'},
+  {icon:'🎭',n:'Activities + entrances',s:'Temples, TeamLab, Takayama festival, Miyajima, Himeji, Seoul',sfo:'$180–300 USD',ywg:'C$240–400 CAD',gloria:'₩150K–300K KRW'},
+  {icon:'🛅',n:'Luggage forwarding (4 legs)',s:'Yamato Transport ~¥2,000/bag/leg',sfo:'$50–80 USD',ywg:'C$70–110 CAD',gloria:'$50–80 USD'},
+  {icon:'💴',n:'Cash + misc + shopping',s:'Rural yen, souvenirs, personal spending',sfo:'$250–450 USD',ywg:'C$340–610 CAD',gloria:'₩300K–600K KRW'},
+  {icon:'🏌️',n:'Golf — Rick + Rose only',s:'Seta North Course, caddy + clubhouse lunch',sfo:null,ywg:'C$180–270 CAD',gloria:null}
+];
+
+/* ─── BUILD BUDGET ─────────────────────────────────── */
+function buildBudget(){
+  var p=currentProfile;
+  var group=p?p.group:'sfo';
+  var summaries;
+  if(group==='sfo'){
+    summaries=[{flag:'🇺🇸',amt:'~$4,200–5,830 USD',sub:'all-in per person',who:'Steven · Esther'},{flag:'🇨🇦',amt:'~C$5,200–7,200 CAD',sub:'≈ $3,800–5,300 USD',who:'Rick · Rose · Sally (for comparison)'},{flag:'🇰🇷',amt:'~₩1.5M–3M KRW',sub:'≈ $1,100–2,200 USD',who:'Gloria (KOR costs only)'}];
+  }else if(group==='ywg'){
+    summaries=[{flag:'🇨🇦',amt:'~C$5,200–7,200 CAD',sub:'all-in per person',who:'Rick · Rose · Sally'},{flag:'🇺🇸',amt:'~$4,200–5,830 USD',sub:'≈ C$5,700–7,900',who:'Steven + Esther (for comparison)'}];
+  }else{
+    summaries=[{flag:'🇰🇷',amt:'~₩1.5M–3M KRW',sub:'≈ $1,100–2,200 USD',who:'Gloria — Korea costs only'},{flag:'🇯🇵',amt:'¥200K–350K JPY',sub:'In-Japan costs share',who:'Accommodation + food + transport'}];
+  }
+  document.getElementById('bdg-summary').innerHTML=summaries.map(function(c){return'<div class="bdg-c"><div class="flag">'+c.flag+'</div><div class="amt">'+c.amt+'</div><div class="amtsub">'+c.sub+'</div><div class="who">'+c.who+'</div></div>';}).join('');
+
+  var field=group==='gloria'?'gloria':group==='ywg'?'ywg':'sfo';
+  document.getElementById('bdg-rows').innerHTML=BUDGET_ROWS.filter(function(r){return r[field]!==undefined&&r[field]!==null||r.sfo===null&&r.ywg===null&&r.gloria===null;}).map(function(r){
+    var val=r[field]||'—';
+    return'<div class="bdg-row"><div class="bdg-icon">'+r.icon+'</div><div class="bdg-cat"><div class="bdg-cn">'+r.n+'</div><div class="bdg-cs">'+r.s+(r.note?' · <em>'+r.note+'</em>':'')+'</div></div><div><div class="bdg-rng">'+val+'</div></div></div>';
+  }).join('');
+}
+
+/* ─── BUILD PACKING ─────────────────────────────────── */
+function buildPacking(){
+  var p=currentProfile;
+  var el=document.getElementById('pack-categories');
+  el.innerHTML='';
+  PACK_CATS.forEach(function(cat,ci){
+    // Filter items relevant to profile
+    var items=cat.items.filter(function(item){
+      if(!p)return true;
+      // Show knee items only if Rick
+      if(item.tags.indexOf('knee')>=0&&!p.isKnee)return false;
+      // Show golf items only if golfer
+      if(item.tags.indexOf('golf')>=0&&!p.isGolf)return false;
+      // Show gloria items only if Gloria
+      if(item.tags.indexOf('gloria')>=0&&!p.isGloria)return false;
+      return true;
+    });
+    if(items.length===0)return;
+    var div=document.createElement('div');
+    div.className='pack-cat';
+    var hdr=document.createElement('div');
+    hdr.className='pack-cat-hdr';
+    hdr.innerHTML='<span class="picon">'+cat.icon+'</span><span class="pname">'+cat.name+'</span><span class="pcount" id="pcount-'+ci+'">'+items.length+' items</span><span class="pchev">›</span>';
+    hdr.onclick=function(){togglePackCat(hdr,ci);};
+    div.appendChild(hdr);
+    var list=document.createElement('div');
+    list.className='pack-items';
+    list.id='pack-items-'+ci;
+    items.forEach(function(item){
+      var row=document.createElement('div');
+      row.className='pack-item';
+      var tagHtml=item.tags.filter(function(t){return t!=='essential';}).map(function(t){
+        var labels={knee:'Rick',golf:'Golf',korea:'Korea',gloria:'Gloria'};
+        return'<span class="pack-tag '+t+'">'+(labels[t]||t)+'</span>';
+      }).join('');
+      var essTag=item.tags.indexOf('essential')>=0?'<span class="pack-tag essential">essential</span>':'';
+      row.innerHTML='<div class="pack-cb'+(item.tags.indexOf('essential')>=0?' warn':'')+'" id="pcb-'+item.id+'"></div><div style="flex:1"><div class="pack-label" id="pcl-'+item.id+'">'+item.label+'</div>'+(item.note?'<div class="pack-note">'+item.note+'</div>':'')+'</div>'+tagHtml+essTag;
+      row.onclick=function(){togglePackItem(item.id,ci,items.length);};
+      list.appendChild(row);
+    });
+    div.appendChild(list);
+    el.appendChild(div);
+    // restore state
+    items.forEach(function(item){
+      try{var s=JSON.parse(localStorage.getItem('jp27_pack')||'{}');if(s[item.id]){document.getElementById('pcb-'+item.id).classList.add('done');document.getElementById('pcl-'+item.id).classList.add('done');}}catch(e){}
+    });
+  });
+  updatePackProgress();
+}
+
+function togglePackCat(hdr,ci){
+  hdr.classList.toggle('open');
+  var items=document.getElementById('pack-items-'+ci);
+  if(items)items.classList.toggle('open');
+}
+
+function togglePackItem(id,ci,total){
+  var cb=document.getElementById('pcb-'+id),lbl=document.getElementById('pcl-'+id);
+  if(!cb)return;
+  var done=cb.classList.toggle('done');
+  lbl.classList.toggle('done',done);
+  try{var s=JSON.parse(localStorage.getItem('jp27_pack')||'{}');s[id]=done;localStorage.setItem('jp27_pack',JSON.stringify(s));}catch(e){}
+  updatePackProgress();
+}
+
+function updatePackProgress(){
+  var all=document.querySelectorAll('.pack-cb'),done=document.querySelectorAll('.pack-cb.done');
+  var pct=all.length?Math.round(done.length/all.length*100):0;
+  document.getElementById('pack-count').textContent=done.length+' / '+all.length+' packed';
+  document.getElementById('pack-bar').style.width=pct+'%';
+}
+
+/* ─── BUILD CREW ─────────────────────────────────── */
+function buildCrew(){
+  document.getElementById('crew-list').innerHTML=PROFILES.map(function(m){
+    var isYou=currentProfile&&currentProfile.id===m.id;
+    return'<div class="crew-m'+(isYou?' you-m':'')+'"><div class="crew-av" style="background:'+m.col+'">'+m.init+'</div><div><div class="crew-nm">'+m.name+(isYou?' <span style="font-size:10px;color:var(--cherry)">← you</span>':'')+'</div><div class="crew-rl">'+m.role+'</div><div class="crew-tags">'+m.tags.map(function(t){return'<span class="ctag '+t.c+'">'+t.t+'</span>';}).join('')+(isYou?'<span class="ctag you">You</span>':'')+'</div></div></div>';
+  }).join('');
+}
+
+/* ─── TODAY ─────────────────────────────────────── */
+var curIdx=0;
+function getTodayIdx(){var start=new Date('2027-04-03'),now=new Date(),d=Math.floor((now-start)/86400000);return(d<0||d>=DAYS.length)?0:d;}
+
+function buildToday(idx){
+  var d=DAYS[idx],p=currentProfile,isKr=d.c==='kr',prev=idx>0,next=idx<DAYS.length-1;
+  var h='<div class="today-hero"><img src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.opacity=0"><div class="today-hero-ov"></div><div class="today-hero-content"><div class="tday-badge'+(isKr?' kr':'')+'"><span>Day '+d.n+'</span></div><h2>'+d.title+'</h2><div class="tdate">'+d.date+' · '+d.label+'</div></div></div>';
+  h+='<div class="today-nav"><button class="tnav-btn" onclick="goDay('+(idx-1)+')" style="opacity:'+(prev?1:0.3)+'" '+(prev?'':'disabled')+'>‹ Prev</button><div class="tnav-center">Day '+d.n+' of '+DAYS.length+'<small>'+d.date+'</small></div><button class="tnav-btn" onclick="goDay('+(idx+1)+')" style="opacity:'+(next?1:0.3)+'" '+(next?'':'disabled')+'>Next ›</button></div>';
+  h+='<div class="today-body">';
+  var wt=d.wt||{t:isKr?'12–18°C':'13–18°C',cond:'Spring weather · light jacket recommended',icon:'🌸'};
+  h+='<div class="weather-b"><div style="flex:1"><div class="wloc">'+d.label+'</div><div class="wcond">'+wt.cond+'</div></div><div class="temp">'+wt.t+'</div><span style="font-size:28px">'+wt.icon+'</span></div>';
+
+  // Split options
+  if(d.split){
+    h+='<div class="act-card"><div class="split-wrap"><div class="split-lbl">Today\'s split options</div><div class="split-row">';
+    d.split.forEach(function(s){
+      var isYouSplit=!p||!s.whoFor||(s.whoFor.indexOf('all')>=0)||(s.whoFor.indexOf(p?p.id:'')>=0);
+      var useKo=p&&p.isGloria&&s.ko;
+      var splitText=useKo?s.ko:s.text;
+      var splitWho=useKo&&s.whoKo?s.whoKo:s.who;
+      h+='<div class="split-opt'+(isYouSplit?' you-opt':'')+'"><div class="who'+(s.cls?' '+s.cls:'')+'">'+splitWho+(isYouSplit&&p?' ← 나':'')+'</div><p>'+splitText+'</p>'+(s.knee&&p&&p.isKnee?'<div class="knee-mini">🦵 '+s.knee+'</div>':'')+'</div>';
+    });
+    h+='</div></div></div>';
+  }
+
+  var isGloria=p&&p.isGloria;
+  h+='<div class="t-sec">'+(isGloria?'오늘 일정':'Schedule')+'</div>';
+  d.activities.forEach(function(a){
+    var showKnee=a.knee&&p&&p.isKnee;
+    var desc=isGloria&&a.ko?a.ko:a.desc;
+    var timeLabel=isGloria&&a.timeKo?a.timeKo:a.time;
+    h+='<div class="act-card"><div class="act-inner"><div class="act-time'+(isKr?' kr':'')+'">'+timeLabel+'</div><div class="act-desc">'+desc+'</div></div>';
+    if(showKnee)h+='<div class="knee-alert"><span>🦵</span><span>Rick — '+a.knee+'</span></div>';
+    h+='</div>';
+  });
+  h+='</div>';
+  document.getElementById('today-content').innerHTML=h;
+}
+function goDay(i){if(i<0||i>=DAYS.length)return;curIdx=i;buildToday(i);document.getElementById('tab-today').scrollTop=0;}
+
+/* ─── TIMELINE ─────────────────────────────────────── */
+function buildTimeline(){
+  var jp=document.getElementById('tl-jp'),kr=document.getElementById('tl-kr');
+  var tagMap={night:'Night',travel:'Transit',golf:'Golf',split:'Split',knee:'Rick flag',splurge:'Splurge',festival:'Festival',korea:'Korea'};
+  DAYS.forEach(function(d){
+    var el=d.c==='kr'?kr:jp,isKr=d.c==='kr';
+    var tags=d.tags.map(function(t){return'<span class="dtag '+t+'">'+(tagMap[t]||t)+'</span>';}).join('');
+    var body='';
+    if(d.split)d.split.forEach(function(s){body+='<div class="db-act"><div class="db-time'+(isKr?' kr':'')+'" style="'+(s.cls==='golf'?'color:#2e7d32':'')+'">'+(s.cls==='golf'?'🏌️ Golf':s.who)+'</div><div class="db-desc">'+s.text+(s.knee?'<div class="knee-note">🦵 '+s.knee+'</div>':'')+'</div></div>';});
+    d.activities.forEach(function(a){body+='<div class="db-act"><div class="db-time'+(isKr?' kr':'')+'">'+a.time+'</div><div class="db-desc">'+a.desc+(a.knee?'<div class="knee-note">🦵 '+a.knee+'</div>':'')+'</div></div>';});
+    el.innerHTML+='<div class="day-card"><div class="day-card-hdr" onclick="toggleDay(this)"><img class="day-card-img" src="'+d.img+'" alt="'+d.label+'" loading="lazy" onerror="this.style.display=\'none\'"><div class="day-card-nfo"><div class="day-num-lbl">Day '+d.n+' · '+d.date+'</div><div class="day-title-t">'+d.title+'</div><div class="day-sub-t">'+d.sub+'</div><div class="day-tags-t">'+tags+'</div></div><div class="day-chev">›</div></div><div class="day-body">'+body+'</div></div>';
+  });
+}
+function toggleDay(h){var b=h.nextElementSibling,ch=h.querySelector('.day-chev'),o=b.classList.toggle('open');ch.classList.toggle('open',o);}
+
+/* ─── CHECKLIST ─────────────────────────────────────── */
+function buildChecklist(){
+  ['red','yellow','green'].forEach(function(col){
+    var el=document.getElementById('cl-'+col),cls={red:'r',yellow:'y',green:'g'}[col];
+    CL[col].forEach(function(item,i){
+      el.innerHTML+='<div class="cl-item" onclick="toggleCheck(this,\''+col+'_'+i+'\')"><div class="cl-dot '+cls+'"></div><div class="cl-chk'+(col==='red'?' urgent':'')+'" id="cb_'+col+'_'+i+'"></div><div><div class="cl-t" id="ct_'+col+'_'+i+'">'+item.t+'</div><div class="cl-s">'+item.s+'</div></div></div>';
+    });
+  });
+  loadCL();
+}
+function toggleCheck(item,id){var b=document.getElementById('cb_'+id),t=document.getElementById('ct_'+id),done=b.classList.toggle('done');t.classList.toggle('done',done);saveCL();}
+function saveCL(){var s={};document.querySelectorAll('.cl-chk').forEach(function(b){s[b.id]=b.classList.contains('done');});try{localStorage.setItem('jp27v4_cl',JSON.stringify(s));}catch(e){}}
+function loadCL(){try{var s=JSON.parse(localStorage.getItem('jp27v4_cl')||'{}');Object.entries(s).forEach(function(e){var b=document.getElementById(e[0]),t=document.getElementById(e[0].replace('cb_','ct_'));if(b&&e[1]){b.classList.add('done');if(t)t.classList.add('done');}});}catch(e){}}
+
+/* ─── UTILS ─────────────────────────────────────── */
+function toggleBlk(hdr){var b=hdr.nextElementSibling,ch=hdr.querySelector('.bchev'),o=b.classList.toggle('open');if(ch){ch.style.transform=o?'rotate(90deg)':'';ch.style.color=o?'var(--cherry)':'var(--border)';}}
+function switchTab(id,btn){document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');document.getElementById('tab-'+id).scrollTop=0;}
+
+/* ─── INIT ─────────────────────────────────────── */
+buildProfileGrid();
+// Try to restore saved profile
+try{
+  var saved=localStorage.getItem('jp27_profile');
+  if(saved){selectProfile(saved);}
+}catch(e){}
+
+curIdx=getTodayIdx();
+buildTimeline();
+buildChecklist();
+
+// buildToday/Budget/Packing/Crew called after profile selection
+// Default render if no profile
+if(!currentProfile){
+  buildToday(curIdx);
+  buildBudget();
+  buildPacking();
+  buildCrew();
+}
+</script>
+</body>
+</html>
